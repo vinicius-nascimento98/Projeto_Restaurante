@@ -1,9 +1,9 @@
 <?php
 
     include("Class/ClassForm.php");
-    include("funcoes.php"); //mudar para conceito orientação objeto
+    include("Funcoes.php"); //mudar para conceito orientação objeto
     include("Conexao.php");
-    include("Cabecalho/Cabecalho.php"); //mudar para cabecalho geral
+    include("Cabecalho/Cabecalho.php");
 
     echo "<h1>Cadastro Reserva</h1>";
 

@@ -1,6 +1,5 @@
 ﻿<?php
-	//modificar para cabecalho geral
-	include("Cabecalho.html");
+	include("Cabecalho/Cabecalho.php");
 
 if(!empty($_POST)){
 	include("Conexao.php");

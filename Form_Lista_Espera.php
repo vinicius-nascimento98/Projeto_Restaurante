@@ -1,9 +1,9 @@
 <?php
 
     include("Class/ClassForm.php");
-    include("funcoes.php"); //mudar para conceito orientação objeto (class_BD)
+    include("Funcoes.php"); //mudar para conceito orientação objeto (class_BD)
     include("Conexao.php");
-    include("Cabecalho/Cabecalho.php"); //mudar para cabecalho geral
+    include("Cabecalho/Cabecalho.php");
 
     echo "<h1>Cadastro Lista de Espera</h1>";
 

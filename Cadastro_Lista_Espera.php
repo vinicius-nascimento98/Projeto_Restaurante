@@ -1,7 +1,7 @@
 <?php
 
     include("Conexao.php");
-    include("cabecalhos/cabecalho.html"); //mudar cabecalho geral
+    include("Cabecalho/Cabecalho.php");
 
     //verificando se foi passado um POST
     if(!empty($_POST)){

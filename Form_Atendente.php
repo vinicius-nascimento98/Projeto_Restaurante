@@ -1,6 +1,7 @@
 ﻿<?php
 
 	include("Class/ClassForm.php");
+	include("Cabecalho/Cabecalho.php");
 
 	echo "<h2> Cadastro de Atendente </h2>";
 	
