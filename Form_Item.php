@@ -2,6 +2,8 @@
 include('Cabecalho/Cabecalho.php'); //mudar para cabecalho geral
 include('Class/ClassForm.php');
 
+ echo "<h1>Cadastro Item</h1>";
+
 //input
 $inp1 = array("label"=>"Descrição", "nome"=>"descricao", "tipo"=>"text");
 
