@@ -5,4 +5,6 @@ $usuario = 'root';
 $senha = 'usbw';
 
 $conn = new PDO($servBD, $usuario, $senha);
+
+$conn->exec("set names utf8");
 ?>

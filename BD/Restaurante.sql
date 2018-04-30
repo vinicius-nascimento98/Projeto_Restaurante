@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de Dados: `restaurante`
 --
-CREATE DATABASE IF NOT EXISTS `restaurante` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `restaurante` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `restaurante`;
 
 -- --------------------------------------------------------
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `atendente` (
   `nome` varchar(50) NOT NULL,
   `comissao` double NOT NULL,
   PRIMARY KEY (`id_Atendente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `bebida` (
   `cod_Bebida` int(11) NOT NULL,
   `estoque` int(11) NOT NULL,
   PRIMARY KEY (`cod_Bebida`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `bebida` (
 CREATE TABLE IF NOT EXISTS `drink` (
   `cod_Drink` int(11) NOT NULL,
   PRIMARY KEY (`cod_Drink`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `drink_ingrediente` (
   `cod_Drink` int(11) NOT NULL,
   PRIMARY KEY (`cod_Ingrediente`,`cod_Drink`),
   KEY `cod_Drink` (`cod_Drink`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `ingrediente` (
   `custo` double NOT NULL,
   `estoque` double NOT NULL,
   PRIMARY KEY (`id_Ingrediente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `item` (
   `disponibilidade` char(2) NOT NULL,
   `tipo` varchar(50) NOT NULL,
   PRIMARY KEY (`id_item`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `lista_espera` (
   `cod_Atendente` int(11) NOT NULL,
   PRIMARY KEY (`telefone`,`data_Espera`),
   KEY `cod_Atendente` (`cod_Atendente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `mesa` (
   `id_Mesa` int(11) NOT NULL AUTO_INCREMENT,
   `status_Mesa` varchar(30) NOT NULL,
   PRIMARY KEY (`id_Mesa`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `pagamento` (
   `operadora` varchar(15) DEFAULT NULL,
   `desconto` double DEFAULT NULL,
   PRIMARY KEY (`cod_Mesa`,`data_Hora`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `pedido` (
   `sequencia` int(11) DEFAULT NULL,
   PRIMARY KEY (`cod_Mesa`,`data_Hora`),
   KEY `sequencia` (`sequencia`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `pedido_atendente` (
   `cod_Atendente` int(11) NOT NULL,
   PRIMARY KEY (`cod_Mesa`,`data_Hora`),
   KEY `cod_Atendente` (`cod_Atendente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -180,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `pedido_atendente` (
 CREATE TABLE IF NOT EXISTS `prato` (
   `cod_Prato` int(11) NOT NULL,
   PRIMARY KEY (`cod_Prato`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `prato_ingrediente` (
   `cod_Prato` int(11) NOT NULL,
   PRIMARY KEY (`cod_Ingrediente`,`cod_Prato`),
   KEY `cod_Prato` (`cod_Prato`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `reserva` (
   PRIMARY KEY (`data_Hora`,`telefone`,`cod_Mesa`),
   KEY `cod_Mesa` (`cod_Mesa`),
   KEY `cod_Atendente` (`cod_Atendente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -224,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `vinho` (
   `safra` varchar(30) NOT NULL,
   `estoque` int(11) NOT NULL,
   PRIMARY KEY (`cod_Vinho`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Constraints for dumped tables
@@ -303,7 +303,7 @@ ALTER TABLE `vinho`
 --
 -- Base de Dados: `test`
 --
-CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET utf8 COLLATE utf8_swedish_ci;
 USE `test`;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
