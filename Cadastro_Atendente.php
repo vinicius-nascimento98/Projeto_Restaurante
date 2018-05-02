@@ -21,7 +21,7 @@ if(!empty($_POST)){
 	//echo "<br /> <a href='Form_CadastroAtendente.php'> Cadastrar novo Atendente </a>";
 }	
 else{
-	header("location: Form_CadastroAtendente.php");
+	header("location: Form_Atendente.php");
 }
 
 ?>
