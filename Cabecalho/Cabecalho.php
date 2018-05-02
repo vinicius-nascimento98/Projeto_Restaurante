@@ -10,6 +10,8 @@
 	|
 	<a href="Form_Ingrediente.php">Cadastrar Ingredientes</a>
 	|
+	<a href="Form_Item.php">Cadastrar Item</a>
+	|
 	<a href="Verifica_Mesa.html">Cadastrar Reserva</a>
 	|
 	<a href="Listar_Ingrediente.php">Listar Ingredientes</a>
