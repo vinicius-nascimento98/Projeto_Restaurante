@@ -6,6 +6,7 @@
 	</head>
 	
 	<body>
+	
 	<a href="Form_Atendente.php">Cadastrar Atendentes</a>
 	|
 	<a href="Form_Ingrediente.php">Cadastrar Ingredientes</a>
