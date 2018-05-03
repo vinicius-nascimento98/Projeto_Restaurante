@@ -27,12 +27,20 @@ abstract class Atributos implements Tag{
 class Radio extends Atributos{
 	protected $labelTexto = array();
 	protected $value = array();
+	protected $onchange;
 
 	public function set_tag(){
 		$this->tag="$this->label: ";
 
 		foreach ($this->value as $i => $v) {
-			$this->tag.="<input type='radio' name='$this->name' value='$v'> ".$this->labelTexto[$i];
+			$this->tag.="<input type='radio' name='$this->name' value='$v' ";
+			
+			//Adicionar onchange no Formulario que contenha radio ou checkbox caso use jQuery.
+				if($this->onchange!=null){
+					$this->tag .=" onchange='$this->onchange' ";
+				}
+			
+			$this->tag.="> ".$this->labelTexto[$i];
 		}
 	}
 
