@@ -23,10 +23,10 @@
 			$this->tagHead .= "<th>Ação</th></tr></thead>";
 		}
 
-		public function __construct($matrixDados){
+		public function __construct($vetor_cabecalho){
 			
-			foreach ($matrixDados as $i => $v) {
-				array_push($this->head, $i);
+			foreach ($vetor_cabecalho as $v) {
+				array_push($this->head, $v);
 			}
 
 			$this->set_head();
@@ -47,46 +47,40 @@
 			$this->nomeTabela = $tabela;
 		}
 
-		public function set_body($dadosBody){
+		public function add_body($objBody){
 
-			//descobrindo a quantidade de dados em minha primeira linha da matriz
-			$qntdLin = sizeof($dadosBody[$this->vetorHead[0]]);
+			//print_r($objBody);
 
-			$this->tagBody="<tbody>";
+			//abrindo uma linha na tabela
+			$this->tagBody.="<tr>";
 
-			//laço mais externo é responsável por percorrer as linhas de minha tabela (colunas da matriz)
-			for($col=0; $col<$qntdLin; $col++){
-
-				$this->tagBody.="<tr>";
-
-				$i=0;
-				//laço mais interno é responsável por percorrer as colunas da minha tabela (linhas da matriz)
-				foreach ($this->vetorHead as $lin) {
-					if($i==0){
-						$id=$dadosBody[$lin][$col];
-						$i++;
-					}
-					else{
-						$this->tagBody.="<td>".$dadosBody[$lin][$col]."</td>";
-					}
-				}
-
-				$this->tagBody.="<td><a href = 'altera.php?id=".$id."&tabela=".$this->nomeTabela."'>Alterar</a> | <a href = 'remove.php?id=".$id."&tabela=".$this->nomeTabela."'>Remover</a></td></tr>";
+			//laço responsável por montar as colunas da tabela
+			foreach ($this->vetorHead as $lin) {
+				
+				/*if($i==0){
+					$id=$objBody[$lin][$col];
+					$i++;
+				}*/
+				$this->tagBody.="<td>".$objBody->$lin."</td>";
+				
 			}
 
-			$this->tagBody.="</tbody>";
+			//adicionando as colunas de remoção e alteração
+			$this->tagBody.="<td><a href = 'altera.php?id=".$id."&tabela=".$this->nomeTabela."'>Alterar</a> | <a href = 'remove.php?id=".$id."&tabela=".$this->nomeTabela."'>Remover</a></td>";
 
+			//fechando a linha da tabela
+			$this->tagBody.="</tr>";
 		}
 
-		public function __construct($matrixDados,$tabela){
+		public function __construct($vetor_cabecalho){
 
-			$this->set_nomeTabela($tabela);
+			//$this->set_nomeTabela($tabela);
 
-			foreach ($matrixDados as $i => $v) {
-				array_push($this->vetorHead,$i);
+			foreach ($vetor_cabecalho as $v) {
+				array_push($this->vetorHead,$v);
 			}
 
-			$this->set_body($matrixDados);
+			$this->tagBody="<tbody>";
 		}
 	}
 
@@ -98,8 +92,8 @@
 			$this->thead=$dadoshead;
 		}
 
-		public function set_tbody($dadosbody){
-			$this->tbody=$dadosbody;
+		public function set_tbody($objBody){
+			$this->tbody=$objBody;
 		}
 
 		public function imprime_table(){			
@@ -107,6 +101,7 @@
 			echo "<table border='1'>";
 			$this->thead->imprime_head();
 			$this->tbody->imprime_body();
+			echo "</tbody>";
 			echo "</table>";
 			echo "</div>";
 		}
