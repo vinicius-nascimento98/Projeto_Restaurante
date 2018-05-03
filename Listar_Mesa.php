@@ -28,7 +28,7 @@
 	if(isset($dados)){
 		
 		$h = new Thead($dados);
-		$b = new Tbody($dados, 'atendente');
+		$b = new Tbody($dados, 'mesa');
 
 		$t = new Table($h,$b);
 
