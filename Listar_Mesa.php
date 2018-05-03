@@ -4,7 +4,7 @@
 	include('Class/ClassTable.php');
 	include('Conexao.php');
 
-	$select = "SELECT id_mesa, status_mesa FROM mesa";
+	$select = "SELECT id_mesa FROM mesa";
 	
 	$stmt = $conn -> prepare($select);
 	
