@@ -26,5 +26,9 @@ header('Content-Type: text/html; charset=utf-8');
 	<a href="Listar_Espera.php">Listar Espera</a>
 	|
 	<a href="Listar_Reserva.php">Listar Reservas</a>
+	|
+	<a href="Listar_Atendente.php">Listar Atendentes</a>
+	|
+	<a href="Listar_Mesa.php">Listar Mesas</a>
 	<hr />
 	<br />
