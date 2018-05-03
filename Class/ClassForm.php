@@ -279,12 +279,13 @@ class Form{
 	public function exibe_form(){
 		echo "<form name='$this->name' action='$this->action' method='$this->method'>";
 		echo "<fieldset>";
-		foreach($this->entrada as $e){
-			echo "<p>";	
-			$e->imprime_tag();
-			echo "</p>";
+		if($this->entrada != null){
+			foreach($this->entrada as $e){
+				echo "<p>";	
+				$e->imprime_tag();
+				echo "</p>";
+			}
 		}
-
 		echo "<p>";
 		echo $this->submit;
 		echo "</p>";
