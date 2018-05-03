@@ -16,6 +16,7 @@ $input2 = new Input($inp2);
 $r1 = array("label"=>"Disponibilidade", "nome"=>"disponibilidade", "tipo"=>"radio");
 $vetValueLabel = array('di'=>"Disponivel", 'in'=>"Indisponivel");
 
+//adicionar onchange.
 $r2 = array("label"=>"Tipo", "nome"=>"tipo", "tipo"=>"radio");
 $vetValueLabel2 = array('drink'=>"Drink", 'prato'=>"Prato", 'vinho'=>"Vinho", 'bebida'=>"Bebida");
 
