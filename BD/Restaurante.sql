@@ -1,9 +1,9 @@
-﻿-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 4.0.4.2
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 24-Abr-2018 às 09:51
+-- Data de Criação: 03-Maio-2018 às 00:56
 -- Versão do servidor: 5.6.13
 -- versão do PHP: 5.4.17
 
@@ -124,9 +124,17 @@ CREATE TABLE IF NOT EXISTS `lista_espera` (
 
 CREATE TABLE IF NOT EXISTS `mesa` (
   `id_Mesa` int(11) NOT NULL AUTO_INCREMENT,
-  `status_Mesa` varchar(30) NOT NULL,
+  `status_Mesa` enum('Disponível','Indisponível') DEFAULT 'Disponível',
   PRIMARY KEY (`id_Mesa`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Extraindo dados da tabela `mesa`
+--
+
+INSERT INTO `mesa` (`id_Mesa`, `status_Mesa`) VALUES
+(1, NULL),
+(2, 'Disponível');
 
 -- --------------------------------------------------------
 
@@ -300,11 +308,6 @@ ALTER TABLE `reserva`
 --
 ALTER TABLE `vinho`
   ADD CONSTRAINT `vinho_ibfk_1` FOREIGN KEY (`cod_Vinho`) REFERENCES `item` (`id_item`);
---
--- Base de Dados: `test`
---
-CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET utf8 COLLATE utf8_swedish_ci;
-USE `test`;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
