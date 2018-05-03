@@ -1,6 +1,8 @@
 <?php
 if(!empty($_POST)){
+	include("Cabecalho/Cabecalho.php");
 	include('Conexao.php');
+
 $insert = "INSERT INTO ingrediente (nome_Ingrediente, custo, estoque) values (:nome_Ingrediente, :custo, :estoque);";
 
 $stmt = $conn->prepare($insert);
@@ -16,7 +18,6 @@ $stmt->bindValue(':estoque',$estoque);
 $stmt->execute();
 
 echo "Ingrediente cadastrado com sucesso!";
-echo "<br /><a href='Form_Ingrediente.php'>Cadastrar novo Ingrediente</a>";
 
 }
 else{
