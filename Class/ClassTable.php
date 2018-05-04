@@ -37,7 +37,6 @@
 	class Tbody{
 		protected $tagBody;
 		protected $vetorHead=array();
-		protected $nomeTabela;
 
 		public function imprime_body(){
 			echo $this->tagBody;
@@ -49,24 +48,25 @@
 
 		public function add_body($objBody){
 
-			//print_r($objBody);
-
 			//abrindo uma linha na tabela
 			$this->tagBody.="<tr>";
 
 			//laço responsável por montar as colunas da tabela
 			foreach ($this->vetorHead as $lin) {
-				
-				/*if($i==0){
-					$id=$objBody[$lin][$col];
-					$i++;
-				}*/
-				$this->tagBody.="<td>".$objBody->$lin."</td>";
+
+				$method = "get_".$lin;
+
+				if(substr($lin,0,2) == "id"){
+					$id= $objBody->$method();
+				}
+				else{
+					$this->tagBody.="<td>".$objBody->$method()."</td>";
+				}
 				
 			}
 
-			//adicionando as colunas de remoção e alteração
-			$this->tagBody.="<td><a href = 'altera.php?id=".$id."&tabela=".$this->nomeTabela."'>Alterar</a> | <a href = 'remove.php?id=".$id."&tabela=".$this->nomeTabela."'>Remover</a></td>";
+			//adicionando as colunas de remoção e Alteração
+			$this->tagBody.="<td><a href = 'Altera.php?id=".$id."&tabela=".strtolower(get_class($objBody))."'>Alterar</a> | <a href = 'Remover.php?id=".$id."&tabela=".strtolower(get_class($objBody))."'>Remover</a></td>";
 
 			//fechando a linha da tabela
 			$this->tagBody.="</tr>";
@@ -112,5 +112,7 @@
 		}
 
 	}
+
+	//strtolower() deixa a string minuscula
 
 ?>

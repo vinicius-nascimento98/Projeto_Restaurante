@@ -29,10 +29,10 @@ USE `restaurante`;
 --
 
 CREATE TABLE IF NOT EXISTS `atendente` (
-  `id_Atendente` int(11) NOT NULL AUTO_INCREMENT,
+  `id_atendente` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   `comissao` double NOT NULL,
-  PRIMARY KEY (`id_Atendente`)
+  PRIMARY KEY (`id_atendente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -42,9 +42,9 @@ CREATE TABLE IF NOT EXISTS `atendente` (
 --
 
 CREATE TABLE IF NOT EXISTS `bebida` (
-  `cod_Bebida` int(11) NOT NULL,
+  `cod_bebida` int(11) NOT NULL,
   `estoque` int(11) NOT NULL,
-  PRIMARY KEY (`cod_Bebida`)
+  PRIMARY KEY (`cod_bebida`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -54,8 +54,8 @@ CREATE TABLE IF NOT EXISTS `bebida` (
 --
 
 CREATE TABLE IF NOT EXISTS `drink` (
-  `cod_Drink` int(11) NOT NULL,
-  PRIMARY KEY (`cod_Drink`)
+  `cod_drink` int(11) NOT NULL,
+  PRIMARY KEY (`cod_drink`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -65,10 +65,10 @@ CREATE TABLE IF NOT EXISTS `drink` (
 --
 
 CREATE TABLE IF NOT EXISTS `drink_ingrediente` (
-  `cod_Ingrediente` int(11) NOT NULL,
-  `cod_Drink` int(11) NOT NULL,
-  PRIMARY KEY (`cod_Ingrediente`,`cod_Drink`),
-  KEY `cod_Drink` (`cod_Drink`)
+  `cod_ingrediente` int(11) NOT NULL,
+  `cod_drink` int(11) NOT NULL,
+  PRIMARY KEY (`cod_ingrediente`,`cod_drink`),
+  KEY `cod_drink` (`cod_drink`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -78,11 +78,11 @@ CREATE TABLE IF NOT EXISTS `drink_ingrediente` (
 --
 
 CREATE TABLE IF NOT EXISTS `ingrediente` (
-  `id_Ingrediente` int(11) NOT NULL AUTO_INCREMENT,
-  `nome_Ingrediente` varchar(30) NOT NULL,
+  `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT,
+  `nome_ingrediente` varchar(30) NOT NULL,
   `custo` double NOT NULL,
   `estoque` double NOT NULL,
-  PRIMARY KEY (`id_Ingrediente`)
+  PRIMARY KEY (`id_ingrediente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -107,13 +107,13 @@ CREATE TABLE IF NOT EXISTS `item` (
 --
 
 CREATE TABLE IF NOT EXISTS `lista_espera` (
-  `nome_Cliente` varchar(50) NOT NULL,
+  `nome_cliente` varchar(50) NOT NULL,
   `ordem` int(11) NOT NULL,
-  `data_Espera` date NOT NULL,
+  `data_espera` date NOT NULL,
   `telefone` varchar(20) NOT NULL,
-  `cod_Atendente` int(11) NOT NULL,
-  PRIMARY KEY (`telefone`,`data_Espera`),
-  KEY `cod_Atendente` (`cod_Atendente`)
+  `cod_atendente` int(11) NOT NULL,
+  PRIMARY KEY (`telefone`,`data_espera`),
+  KEY `cod_atendente` (`cod_atendente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -123,16 +123,16 @@ CREATE TABLE IF NOT EXISTS `lista_espera` (
 --
 
 CREATE TABLE IF NOT EXISTS `mesa` (
-  `id_Mesa` int(11) NOT NULL AUTO_INCREMENT,
-  `status_Mesa` enum('Disponível','Indisponível') DEFAULT 'Disponível',
-  PRIMARY KEY (`id_Mesa`)
+  `id_mesa` int(11) NOT NULL AUTO_INCREMENT,
+  `status_mesa` enum('Disponível','Indisponível') DEFAULT 'Disponível',
+  PRIMARY KEY (`id_mesa`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Extraindo dados da tabela `mesa`
 --
 
-INSERT INTO `mesa` (`id_Mesa`, `status_Mesa`) VALUES
+INSERT INTO `mesa` (`id_mesa`, `status_mesa`) VALUES
 (1, NULL),
 (2, 'Disponível');
 
@@ -143,12 +143,12 @@ INSERT INTO `mesa` (`id_Mesa`, `status_Mesa`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `pagamento` (
-  `data_Hora` datetime NOT NULL,
-  `cod_Mesa` int(11) NOT NULL,
-  `forma_Pagamento` varchar(15) NOT NULL,
+  `data_hora` datetime NOT NULL,
+  `cod_mesa` int(11) NOT NULL,
+  `forma_pagamento` varchar(15) NOT NULL,
   `operadora` varchar(15) DEFAULT NULL,
   `desconto` double DEFAULT NULL,
-  PRIMARY KEY (`cod_Mesa`,`data_Hora`)
+  PRIMARY KEY (`cod_mesa`,`data_hora`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -158,10 +158,10 @@ CREATE TABLE IF NOT EXISTS `pagamento` (
 --
 
 CREATE TABLE IF NOT EXISTS `pedido` (
-  `data_Hora` datetime NOT NULL,
-  `cod_Mesa` int(11) NOT NULL,
+  `data_hora` datetime NOT NULL,
+  `cod_mesa` int(11) NOT NULL,
   `sequencia` int(11) DEFAULT NULL,
-  PRIMARY KEY (`cod_Mesa`,`data_Hora`),
+  PRIMARY KEY (`cod_mesa`,`data_hora`),
   KEY `sequencia` (`sequencia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -172,11 +172,11 @@ CREATE TABLE IF NOT EXISTS `pedido` (
 --
 
 CREATE TABLE IF NOT EXISTS `pedido_atendente` (
-  `data_Hora` datetime NOT NULL,
-  `cod_Mesa` int(11) NOT NULL,
-  `cod_Atendente` int(11) NOT NULL,
-  PRIMARY KEY (`cod_Mesa`,`data_Hora`),
-  KEY `cod_Atendente` (`cod_Atendente`)
+  `data_hora` datetime NOT NULL,
+  `cod_mesa` int(11) NOT NULL,
+  `cod_atendente` int(11) NOT NULL,
+  PRIMARY KEY (`cod_mesa`,`data_hora`),
+  KEY `cod_atendente` (`cod_atendente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -186,8 +186,8 @@ CREATE TABLE IF NOT EXISTS `pedido_atendente` (
 --
 
 CREATE TABLE IF NOT EXISTS `prato` (
-  `cod_Prato` int(11) NOT NULL,
-  PRIMARY KEY (`cod_Prato`)
+  `cod_prato` int(11) NOT NULL,
+  PRIMARY KEY (`cod_prato`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -197,10 +197,10 @@ CREATE TABLE IF NOT EXISTS `prato` (
 --
 
 CREATE TABLE IF NOT EXISTS `prato_ingrediente` (
-  `cod_Ingrediente` int(11) NOT NULL,
-  `cod_Prato` int(11) NOT NULL,
-  PRIMARY KEY (`cod_Ingrediente`,`cod_Prato`),
-  KEY `cod_Prato` (`cod_Prato`)
+  `cod_ingrediente` int(11) NOT NULL,
+  `cod_prato` int(11) NOT NULL,
+  PRIMARY KEY (`cod_ingrediente`,`cod_prato`),
+  KEY `cod_prato` (`cod_prato`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -210,14 +210,14 @@ CREATE TABLE IF NOT EXISTS `prato_ingrediente` (
 --
 
 CREATE TABLE IF NOT EXISTS `reserva` (
-  `nome_Cliente` varchar(50) NOT NULL,
+  `nome_cliente` varchar(50) NOT NULL,
   `telefone` varchar(20) NOT NULL,
-  `data_Hora` datetime NOT NULL,
-  `cod_Mesa` int(11) NOT NULL,
-  `cod_Atendente` int(11) NOT NULL,
-  PRIMARY KEY (`data_Hora`,`telefone`,`cod_Mesa`),
-  KEY `cod_Mesa` (`cod_Mesa`),
-  KEY `cod_Atendente` (`cod_Atendente`)
+  `data_hora` datetime NOT NULL,
+  `cod_mesa` int(11) NOT NULL,
+  `cod_atendente` int(11) NOT NULL,
+  PRIMARY KEY (`data_hora`,`telefone`,`cod_mesa`),
+  KEY `cod_mesa` (`cod_mesa`),
+  KEY `cod_atendente` (`cod_atendente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -227,11 +227,11 @@ CREATE TABLE IF NOT EXISTS `reserva` (
 --
 
 CREATE TABLE IF NOT EXISTS `vinho` (
-  `cod_Vinho` int(11) NOT NULL,
+  `cod_vinho` int(11) NOT NULL,
   `tipo_uva` varchar(100) NOT NULL,
   `safra` varchar(30) NOT NULL,
   `estoque` int(11) NOT NULL,
-  PRIMARY KEY (`cod_Vinho`)
+  PRIMARY KEY (`cod_vinho`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -242,72 +242,72 @@ CREATE TABLE IF NOT EXISTS `vinho` (
 -- Limitadores para a tabela `bebida`
 --
 ALTER TABLE `bebida`
-  ADD CONSTRAINT `bebida_ibfk_1` FOREIGN KEY (`cod_Bebida`) REFERENCES `item` (`id_item`);
+  ADD CONSTRAINT `bebida_ibfk_1` FOREIGN KEY (`cod_bebida`) REFERENCES `item` (`id_item`);
 
 --
 -- Limitadores para a tabela `drink`
 --
 ALTER TABLE `drink`
-  ADD CONSTRAINT `drink_ibfk_1` FOREIGN KEY (`cod_Drink`) REFERENCES `item` (`id_item`);
+  ADD CONSTRAINT `drink_ibfk_1` FOREIGN KEY (`cod_drink`) REFERENCES `item` (`id_item`);
 
 --
 -- Limitadores para a tabela `drink_ingrediente`
 --
 ALTER TABLE `drink_ingrediente`
-  ADD CONSTRAINT `drink_ingrediente_ibfk_1` FOREIGN KEY (`cod_Ingrediente`) REFERENCES `ingrediente` (`id_Ingrediente`),
-  ADD CONSTRAINT `drink_ingrediente_ibfk_2` FOREIGN KEY (`cod_Drink`) REFERENCES `drink` (`cod_Drink`);
+  ADD CONSTRAINT `drink_ingrediente_ibfk_1` FOREIGN KEY (`cod_ingrediente`) REFERENCES `ingrediente` (`id_ingrediente`),
+  ADD CONSTRAINT `drink_ingrediente_ibfk_2` FOREIGN KEY (`cod_drink`) REFERENCES `drink` (`cod_drink`);
 
 --
 -- Limitadores para a tabela `lista_espera`
 --
 ALTER TABLE `lista_espera`
-  ADD CONSTRAINT `lista_espera_ibfk_1` FOREIGN KEY (`cod_Atendente`) REFERENCES `atendente` (`id_Atendente`);
+  ADD CONSTRAINT `lista_espera_ibfk_1` FOREIGN KEY (`cod_atendente`) REFERENCES `atendente` (`id_atendente`);
 
 --
 -- Limitadores para a tabela `pagamento`
 --
 ALTER TABLE `pagamento`
-  ADD CONSTRAINT `pagamento_ibfk_1` FOREIGN KEY (`cod_Mesa`) REFERENCES `pedido` (`cod_Mesa`);
+  ADD CONSTRAINT `pagamento_ibfk_1` FOREIGN KEY (`cod_mesa`) REFERENCES `pedido` (`cod_mesa`);
 
 --
 -- Limitadores para a tabela `pedido`
 --
 ALTER TABLE `pedido`
-  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`cod_Mesa`) REFERENCES `mesa` (`id_Mesa`),
+  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`cod_mesa`) REFERENCES `mesa` (`id_mesa`),
   ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`sequencia`) REFERENCES `item` (`id_item`);
 
 --
 -- Limitadores para a tabela `pedido_atendente`
 --
 ALTER TABLE `pedido_atendente`
-  ADD CONSTRAINT `pedido_atendente_ibfk_1` FOREIGN KEY (`cod_Mesa`, `data_Hora`) REFERENCES `pedido` (`cod_Mesa`, `data_Hora`),
-  ADD CONSTRAINT `pedido_atendente_ibfk_2` FOREIGN KEY (`cod_Atendente`) REFERENCES `atendente` (`id_Atendente`);
+  ADD CONSTRAINT `pedido_atendente_ibfk_1` FOREIGN KEY (`cod_mesa`, `data_hora`) REFERENCES `pedido` (`cod_mesa`, `data_hora`),
+  ADD CONSTRAINT `pedido_atendente_ibfk_2` FOREIGN KEY (`cod_atendente`) REFERENCES `atendente` (`id_atendente`);
 
 --
 -- Limitadores para a tabela `prato`
 --
 ALTER TABLE `prato`
-  ADD CONSTRAINT `prato_ibfk_1` FOREIGN KEY (`cod_Prato`) REFERENCES `item` (`id_item`);
+  ADD CONSTRAINT `prato_ibfk_1` FOREIGN KEY (`cod_prato`) REFERENCES `item` (`id_item`);
 
 --
 -- Limitadores para a tabela `prato_ingrediente`
 --
 ALTER TABLE `prato_ingrediente`
-  ADD CONSTRAINT `prato_ingrediente_ibfk_1` FOREIGN KEY (`cod_Ingrediente`) REFERENCES `ingrediente` (`id_Ingrediente`),
-  ADD CONSTRAINT `prato_ingrediente_ibfk_2` FOREIGN KEY (`cod_Prato`) REFERENCES `prato` (`cod_Prato`);
+  ADD CONSTRAINT `prato_ingrediente_ibfk_1` FOREIGN KEY (`cod_ingrediente`) REFERENCES `ingrediente` (`id_ingrediente`),
+  ADD CONSTRAINT `prato_ingrediente_ibfk_2` FOREIGN KEY (`cod_prato`) REFERENCES `prato` (`cod_prato`);
 
 --
 -- Limitadores para a tabela `reserva`
 --
 ALTER TABLE `reserva`
-  ADD CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`cod_Mesa`) REFERENCES `mesa` (`id_Mesa`),
-  ADD CONSTRAINT `reserva_ibfk_2` FOREIGN KEY (`cod_Atendente`) REFERENCES `atendente` (`id_Atendente`);
+  ADD CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`cod_mesa`) REFERENCES `mesa` (`id_mesa`),
+  ADD CONSTRAINT `reserva_ibfk_2` FOREIGN KEY (`cod_atendente`) REFERENCES `atendente` (`id_atendente`);
 
 --
 -- Limitadores para a tabela `vinho`
 --
 ALTER TABLE `vinho`
-  ADD CONSTRAINT `vinho_ibfk_1` FOREIGN KEY (`cod_Vinho`) REFERENCES `item` (`id_item`);
+  ADD CONSTRAINT `vinho_ibfk_1` FOREIGN KEY (`cod_vinho`) REFERENCES `item` (`id_item`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

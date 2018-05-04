@@ -6,7 +6,7 @@
 		protected $comissao;
 		
 		public function __construct($atendente){
-			if(isset($i["id_atendente"])){
+			if(isset($atendente["id_atendente"])){
 				$this->set_id_atendente($atendente["id_atendente"]);
 			}
 			$this->set_nome($atendente["nome"]);

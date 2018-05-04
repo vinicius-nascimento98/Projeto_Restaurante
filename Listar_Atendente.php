@@ -1,44 +1,41 @@
 <?php
 
-	include('Cabecalho/Cabecalho.php'); //mudar para cabecalho geral
-	include('Class/ClassTable.php');
-	include('Conexao.php');
+	include("Cabecalho/Cabecalho.php");
+    include("Class/ClassBD.php");
+    include("Class/ClassAtendente.php");
+    include("Class/ClassTable.php");
+    include("Conexao.php");
+    
+    $table="atendente";
 
-	$select = "SELECT id_atendente, nome, comissao FROM atendente";
-	
-	$stmt = $conn -> prepare($select);
-	
-	$stmt->execute();
-	
-	$cont = 0;
+    $b=new BD($conn);
 
-    while($linha = $stmt->fetch()){
-        
-        foreach($linha as $i => $v){
+    $retorno = $b->select($table);
+    
+	if($retorno!=null){
+		//criando vetor de objetos
+		foreach($retorno as $v){
+			$a[] = new Atendente($v);
+		}
 
-            if(!is_numeric($i)){
+		//criando vetor de cabecalho
+		foreach($retorno[0] as $i=>$v){
+			$cabecalho[]=$i;
+		}
 
-                $dados[$i][$cont] = $v;
-            }
-        }
+		$h=new Thead($cabecalho);
+		$b=new Tbody($cabecalho);
 
-        $cont++;
-    }
-	
-	if(isset($dados)){
-		
-		$h = new Thead($dados);
-		$b = new Tbody($dados, 'atendente');
+		foreach($a as $v){
+			$b->add_body($v);
+		}
 
-		$t = new Table($h,$b);
-
-		echo "<h1> Atendentes Cadastrados</h1>";
-		echo "<hr>";
+		$t=new Table($h,$b);
 
 		$t->imprime_table();
-	
+
+		//get_object_vars([objeto]) -> retorna um vetor de atributos do objeto
 	}
-	
 	else{
 		echo"<h1>Não possui DADOS!!</h1>";
 	}

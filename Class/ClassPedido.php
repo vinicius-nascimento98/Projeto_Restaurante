@@ -5,13 +5,13 @@
     include("ClassItem.php");
 
     class Pedido{
-        protected $data_Hora;
+        protected $data_hora;
         protected $mesa;
         protected $sequencia=array();
 
         public function __construct($pedido, Mesa $m, Item $i){
 
-            $this->set_data_Hora($pedido['data_Hora']);
+            $this->set_data_hora($pedido['data_hora']);
             $this->set_mesa($m);
             $this->set_sequencia($i);
         }

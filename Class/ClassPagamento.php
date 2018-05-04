@@ -4,14 +4,14 @@
     include("ClassMesa.php");
 
     class Pagamento{
-        protected $data_Hora;
+        protected $data_hora;
         protected $mesa;
-        protected $forma_Pagamento;
+        protected $forma_pagamento;
         protected $operadora;
         protected $desconto;
 
-        public function set_data_Hora($data){
-            $this->data_Hora=$data;
+        public function set_data_hora($data){
+            $this->data_hora=$data;
         }
 
         //sera inserido um objeto da classe Mesa no atributo Mesa
@@ -19,8 +19,8 @@
             $this->mesa=$m;
         }
 
-        public function set_forma_Pagamento($forma_Pagamento){
-            $this->forma_Pagamento=$forma_Pagamento;
+        public function set_forma_pagamento($forma_pagamento){
+            $this->forma_pagamento=$forma_pagamento;
         }
 
         public function set_operadora($operadora){
@@ -31,8 +31,8 @@
             $this->desconto=$desconto;
         }
 
-        public function get_data_Hora(){
-            return($this->data_Hora);
+        public function get_data_hora(){
+            return($this->data_hora);
         }
 
         //retorno o objeto contido no atributo e trato na página onde ele foi chamado
@@ -40,8 +40,8 @@
             return($this->mesa);
         }
 
-        public function get_forma_Pagamento(){
-            return($this->forma_Pagamento);
+        public function get_forma_pagamento(){
+            return($this->forma_pagamento);
         }
 
         public function get_operadora(){
@@ -55,9 +55,9 @@
         //tem de ser passado um POST com os dados, além do objeto da Classe Mesa
         public function __construct($pagamento, Mesa $m){
 
-            $this->set_data_Hora($pagamento['data_Hora']);
+            $this->set_data_hora($pagamento['data_hora']);
             $this->set_mesa($m);
-            $this->set_forma_Pagamento($pagamento['forma_Pagamento']);
+            $this->set_forma_pagamento($pagamento['forma_pagamento']);
             $this->set_operadora($pagamento['operadora']);
             $this->set_desconto($pagamento['desconto']);
         }

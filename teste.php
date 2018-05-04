@@ -1,6 +1,5 @@
-<pre>
 <?php
-
+    include("Cabecalho/Cabecalho.php");
     include("Class/ClassBD.php");
     include("Class/ClassAtendente.php");
     include("Class/ClassTable.php");
@@ -29,8 +28,9 @@
         $b->add_body($v);
     }
 
-    print_r($b);
+    $t=new Table($h,$b);
+
+    $t->imprime_table();
 
     //get_object_vars([objeto]) -> retorna um vetor de atributos do objeto
 ?>
-</pre>
