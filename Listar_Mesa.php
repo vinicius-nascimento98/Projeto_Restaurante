@@ -1,45 +1,34 @@
 <?php
 
-	include('Cabecalho/Cabecalho.php'); //mudar para cabecalho geral
-	include('Class/ClassTable.php');
-	include('Conexao.php');
-
-	$select = "SELECT id_mesa FROM mesa";
+	include("Cabecalho/Cabecalho.php"); //mudar para cabecalho geral
+	include("Class/ClassBD.php");
+	include("Class/ClassMesa.php");
+	include("Class/ClassTable.php");
+	include("Conexao.php");
 	
-	$stmt = $conn -> prepare($select);
+	$table = "mesa";
 	
-	$stmt->execute();
+	$b = new BD($conn);
 	
-	$cont = 0;
-
-    while($linha = $stmt->fetch()){
-        
-        foreach($linha as $i => $v){
-
-            if(!is_numeric($i)){
-
-                $dados[$i][$cont] = $v;
-            }
-        }
-
-        $cont++;
-    }
+	$retorno_BD = $b->select($table);
 	
-	if(isset($dados)){
+	if($retorno_BD != null){
+		//criando vetor de objetos
+		foreach($retorno_BD as $v){
+			$mesa = new Mesa($v);
+		}
 		
-		$h = new Thead($dados);
-		$b = new Tbody($dados, 'mesa');
-
-		$t = new Table($h,$b);
-
-		echo "<h1> Mesas Cadastradas</h1>";
-		echo "<hr>";
-
-		$t->imprime_table();
-	
+		//criando vetor de cabecalho
+		foreach($retorno_BD[0] as $i=>$v){
+			$cabecalho[] = $i;
+		}
+		
+		$t = new Table($cabecalho,$mesa);
+		
 	}
 	
 	else{
-		echo"<h1>Não possui DADOS!!</h1>";
+		echo "<h1>Não possui DADOS!!</h1>";
 	}
+	
 ?>
