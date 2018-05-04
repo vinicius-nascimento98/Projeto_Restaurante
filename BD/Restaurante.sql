@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 03-Maio-2018 às 00:56
+-- Data de Criação: 04-Maio-2018 às 17:03
 -- Versão do servidor: 5.6.13
 -- versão do PHP: 5.4.17
 
@@ -98,8 +98,42 @@ CREATE TABLE IF NOT EXISTS `item` (
   `disponibilidade` char(2) NOT NULL,
   `tipo` varchar(50) NOT NULL,
   PRIMARY KEY (`id_item`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
+--
+-- Extraindo dados da tabela `item`
+--
+
+INSERT INTO `item` (`id_item`, `descricao`, `custo`, `disponibilidade`, `tipo`) VALUES
+(1, 'Vinho Latitude', 80, 'S', 'Bebida Alcoólica'),
+(2, 'Vinho Monte Verde', 90, 'S', 'Bebida Alcoólica');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `item_bebida`
+--
+CREATE TABLE IF NOT EXISTS `item_bebida` (
+`cod_bebida` int(11)
+,`descricao` varchar(100)
+,`custo` double
+,`estoque` int(11)
+,`disponibilidade` char(2)
+);
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `item_vinho`
+--
+CREATE TABLE IF NOT EXISTS `item_vinho` (
+`cod_vinho` int(11)
+,`descricao` varchar(100)
+,`tipo_uva` varchar(100)
+,`safra` varchar(30)
+,`custo` double
+,`estoque` int(11)
+,`disponibilidade` char(2)
+);
 -- --------------------------------------------------------
 
 --
@@ -233,6 +267,32 @@ CREATE TABLE IF NOT EXISTS `vinho` (
   `estoque` int(11) NOT NULL,
   PRIMARY KEY (`cod_vinho`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `vinho`
+--
+
+INSERT INTO `vinho` (`cod_vinho`, `tipo_uva`, `safra`, `estoque`) VALUES
+(1, 'Uva Chilena', '2010', 100),
+(2, 'Uva Argentina', '2009', 100);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `item_bebida`
+--
+DROP TABLE IF EXISTS `item_bebida`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `item_bebida` AS select `bebida`.`cod_bebida` AS `cod_bebida`,`item`.`descricao` AS `descricao`,`item`.`custo` AS `custo`,`bebida`.`estoque` AS `estoque`,`item`.`disponibilidade` AS `disponibilidade` from (`bebida` join `item`) where (`bebida`.`cod_bebida` = `item`.`id_item`);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `item_vinho`
+--
+DROP TABLE IF EXISTS `item_vinho`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `item_vinho` AS select `vinho`.`cod_vinho` AS `cod_vinho`,`item`.`descricao` AS `descricao`,`vinho`.`tipo_uva` AS `tipo_uva`,`vinho`.`safra` AS `safra`,`item`.`custo` AS `custo`,`vinho`.`estoque` AS `estoque`,`item`.`disponibilidade` AS `disponibilidade` from (`vinho` join `item`) where (`vinho`.`cod_vinho` = `item`.`id_item`);
 
 --
 -- Constraints for dumped tables
