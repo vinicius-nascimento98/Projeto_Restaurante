@@ -1,5 +1,5 @@
 <?php
-	include("Class_Item.php");
+	include("ClassItem.php");
 
 	class Bebida extends Item{
 		protected $cod_bebida;

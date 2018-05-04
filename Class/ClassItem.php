@@ -4,19 +4,29 @@ abstract class Item {
 	protected $id_item;
 	protected $descricao;
 	protected $custo;
+	protected $disponibilidade;
 	protected $tipo;
 	
 	public function __construct ($item){
+		$this->set_disponibilidade($item['disponibilidade']);
+		$this->set_descricao($item['descricao']);
+		$this->set_custo($item['custo']);
+		
 		if(isset($i["id_item"])){
 			$this->set_id_item($item["id_item"]);
 		}
-		$this->set_descricao($item['descricao']);
-		$this->set_custo($item['custo']);
-		$this->set_tipo($item['tipo']);
+
+		if(isset($item['tipo'])){
+			$this->set_tipo($item['tipo']);
+		}
 	}
 	
 	public function set_id_item($id_item){
 		$this->id_item = $id_item;
+	}
+
+	public function set_disponibilidade($disponibilidade){
+		$this->disponibilidade = $disponibilidade;
 	}
 	
 	public function set_descricao($descricao){
@@ -45,6 +55,10 @@ abstract class Item {
 	
 	public function get_tipo(){
 		return($this->tipo);
+	}
+
+	public function get_disponibilidade(){
+		return($this->disponibilidade);
 	}
 	
 }
