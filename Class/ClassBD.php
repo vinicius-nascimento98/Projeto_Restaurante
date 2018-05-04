@@ -2,28 +2,24 @@
 
     class BD{
         protected $conn;
-        protected $table;
         
         protected function set_conn($conexao){
             $this->conn=$conexao;
         }
 
-        protected function set_table($tabela){
-            $this->table=$tabela;
-        }
-
+        /*método responsável por montar o select para consulta, utilizando a
+         tabela passado por parametro e retornando uma matriz de resultados,
+         adquiridos pela consulta no BD.*/
         public function select($tabela){
+             
+            $select = "SELECT * FROM ". $tabela;
 
-            $this->set_table($tabela);
-
-            $select="SELECT * FROM ".$this->table.";";
-
-            $stmt=$this->conn->prepare($select);
+            $stmt = $this->conn->prepare($select);
             $stmt->execute();
 
-            $cont=0;
-            $vetor_retorno=array();
-            while($retorno=$stmt->fetch()){
+            $cont = 0;
+            
+            while($retorno = $stmt->fetch()){
 				
                 foreach($retorno as $i => $v){
                     

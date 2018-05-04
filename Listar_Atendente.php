@@ -6,9 +6,9 @@
     include("Class/ClassTable.php");
     include("Conexao.php");
     
-    $table="atendente";
+    $table = "atendente";
 
-    $b=new BD($conn);
+    $b = new BD($conn);
 
     $retorno = $b->select($table);
     
@@ -20,19 +20,10 @@
 
 		//criando vetor de cabecalho
 		foreach($retorno[0] as $i=>$v){
-			$cabecalho[]=$i;
+			$cabecalho[] = $i;
 		}
 
-		$h=new Thead($cabecalho);
-		$b=new Tbody($cabecalho);
-
-		foreach($a as $v){
-			$b->add_body($v);
-		}
-
-		$t=new Table($h,$b);
-
-		$t->imprime_table();
+		$t = new Table($cabecalho,$a);
 
 		//get_object_vars([objeto]) -> retorna um vetor de atributos do objeto
 	}

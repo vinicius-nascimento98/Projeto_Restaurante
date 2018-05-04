@@ -106,9 +106,18 @@
 			echo "</div>";
 		}
 
-		public function __construct(Thead $head, Tbody $body){
-			$this->set_thead($head);
-			$this->set_tbody($body);
+		public function __construct($cabecalho, $vetorObj){
+			$h=new Thead($cabecalho);
+			$b=new Tbody($cabecalho);
+
+			foreach($vetorObj as $v){
+				$b->add_body($v);
+			}
+
+			$this->set_thead($h);
+			$this->set_tbody($b);
+
+			$this->imprime_table();
 		}
 
 	}
