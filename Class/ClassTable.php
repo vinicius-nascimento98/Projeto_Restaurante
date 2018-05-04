@@ -112,7 +112,8 @@
 		}
 
 	}
-
+	
+	//strtoupper->deixa a string maiuscula
 	//strtolower() deixa a string minuscula
 
 ?>
