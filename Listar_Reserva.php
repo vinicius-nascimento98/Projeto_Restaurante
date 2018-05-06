@@ -1,45 +1,65 @@
 <?php
 
-    include("Conexao.php");
+	include("Cabecalho/Cabecalho.php");
+    include("Class/ClassBD.php");
+    include("Class/ClassReserva.php");
     include("Class/ClassTable.php");
-    include("Cabecalho/Cabecalho.php"); //mudar para cabecalho geral
+    include("Conexao.php");
+    
+    $r=new BD($conn);
 
-    //preparando o query de busca para execução no banco de dados
-    $select = "SELECT telefone ID,nome_ClientE CLIENTE,telefone TELEFONE,data_HorA DATA_CADASTRO_RESERVA,cod_Mesa MESA,atendente.nome ATENDENTE FROM reserva INNER JOIN atendente ON reserva.cod_atendente=atendente.id_atendente;";
+    $table = "vw_reserva";
+    $retornoReserva = $r->select($table);
+    
+    //se tiver retorno do banco ele entra o if
+	if($retornoReserva!=null){
+        
+        //buscando os atendentes no banco de dados
+        $table = "atendente";
+        $retornoAtendente = $r->select($table);
 
-    $stmt=$conn->prepare($select);
-
-    $stmt->execute();
-
-    //adicionando os dados retornados pelo banco e guardando na matriz $dados
-    $cont = 0;
-    while($linha = $stmt -> fetch()){
-
-        foreach($linha as $i => $v){
+        //buscando as mesas no banco de dados
+        $table = "mesa";
+        $retornoMesa = $r->select($table);
+        
+        foreach($retornoReserva as $v){
             
-            if(!is_numeric($i)){
-                $dados[$i][$cont] = $v;
+            //criando os objetos dos atendentes relacionados com a reserva
+            foreach ($retornoAtendente as $val) {
+                             
+                if($val['nome'] == $v['nome']){
+                    $a[] = new Atendente($val);
+                }
             }
+
+            //criando os objetos das mesas relacionados com a reserva
+            foreach($retornoMesa as $val){
+                
+                if($val['id_mesa'] == $v['cod_mesa']){
+                    $m[] = new Mesa ($val);
+                }
+            
+            }
+
         }
 
-        $cont++;
-    }
-    
-    //instanciando um objeto table por meio da matriz $dados
-    if($cont >= 1){
+        //for responsável por percorrer as reservas no banco de dados
+        for ($i=0; $i < sizeof($retornoReserva); $i++) { 
+            
+            //instanciando objeto reserva, passando os objetos de mesa e atendente respectivos a reserva
+            $reserva[]=new Reserva($retornoReserva[$i],$m[$i],$a[$i]);
+        }
 
-        $h = new Thead($dados);
-        $b = new Tbody($dados,"reserva");
+        //criando vetor de cabecalho
+        foreach($retornoReserva[0] as $i=>$v){
+            $cabecalho[]=$i;
+        }
 
-        $t = new Table($h,$b);
+        $t = new Table($cabecalho,$reserva);
 
-        echo "<h1>Lista de Reservas</h1>";
-        echo "<hr>";
 
-        $t->imprime_Table();
-    }
-    else{
-        echo "<h3>Ainda não existem clientes na Lista de Espera</h3>";
-    }
-
+	}
+	else{
+		echo"<h1>Não possui DADOS!!</h1>";
+	}
 ?>

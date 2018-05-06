@@ -6,7 +6,7 @@
 		
 		
 		public function __construct($mesa){
-			if(isset($i["id_mesa"])){
+			if(isset($mesa["id_mesa"])){
 				$this->set_id_mesa($mesa["id_mesa"]);
 			}
 			$this->set_status_mesa($mesa["status_mesa"]);

@@ -55,6 +55,22 @@
             return($this->atendente);
         }
 
+        /*GAMBIARRA?*/
+        //retorna o nome do atendente guardado no próprio objeto de atendente
+        public function get_nome(){
+            return($this->atendente->get_nome());
+        }
+
+        //retorna o cod_mesa guardado no próprio objeto de mesa
+        public function get_cod_mesa(){
+            return($this->mesa->get_id_mesa());
+        }
+
+        //retorna o cod_mesa guardado no próprio objeto de mesa
+        public function get_id_reserva(){
+            return($this->telefone);
+        }
+
         //tem de ser passado um POST com os dados, além do objeto da Classe Atendente e Mesa
         public function __construct($reserva, Mesa $m, Atendente $a){
             $this->set_nome_cliente($reserva['nome_cliente']);
