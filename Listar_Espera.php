@@ -1,45 +1,54 @@
 <?php
 
-    include("Conexao.php");
+	include("Cabecalho/Cabecalho.php");
+    include("Class/ClassBD.php");
+    include("Class/ClassLista_Espera.php");
+    include("Class/ClassAtendente.php");
     include("Class/ClassTable.php");
-    include("Cabecalho/Cabecalho.php"); //mudar para cabecalho geral
+    include("Conexao.php");
+    
+    $l=new BD($conn);
 
-    //preparando o query de busca para execução no banco de dados
-    $select = "SELECT telefone ID,nome_Cliente CLIENTE,telefone TELEFONE,Ordem ORDEM,data_Espera CADASTRADO,atendente.nome ATENDENTE FROM lista_espera INNER JOIN atendente ON lista_espera.cod_Atendente = atendente.id_Atendente ORDER BY ORDEM;";
-
-    $stmt=$conn->prepare($select);
-
-    $stmt->execute();
-
-    //adicionando os dados retornados pelo banco e guardando na matriz $dados
-    $cont = 0;
-    while($linha = $stmt -> fetch()){
-
-        foreach($linha as $i => $v){
+    $table = "vw_espera";
+    $retornoEspera = $l->select($table);
+    
+    //se tiver retorno do banco ele entra o if
+	if($retornoEspera!=null){
+        
+        //buscando os atendentes no banco de dados
+        $table = "atendente";
+        $retornoAtendente = $l->select($table);
+        
+        foreach($retornoEspera as $v){
             
-            if(!is_numeric($i)){
-                $dados[$i][$cont] = $v;
+            //criando os objetos dos atendentes relacionados com a reserva
+            foreach ($retornoAtendente as $val) {
+                             
+                if($val['nome'] == $v['nome']){
+                    $a[] = new Atendente($val);
+                }
             }
+
         }
 
-        $cont++;
+        //for responsável por percorrer as reservas no banco de dados
+        for ($i=0; $i < sizeof($retornoEspera); $i++) { 
+            
+            //instanciando objeto reserva, passando os objetos de mesa e atendente respectivos a reserva
+            $lista_espera[]=new Lista_Espera($retornoEspera[$i],$a[$i]);
+        }
+
+        //criando vetor de cabecalho
+        foreach($retornoEspera[0] as $i=>$v){
+            $cabecalho[]=$i;
+        }
+
+        $t = new Table($cabecalho,$lista_espera);
+
     }
+	else{
+		echo"<h1>Não possui DADOS!!</h1>";
+	}
+
     
-    //instanciando um objeto table por meio da matriz $dados
-    if($cont >= 1){
-
-        $h = new Thead($dados);
-        $b = new Tbody($dados,"espera");
-
-        $t = new Table($h,$b);
-
-        echo "<h1>Lista de Espera</h1>";
-        echo "<hr>";
-
-        $t->imprime_Table();
-    }
-    else{
-        echo "<h3>Ainda não existem clientes na Lista de Espera</h3>";
-    }
-
 ?>

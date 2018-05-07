@@ -34,6 +34,14 @@
             return ($vetor_retorno);
         }
 
+        public function delete($vetor_delete){
+            
+            $delete = "DELETE FROM " . $vetor_delete["tabela"] . " WHERE id_". $vetor_delete["tabela"] ." = " . $vetor_delete["id"];
+
+            $stmt = $this->conn-> prepare($delete);
+            $stmt->execute();
+        }
+
         public function __construct(PDO $conexao){
             $this->set_conn($conexao);
         }

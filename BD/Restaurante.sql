@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 06-Maio-2018 às 19:32
+-- Data de Criação: 07-Maio-2018 às 01:45
 -- Versão do servidor: 5.6.13
 -- versão do PHP: 5.4.17
 
@@ -98,8 +98,7 @@ CREATE TABLE IF NOT EXISTS `item` (
   `disponibilidade` char(2) NOT NULL,
   `tipo` varchar(50) NOT NULL,
   PRIMARY KEY (`id_item`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -256,10 +255,24 @@ CREATE TABLE IF NOT EXISTS `vinho` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vw_espera`
+--
+CREATE TABLE IF NOT EXISTS `vw_espera` (
+`id_espera` varchar(20)
+,`nome_cliente` varchar(50)
+,`telefone` varchar(20)
+,`ordem` int(11)
+,`data_espera` date
+,`nome` varchar(50)
+);
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `vw_reserva`
 --
 CREATE TABLE IF NOT EXISTS `vw_reserva` (
-`nome_clientE` varchar(50)
+`id_reserva` varchar(20)
+,`nome_cliente` varchar(50)
 ,`telefone` varchar(20)
 ,`data_hora` datetime
 ,`cod_mesa` int(11)
@@ -286,11 +299,20 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `vw_espera`
+--
+DROP TABLE IF EXISTS `vw_espera`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_espera` AS select `lista_espera`.`telefone` AS `id_espera`,`lista_espera`.`nome_cliente` AS `nome_cliente`,`lista_espera`.`telefone` AS `telefone`,`lista_espera`.`ordem` AS `ordem`,`lista_espera`.`data_espera` AS `data_espera`,`atendente`.`nome` AS `nome` from (`lista_espera` join `atendente` on((`lista_espera`.`cod_atendente` = `atendente`.`id_atendente`))) order by `lista_espera`.`ordem`;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `vw_reserva`
 --
 DROP TABLE IF EXISTS `vw_reserva`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_reserva` AS select `reserva`.`telefone` AS `id_reserva`,`reserva`.`nome_cliente` AS `nome_cliente`,`reserva`.`telefone` AS `telefone`,`reserva`.`data_hora` AS `data_hora`,`reserva`.`cod_mesa` AS `cod_mesa`,`atendente`.`nome` AS `nome` from (`reserva` join `atendente` on((`reserva`.`cod_atendente` = `atendente`.`id_atendente`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_reserva` AS select `reserva`.`telefone` AS `id_reserva`,`reserva`.`nome_cliente` AS `nome_cliente`,`reserva`.`telefone` AS `telefone`,`reserva`.`data_hora` AS `data_hora`,`reserva`.`cod_mesa` AS `cod_mesa`,`atendente`.`nome` AS `nome` from (`reserva` join `atendente` on((`reserva`.`cod_atendente` = `atendente`.`id_atendente`))) order by `reserva`.`data_hora`;
 
 --
 -- Constraints for dumped tables

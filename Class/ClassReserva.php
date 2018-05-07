@@ -66,7 +66,6 @@
             return($this->mesa->get_id_mesa());
         }
 
-        //retorna o cod_mesa guardado no próprio objeto de mesa
         public function get_id_reserva(){
             return($this->telefone);
         }
