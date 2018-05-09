@@ -18,7 +18,8 @@
             $stmt->execute();
 
             $cont = 0;
-            
+            $vetor_retorno = array();
+			
             while($retorno = $stmt->fetch()){
 				
                 foreach($retorno as $i => $v){
