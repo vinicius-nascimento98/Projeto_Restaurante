@@ -1,42 +1,34 @@
 <?php
 
-include('Cabecalho/Cabecalho.php'); //mudar para cabecalho geral
-include('Class/ClassTable.php');
-include('Conexao.php');
+	include("Cabecalho/Cabecalho.php");
+    include("Class/ClassBD.php");
+    include("Class/ClassIngrediente.php");
+    include("Class/ClassTable.php");
+    include("Conexao.php");
+    
+    $table = "ingrediente";
 
-	$select = "SELECT id_Ingrediente, nome_ingrediente, custo, estoque FROM ingrediente";
-	
-	$stmt = $conn -> prepare($select);
-	
-	$stmt->execute();
-	
-	$cont = 0;
+    $b = new BD($conn);
 
-    while($linha = $stmt->fetch()){
-        
-        foreach($linha as $i => $v){
+    $retorno = $b->select($table);
+    
+	if($retorno != null){
+		//criando vetor de objetos
+		foreach($retorno as $v){
+			$ingrediente[] = new Ingrediente($v);
+			print_r($v);
+		}
 
-            if(!is_numeric($i)){
+		//criando vetor de cabecalho
+		foreach($retorno[0] as $i=>$v){
+			$cabecalho[] = $i;
+		}
 
-                $dados[$i][$cont] = $v;
-            }
-        }
+		$t = new Table($cabecalho,$ingrediente);
 
-        $cont++;
-    }
-	if(isset($dados)){
-		
-		$h = new Thead($dados);
-		$b = new Tbody($dados, 'ingrediente');
-
-		$t = new Table($h,$b);
-
-		echo "<h1>Ingredientes Cadastrados</h1>";
-		echo "<hr>";
-
-		$t->imprime_table();
-	
-	}else{
+		//get_object_vars([objeto]) -> retorna um vetor de atributos do objeto
+	}
+	else{
 		echo"<h1>Não possui DADOS!!</h1>";
 	}
 ?>
