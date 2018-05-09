@@ -6,11 +6,12 @@ class Ingrediente {
 	protected $custo;
 	protected $estoque;
 	
-	public function __construct($igrediente){
+	public function __construct($ingrediente){
+		print_r($ingrediente);
 		$this->set_nome_ingrediente($ingrediente["nome_ingrediente"]);
 		$this->set_custo($ingrediente["custo"]);
 		$this->set_estoque($ingrediente["estoque"]);
-		if(isset($i["id_ingrediente"])){
+		if(isset($ingrediente["id_ingrediente"])){
 			$this->set_id_ingrediente($ingrediente["id_ingrediente"]);
 		}
 	}
@@ -19,8 +20,9 @@ class Ingrediente {
 		$this->id_ingrediente = $id_ingrediente;
 	}
 	
-	public function set_nome_ingrediente($nome_Igrendiente){
-		$this->nome_Igrendiente = $nome_Igrendiente;
+	public function set_nome_ingrediente($nome_Ingrediente){
+			print_r($nome_Ingrediente);
+		$this->nome_ingrediente = $nome_Ingrediente;
 	}
 	
 	public function set_custo($custo){
@@ -31,8 +33,21 @@ class Ingrediente {
 		$this->estoque = $estoque;
 	}
 	
+	public function get_id_ingrediente(){
+		return($this->id_ingrediente);
+	}
+	
+	public function get_nome_ingrediente(){
+		return($this->nome_ingrediente);
+	}
+	
+	public function get_custo(){
+		return($this->custo);
+	}
+	
 	public function get_estoque(){
 		return($this->estoque);
 	}
+	
 }
 ?>
