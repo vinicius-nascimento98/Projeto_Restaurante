@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 07-Maio-2018 às 01:45
+-- Data de Criação: 10-Maio-2018 às 00:32
 -- Versão do servidor: 5.6.13
 -- versão do PHP: 5.4.17
 
@@ -33,7 +33,17 @@ CREATE TABLE IF NOT EXISTS `atendente` (
   `nome` varchar(50) NOT NULL,
   `comissao` double NOT NULL,
   PRIMARY KEY (`id_atendente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+
+--
+-- Extraindo dados da tabela `atendente`
+--
+
+INSERT INTO `atendente` (`id_atendente`, `nome`, `comissao`) VALUES
+(4, 'Vinicius Nascimento', 30),
+(5, 'Davi Freitas', 30),
+(6, 'Carlos Pereira', 30),
+(7, 'Rogério Silva', 30);
 
 -- --------------------------------------------------------
 
@@ -46,6 +56,13 @@ CREATE TABLE IF NOT EXISTS `bebida` (
   `estoque` int(11) NOT NULL,
   PRIMARY KEY (`cod_bebida`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `bebida`
+--
+
+INSERT INTO `bebida` (`cod_bebida`, `estoque`) VALUES
+(2, 400);
 
 -- --------------------------------------------------------
 
@@ -95,10 +112,17 @@ CREATE TABLE IF NOT EXISTS `item` (
   `id_item` int(11) NOT NULL AUTO_INCREMENT,
   `descricao` varchar(100) NOT NULL,
   `custo` double NOT NULL,
-  `disponibilidade` char(2) NOT NULL,
+  `disponibilidade` char(1) NOT NULL,
   `tipo` varchar(50) NOT NULL,
   PRIMARY KEY (`id_item`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Extraindo dados da tabela `item`
+--
+
+INSERT INTO `item` (`id_item`, `descricao`, `custo`, `disponibilidade`, `tipo`) VALUES
+(2, 'Fanta 600 ml', 6, 'S', 'Bebida');
 
 -- --------------------------------------------------------
 
@@ -106,25 +130,11 @@ CREATE TABLE IF NOT EXISTS `item` (
 -- Stand-in structure for view `item_bebida`
 --
 CREATE TABLE IF NOT EXISTS `item_bebida` (
-`cod_bebida` int(11)
+`id_item` int(11)
 ,`descricao` varchar(100)
-,`custo` double
+,`disponibilidade` char(1)
 ,`estoque` int(11)
-,`disponibilidade` char(2)
-);
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `item_vinho`
---
-CREATE TABLE IF NOT EXISTS `item_vinho` (
-`cod_vinho` int(11)
-,`descricao` varchar(100)
-,`tipo_uva` varchar(100)
-,`safra` varchar(30)
 ,`custo` double
-,`estoque` int(11)
-,`disponibilidade` char(2)
 );
 -- --------------------------------------------------------
 
@@ -138,9 +148,10 @@ CREATE TABLE IF NOT EXISTS `lista_espera` (
   `data_espera` date NOT NULL,
   `telefone` varchar(20) NOT NULL,
   `cod_atendente` int(11) NOT NULL,
-  PRIMARY KEY (`telefone`,`data_espera`),
+  `id_lista_reserva` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id_lista_reserva`),
   KEY `cod_atendente` (`cod_atendente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -152,7 +163,21 @@ CREATE TABLE IF NOT EXISTS `mesa` (
   `id_mesa` int(11) NOT NULL AUTO_INCREMENT,
   `status_mesa` enum('Disponível','Indisponível') DEFAULT 'Disponível',
   PRIMARY KEY (`id_mesa`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+--
+-- Extraindo dados da tabela `mesa`
+--
+
+INSERT INTO `mesa` (`id_mesa`, `status_mesa`) VALUES
+(1, NULL),
+(2, 'Disponível'),
+(3, ''),
+(4, ''),
+(5, ''),
+(6, ''),
+(7, ''),
+(8, '');
 
 -- --------------------------------------------------------
 
@@ -233,10 +258,11 @@ CREATE TABLE IF NOT EXISTS `reserva` (
   `data_hora` datetime NOT NULL,
   `cod_mesa` int(11) NOT NULL,
   `cod_atendente` int(11) NOT NULL,
-  PRIMARY KEY (`data_hora`,`telefone`,`cod_mesa`),
+  `id_reserva` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id_reserva`),
   KEY `cod_mesa` (`cod_mesa`),
   KEY `cod_atendente` (`cod_atendente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -255,64 +281,11 @@ CREATE TABLE IF NOT EXISTS `vinho` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `vw_espera`
---
-CREATE TABLE IF NOT EXISTS `vw_espera` (
-`id_espera` varchar(20)
-,`nome_cliente` varchar(50)
-,`telefone` varchar(20)
-,`ordem` int(11)
-,`data_espera` date
-,`nome` varchar(50)
-);
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `vw_reserva`
---
-CREATE TABLE IF NOT EXISTS `vw_reserva` (
-`id_reserva` varchar(20)
-,`nome_cliente` varchar(50)
-,`telefone` varchar(20)
-,`data_hora` datetime
-,`cod_mesa` int(11)
-,`nome` varchar(50)
-);
--- --------------------------------------------------------
-
---
 -- Structure for view `item_bebida`
 --
 DROP TABLE IF EXISTS `item_bebida`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `item_bebida` AS select `bebida`.`cod_bebida` AS `cod_bebida`,`item`.`descricao` AS `descricao`,`item`.`custo` AS `custo`,`bebida`.`estoque` AS `estoque`,`item`.`disponibilidade` AS `disponibilidade` from (`bebida` join `item`) where (`bebida`.`cod_bebida` = `item`.`id_item`);
-
--- --------------------------------------------------------
-
---
--- Structure for view `item_vinho`
---
-DROP TABLE IF EXISTS `item_vinho`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `item_vinho` AS select `vinho`.`cod_vinho` AS `cod_vinho`,`item`.`descricao` AS `descricao`,`vinho`.`tipo_uva` AS `tipo_uva`,`vinho`.`safra` AS `safra`,`item`.`custo` AS `custo`,`vinho`.`estoque` AS `estoque`,`item`.`disponibilidade` AS `disponibilidade` from (`vinho` join `item`) where (`vinho`.`cod_vinho` = `item`.`id_item`);
-
--- --------------------------------------------------------
-
---
--- Structure for view `vw_espera`
---
-DROP TABLE IF EXISTS `vw_espera`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_espera` AS select `lista_espera`.`telefone` AS `id_espera`,`lista_espera`.`nome_cliente` AS `nome_cliente`,`lista_espera`.`telefone` AS `telefone`,`lista_espera`.`ordem` AS `ordem`,`lista_espera`.`data_espera` AS `data_espera`,`atendente`.`nome` AS `nome` from (`lista_espera` join `atendente` on((`lista_espera`.`cod_atendente` = `atendente`.`id_atendente`))) order by `lista_espera`.`ordem`;
-
--- --------------------------------------------------------
-
---
--- Structure for view `vw_reserva`
---
-DROP TABLE IF EXISTS `vw_reserva`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_reserva` AS select `reserva`.`telefone` AS `id_reserva`,`reserva`.`nome_cliente` AS `nome_cliente`,`reserva`.`telefone` AS `telefone`,`reserva`.`data_hora` AS `data_hora`,`reserva`.`cod_mesa` AS `cod_mesa`,`atendente`.`nome` AS `nome` from (`reserva` join `atendente` on((`reserva`.`cod_atendente` = `atendente`.`id_atendente`))) order by `reserva`.`data_hora`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `item_bebida` AS select `item`.`id_item` AS `id_item`,`item`.`descricao` AS `descricao`,`item`.`disponibilidade` AS `disponibilidade`,`bebida`.`estoque` AS `estoque`,`item`.`custo` AS `custo` from (`bebida` join `item` on((`bebida`.`cod_bebida` = `item`.`id_item`)));
 
 --
 -- Constraints for dumped tables
@@ -322,7 +295,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- Limitadores para a tabela `bebida`
 --
 ALTER TABLE `bebida`
-  ADD CONSTRAINT `bebida_ibfk_1` FOREIGN KEY (`cod_bebida`) REFERENCES `item` (`id_item`);
+  ADD CONSTRAINT `bebida_ibfk_1` FOREIGN KEY (`cod_bebida`) REFERENCES `item` (`id_item`) ON DELETE CASCADE;
 
 --
 -- Limitadores para a tabela `drink`

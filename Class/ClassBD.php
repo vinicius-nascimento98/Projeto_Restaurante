@@ -42,6 +42,51 @@
             $stmt->execute();
         }
 
+        public function insert($dados,$tabela){
+            
+            //montando string de insert
+            $insert = "INSERT INTO ".$tabela;
+
+            $cont=0;
+            foreach($dados as $i=>$v){
+                
+                if($cont == 0){
+                    $insert.= "($i";
+                    $cont++;
+                }
+                else{
+                    $insert.=", $i";
+                }
+            }
+
+            $insert.=") VALUES ";
+
+            $cont=0;
+            foreach($dados as $i=>$v){
+                
+                if($cont == 0){
+                    $insert.= "(:$i";
+                    $cont++;
+                }
+                else{
+                    $insert.=", :$i";
+                }
+            }
+
+            $insert.=");";
+
+            $stmt = $this->conn->prepare($insert);
+
+            //criando bind values com os valores do POST
+            foreach($dados as $i=>$v){
+                $stmt->bindValue(":$i",$v);
+            }
+
+            //executando a string de INSERT
+            $stmt->execute();
+
+        }
+
         public function __construct(PDO $conexao){
             $this->set_conn($conexao);
         }

@@ -1,20 +1,14 @@
 ﻿<?php
 	include("Cabecalho/Cabecalho.php");
-
+	include("Class/ClassBD.php");
+	
 if(!empty($_POST)){
 	include("Conexao.php");
 
-	$insert_atendente = "INSERT INTO atendente(nome,comissao) values (:nome,:comissao);";
+	$a = new BD($conn);
 
-	$stmt = $conn->prepare($insert_atendente);
+	$a->insert($_POST,"atendente");
 
-	$nome = $_POST["nome"];
-	$comissao = $_POST["comissao"];
-
-	$stmt->bindValue(':nome',$nome);
-	$stmt->bindValue(':comissao',$comissao);
-
-	$stmt->execute();
 	echo "<br/>";
 	echo "Atendente Cadastrado com Sucesso";
 	

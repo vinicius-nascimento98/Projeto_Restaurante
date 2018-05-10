@@ -231,7 +231,7 @@ class Form{
 		$this->set_name($f["nome"]);
 		$this->set_action($f["action"]);
 		$this->set_method($f["method"]);
-		$this->submit = "<input type='submit' value='Enviar' name='submeter ' />";
+		$this->submit = "<input type='submit' value='Enviar' />";
 	}
 	
 	protected function set_name($n){
