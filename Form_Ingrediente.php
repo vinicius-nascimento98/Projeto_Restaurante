@@ -3,6 +3,9 @@
 include('Cabecalho/Cabecalho.php'); //mudar cabecalho geral
 include('Class/ClassForm.php');
 
+	echo "<h2> Cadastro de Ingrediente </h2>";
+
+
 $inp1 = array("label"=>"Nome", "nome"=>"nome_ingrediente", "tipo"=>"text", "id"=>"ingrediente");
 
 $inp2 = array("label"=>"Custo", "nome"=>"custo", "tipo"=>"number", "id"=>"custo", "step"=>"0.01", "required"=>true);
