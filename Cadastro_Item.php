@@ -1,24 +1,16 @@
 <?php
 if(!empty($_POST)){
 	include("Cabecalho/Cabecalho.php");
-	include('Conexao.php');
-$insert = "INSERT INTO Item(descricao, custo, disponibilidade, tipo) VALUES (:descricao, :custo, :disponibilidade, :tipo);";
+	include("Class/ClassBD.php");
+	include("Conexao.php");
 
-$stmt = $conn->prepare($insert);
-
-$descricao = $_POST['descricao'];
-$custo = $_POST['custo'];
-$disponibilidade = $_POST['disponibilidade'];
-$tipo = $_POST['tipo'];
+	$item = new BD($conn);
 	
-$stmt->bindValue(':descricao', $descricao);
-$stmt->bindValue(':custo', $custo);
-$stmt->bindValue(':disponibilidade', $disponibilidade);
-$stmt->bindValue(':tipo', $tipo);
-
-$stmt->execute();
-
-echo "Item cadastrado com sucesso!!";
+	$item->insert($_POST, "item");
+	
+	echo "<br />";
+	echo "Item cadastrado com sucesso!!";
+	
 }else{
 	header("location: Form_Item.php");
 }
