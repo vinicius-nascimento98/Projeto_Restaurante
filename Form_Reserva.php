@@ -1,7 +1,7 @@
 <?php
 
     include("Class/ClassForm.php");
-    include("Funcoes.php"); //mudar para conceito orientação objeto
+    include("Class/ClassBD;");
     include("Conexao.php");
     include("Cabecalho/Cabecalho.php");
 
@@ -16,12 +16,18 @@
     $input2 = new Input($i2);
 
     //criando objeto input 3
-    $i3 = array("label"=>"Data", "nome"=>"data_reserva", "tipo"=>"date", "id"=>"campo_data","required"=>true);
+    $i3 = array("label"=>"Data", "nome"=>"data_hora", "tipo"=>"date", "id"=>"campo_data","required"=>true);
     $input3 = new Input($i3);
 
-    //chamada de funções para busca das informações no banco de dados
-    $nome_atendentes = busca_atendente($conn);
-    $mesas = busca_mesa($conn,true);
+    $b = new BD($conn);
+    
+    $table = "mesa";
+    $mesas = $b ->  select($table);
+
+    $table = "atendente";
+    $atendentes = $b ->  select($table);
+
+    //CONTINUAR - ADAPTAR PASSOS ABAIXO
 
     //instanciando os objetos options para listar as mesas
     $cont=0;
@@ -40,11 +46,11 @@
     }
 
     //instanciando o objeto select passando os objetos option de mesas
-    $select = array("nome"=>"mesas", "label"=>"Mesas");
+    $select = array("nome"=>"cod_mesa", "label"=>"Mesas");
     $s = new Select($select, $o);
 
     //instanciando o objeto select passando os objetos option de atendentes
-    $select2 = array("nome"=>"atendente", "label"=>"Atendente");
+    $select2 = array("nome"=>"cod_atendente", "label"=>"Atendente");
     $s2 = new Select($select2, $o2);
 
     //criando o form

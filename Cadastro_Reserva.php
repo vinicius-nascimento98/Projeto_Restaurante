@@ -1,31 +1,20 @@
 <?php
 
-    include("Conexao.php");
+    include("Class/ClassBD.php");
     include("Cabecalho/Cabecalho.php");
 
     //verificando se foi passado um POST
     if(!empty($_POST)){
 
-        //preparando o query de inserção para execução no banco de dados
-        $insert="INSERT INTO reserva (nome_Cliente,telefone,data_Hora,cod_Mesa,cod_Atendente) VALUES (:cliente,:telefone,:data_reserva,:mesa,:atendente);";
+        include("Conexao.php");
 
-        $stmt = $conn->prepare($insert);
+        print_r($_POST);
+		/*$l = new BD($conn);
 
-        $nome = $_POST['nome_cliente'];
-        $telefone = $_POST['telefone'];
-        $data_reserva = $_POST['data_reserva'];
-        $mesa = $_POST['mesas'];
-        $atendente = $_POST['atendente'];
+		$l->insert($_POST,"lista_espera");
 
-        $stmt->bindValue(":cliente",$nome);
-        $stmt->bindValue(":telefone",$telefone);
-        $stmt->bindValue(":data_reserva",$data_reserva);
-        $stmt->bindValue(":mesa",$mesa);
-        $stmt->bindValue(":atendente",$atendente);
-
-        $stmt->execute();
-
-        echo "Reserva cadastrada com sucesso!";
+		echo "<br/>";
+        echo "Reserva cadastrada com sucesso!";*/
 
     }
     else{

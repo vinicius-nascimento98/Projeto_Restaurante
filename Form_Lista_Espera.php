@@ -34,7 +34,7 @@
     }
 
     //instanciando o objeto select passando os objetos option acima
-    $select = array("nome"=>"atendente", "label"=>"Atendente");
+    $select = array("nome"=>"cod_atendente", "label"=>"Atendente");
     $s = new Select($select, $o);
 
     //criando o form

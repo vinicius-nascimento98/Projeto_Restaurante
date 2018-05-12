@@ -21,6 +21,8 @@ header('Content-Type: text/html; charset=utf-8');
 	|
 	<a href="Verifica_Mesa.html">Cadastrar Reserva</a>
 	|
+	<a href="Form_Mesa.php">Cadastrar Mesa</a>
+	|
 	<a href="Listar_Ingrediente.php">Listar Ingredientes</a>
 	| 
 	<a href="Listar_Espera.php">Listar Espera</a>

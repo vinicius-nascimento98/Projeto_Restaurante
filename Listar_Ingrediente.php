@@ -16,7 +16,6 @@
 		//criando vetor de objetos
 		foreach($retorno as $v){
 			$ingrediente[] = new Ingrediente($v);
-			print_r($v);
 		}
 
 		//criando vetor de cabecalho
