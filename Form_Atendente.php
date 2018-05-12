@@ -9,11 +9,11 @@
 	
 	$input1 = new Input($i1);
 	
-	$i2 = array("label"=>"Comissão", "nome"=>"comissao", "tipo"=>"text", "id"=>"comissao", "required"=>true);
+	$i2 = array("label"=>"Comissão", "nome"=>"comissao", "tipo"=>"number", "id"=>"comissao", "required"=>true ,"pos_label"=>" % ");
 
 	$input2 = new Input($i2);
 	
-	$f = array("nome"=>"form1", "action"=>"Cadastro_Atendente.php", "method"=>"post");
+	$f = array("nome"=>"form1", "action"=>"Cadastro_Atendente.php", "method"=>"post", "pos_label"=>"%");
 	
 	$form = new Form($f);
 	

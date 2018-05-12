@@ -13,8 +13,15 @@
 
             $this->set_data_hora($pedido['data_hora']);
             $this->set_mesa($m);
-            $this->set_sequencia($i);
+			//Pega a sequencia e o item para contruir.
+            array_push($this->sequencia,$i);	
         }
+		
+		public function set_sequencia(Item $i){
+            $this->sequencia=$i;
+        }
+		
+		//Terminar set's
     }
 
 ?>

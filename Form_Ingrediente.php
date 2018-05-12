@@ -5,7 +5,7 @@ include('Class/ClassForm.php');
 
 $inp1 = array("label"=>"Nome", "nome"=>"nome_ingrediente", "tipo"=>"text", "id"=>"ingrediente");
 
-$inp2 = array("label"=>"Custo", "nome"=>"custo", "tipo"=>"number", "id"=>"custo", "step"=>"0.01", "required"=>true);
+$inp2 = array("label"=>"Custo", "nome"=>"custo", "tipo"=>"number", "id"=>"custo", "step"=>"0.01", "required"=>true,"pos_label"=>" R$ ");
 
 $inp3 = array("label"=>"Estoque", "nome"=>"estoque", "tipo"=>"number", "id"=>"estoque");
 

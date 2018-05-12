@@ -1,4 +1,5 @@
 ﻿<?php
+
 	include("Cabecalho/Cabecalho.php");
 	include("Class/ClassBD.php");
 	
