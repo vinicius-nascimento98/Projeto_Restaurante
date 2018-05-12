@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 10-Maio-2018 às 00:32
+-- Data de Criação: 12-Maio-2018 às 01:27
 -- Versão do servidor: 5.6.13
 -- versão do PHP: 5.4.17
 
@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `drink` (
 CREATE TABLE IF NOT EXISTS `drink_ingrediente` (
   `cod_ingrediente` int(11) NOT NULL,
   `cod_drink` int(11) NOT NULL,
+  `quantidade` double NOT NULL,
   PRIMARY KEY (`cod_ingrediente`,`cod_drink`),
   KEY `cod_drink` (`cod_drink`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -139,6 +140,19 @@ CREATE TABLE IF NOT EXISTS `item_bebida` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `item_vinho`
+--
+CREATE TABLE IF NOT EXISTS `item_vinho` (
+`id_item` int(11)
+,`descricao` varchar(100)
+,`tipo_uva` varchar(100)
+,`safra` varchar(30)
+,`disponibilidade` char(1)
+,`custo` double
+);
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `lista_espera`
 --
 
@@ -148,10 +162,17 @@ CREATE TABLE IF NOT EXISTS `lista_espera` (
   `data_espera` date NOT NULL,
   `telefone` varchar(20) NOT NULL,
   `cod_atendente` int(11) NOT NULL,
-  `id_lista_reserva` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id_lista_reserva`),
+  `id_lista_espera` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id_lista_espera`),
   KEY `cod_atendente` (`cod_atendente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Extraindo dados da tabela `lista_espera`
+--
+
+INSERT INTO `lista_espera` (`nome_cliente`, `ordem`, `data_espera`, `telefone`, `cod_atendente`, `id_lista_espera`) VALUES
+('Valter Renner', 2, '2018-05-11', '(16) 99724-9904', 6, 2);
 
 -- --------------------------------------------------------
 
@@ -242,6 +263,7 @@ CREATE TABLE IF NOT EXISTS `prato` (
 CREATE TABLE IF NOT EXISTS `prato_ingrediente` (
   `cod_ingrediente` int(11) NOT NULL,
   `cod_prato` int(11) NOT NULL,
+  `quantidade` double NOT NULL,
   PRIMARY KEY (`cod_ingrediente`,`cod_prato`),
   KEY `cod_prato` (`cod_prato`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -281,11 +303,42 @@ CREATE TABLE IF NOT EXISTS `vinho` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vw_espera`
+--
+CREATE TABLE IF NOT EXISTS `vw_espera` (
+`id_lista_espera` int(11)
+,`nome_cliente` varchar(50)
+,`ordem` int(11)
+,`data_espera` date
+,`telefone` varchar(20)
+,`nome` varchar(50)
+);
+-- --------------------------------------------------------
+
+--
 -- Structure for view `item_bebida`
 --
 DROP TABLE IF EXISTS `item_bebida`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `item_bebida` AS select `item`.`id_item` AS `id_item`,`item`.`descricao` AS `descricao`,`item`.`disponibilidade` AS `disponibilidade`,`bebida`.`estoque` AS `estoque`,`item`.`custo` AS `custo` from (`bebida` join `item` on((`bebida`.`cod_bebida` = `item`.`id_item`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `item_vinho`
+--
+DROP TABLE IF EXISTS `item_vinho`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `item_vinho` AS select `item`.`id_item` AS `id_item`,`item`.`descricao` AS `descricao`,`vinho`.`tipo_uva` AS `tipo_uva`,`vinho`.`safra` AS `safra`,`item`.`disponibilidade` AS `disponibilidade`,`item`.`custo` AS `custo` from (`item` join `vinho`) where (`item`.`id_item` = `vinho`.`cod_vinho`);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_espera`
+--
+DROP TABLE IF EXISTS `vw_espera`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_espera` AS select `lista_espera`.`id_lista_espera` AS `id_lista_espera`,`lista_espera`.`nome_cliente` AS `nome_cliente`,`lista_espera`.`ordem` AS `ordem`,`lista_espera`.`data_espera` AS `data_espera`,`lista_espera`.`telefone` AS `telefone`,`atendente`.`nome` AS `nome` from (`lista_espera` join `atendente` on((`lista_espera`.`cod_atendente` = `atendente`.`id_atendente`))) order by `lista_espera`.`ordem`;
 
 --
 -- Constraints for dumped tables
