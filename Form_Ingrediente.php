@@ -1,7 +1,7 @@
 <?php
 
 include('Cabecalho/Cabecalho.php'); //mudar cabecalho geral
-include('Class/ClassForm.php');
+include("Class/View/Form/ClassForm.php");
 
 	echo "<h2> Cadastro de Ingrediente </h2>";
 

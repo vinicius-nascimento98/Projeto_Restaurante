@@ -1,6 +1,6 @@
 <?php
 
-    include("Class/ClassBD.php");
+    include("Class/Control/ClassBD.php");
     include("Cabecalho/Cabecalho.php");
 
     //verificando se foi passado um POST

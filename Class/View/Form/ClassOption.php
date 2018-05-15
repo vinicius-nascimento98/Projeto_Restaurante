@@ -1,7 +1,5 @@
 <?php
 	
-	include("Interface.php");
-	
 	class Option implements Tag{
 		protected $value;
 		protected $texto;

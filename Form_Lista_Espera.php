@@ -1,6 +1,7 @@
 <?php
 
-    include("Class/ClassForm.php");
+    include("Class/View/Form/ClassForm.php");
+	//include("Class/Control/ClassBD;");
     include("Funcoes.php"); //mudar para conceito orientação objeto (class_BD)
     include("Conexao.php");
     include("Cabecalho/Cabecalho.php");

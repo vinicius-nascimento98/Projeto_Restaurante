@@ -1,9 +1,9 @@
 <?php
 
 	include("Cabecalho/Cabecalho.php");
-    include("Class/ClassBD.php");
-    include("Class/ClassReserva.php");
-    include("Class/ClassTable.php");
+    include("Class/Control/ClassBD.php");
+    include("Class/Model/ClassReserva.php");
+    include("Class/View/ClassTable.php");
     include("Conexao.php");
     
     $r=new BD($conn);

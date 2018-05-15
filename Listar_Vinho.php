@@ -1,9 +1,9 @@
 <?php
 
 	include("Cabecalho/Cabecalho.php");
-    include("Class/ClassBD.php");
-    include("Class/ClassBebida.php");
-    include("Class/ClassTable.php");
+    include("Class/Control/ClassBD.php");
+    include("Class/Model/ClassBebida.php");
+    include("Class/View/ClassTable.php");
     include("Conexao.php");
     
     $table = "item_vinho";

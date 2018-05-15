@@ -1,9 +1,8 @@
 <?php
-
-	include("Cabecalho/Cabecalho.php"); //mudar para cabecalho geral
-	include("Class/ClassBD.php");
-	include("Class/ClassMesa.php");
-	include("Class/ClassTable.php");
+	include("Cabecalho/Cabecalho.php");
+	include("Class/Control/ClassBD.php");
+	include("Class/Model/ClassMesa.php");
+	include("Class/View/ClassTable.php");
 	include("Conexao.php");
 	
 	$table = "mesa";
@@ -15,7 +14,7 @@
 	if($retorno_BD != null){
 		//criando vetor de objetos
 		foreach($retorno_BD as $v){
-			$mesa = new Mesa($v);
+			$mesa[] = new Mesa($v);
 		}
 		
 		//criando vetor de cabecalho

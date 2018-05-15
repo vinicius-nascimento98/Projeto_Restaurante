@@ -1,6 +1,4 @@
 <?php
-
-	include("ClassAtributos.php");
 	
 	class Input extends Atributos{
 		protected $id;

@@ -1,6 +1,4 @@
 <?php
-
-	include("ClassAtributos.php");
 	
 	class Radio extends Atributos{
 	protected $labelTexto = array();

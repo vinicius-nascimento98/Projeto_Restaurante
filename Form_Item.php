@@ -1,6 +1,6 @@
 <?php
 include('Cabecalho/Cabecalho.php'); //mudar para cabecalho geral
-include('Class/ClassForm.php');
+include("Class/View/Form/ClassForm.php");
 
  echo "<h1>Cadastro Item</h1>";
 
@@ -18,7 +18,7 @@ $vetValueLabel = array('di'=>"Disponivel", 'in'=>"Indisponivel");
 
 //adicionar onchange.
 $r2 = array("label"=>"Tipo", "nome"=>"tipo", "tipo"=>"radio");
-$vetValueLabel2 = array('drink'=>"Drink", 'prato'=>"Prato", 'vinho'=>"Vinho", 'bebida'=>"Bebida");
+$vetValueLabel2 = array('Drink'=>"Drink", 'Prato'=>"Prato", 'Vinho'=>"Vinho", 'Bebida'=>"Bebida");
 
 $r1 = new Radio($r1, $vetValueLabel);
 $r2 = new Radio($r2, $vetValueLabel2);

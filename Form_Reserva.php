@@ -1,7 +1,7 @@
 <?php
 
-    include("Class/ClassForm.php");
-    include("Class/ClassBD;");
+    include("Class/View/Form/ClassForm.php");
+    include("Class/Control/ClassBD;");
     include("Conexao.php");
     include("Cabecalho/Cabecalho.php");
 

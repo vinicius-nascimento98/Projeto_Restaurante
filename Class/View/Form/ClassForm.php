@@ -1,5 +1,6 @@
 <?php
 	
+	include("ClassAtributos.php");
 	include("ClassCheckbox.php");
 	include("ClassInput.php");
 	include("ClassSelect.php");

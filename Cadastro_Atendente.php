@@ -1,7 +1,7 @@
 ﻿<?php
 
 	include("Cabecalho/Cabecalho.php");
-	include("Class/ClassBD.php");
+	include("Class/Control/ClassBD.php");
 	
 	if(!empty($_POST)){
 		include("Conexao.php");

@@ -1,6 +1,6 @@
 ﻿<?php
 
-	include("Class/ClassForm.php");
+	include("Class/View/Form/ClassForm.php");
 	include("Cabecalho/Cabecalho.php");
 
 	echo "<h2> Cadastro de Atendente </h2>";
@@ -9,7 +9,7 @@
 	
 	$input1 = new Input($i1);
 	
-	$i2 = array("label"=>"Comissão", "nome"=>"comissao", "tipo"=>"number", "id"=>"comissao", "required"=>true ,"pos_label"=>" % ");
+	$i2 = array("label"=>"Comissão", "nome"=>"comissao", "tipo"=>"number", "id"=>"comissao", "required"=>true , "pos_label"=>" % ");
 
 	$input2 = new Input($i2);
 	

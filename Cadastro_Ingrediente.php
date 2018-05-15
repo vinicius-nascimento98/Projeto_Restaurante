@@ -2,7 +2,7 @@
 
 	if(!empty($_POST)){
 		include("Cabecalho/Cabecalho.php");
-		include("Class/ClassBD.php");
+		include("Class/Control/ClassBD.php");
 		include("Conexao.php");
 		
 		$i = new BD($conn);

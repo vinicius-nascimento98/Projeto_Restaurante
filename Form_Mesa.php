@@ -1,6 +1,6 @@
 <?php
 
-	include("Class/ClassForm.php");
+	include("Class/View/Form/ClassForm.php");
 	include("Cabecalho/Cabecalho.php");
 
 	echo "<h2> Cadastro de Mesa </h2>";

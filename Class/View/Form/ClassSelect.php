@@ -1,6 +1,5 @@
 <?php
-	
-	include("ClassAtributos.php");
+
 	include("ClassOption.php");
 
 	class Select extends Atributos{

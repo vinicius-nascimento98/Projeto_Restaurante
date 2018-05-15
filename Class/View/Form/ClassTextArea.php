@@ -1,6 +1,4 @@
 <?php
-	
-	include("ClassAtributos.php");
 
 	class TextArea extends Atributos{
 
