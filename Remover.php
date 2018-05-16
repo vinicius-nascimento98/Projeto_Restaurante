@@ -3,7 +3,7 @@
   /*OBS.: utilizar cascate no banco de dados*/
 
   include ('Conexao.php');
-  include ('Class/ClassBD.php');
+  include ('Class/Control/ClassBD.php');
 
   $d = new BD($conn);
 
