@@ -7,7 +7,6 @@ class Ingrediente {
 	protected $estoque;
 	
 	public function __construct($ingrediente){
-		print_r($ingrediente);
 		$this->set_nome_ingrediente($ingrediente["nome_ingrediente"]);
 		$this->set_custo($ingrediente["custo"]);
 		$this->set_estoque($ingrediente["estoque"]);
@@ -21,7 +20,6 @@ class Ingrediente {
 	}
 	
 	public function set_nome_ingrediente($nome_Ingrediente){
-			print_r($nome_Ingrediente);
 		$this->nome_ingrediente = $nome_Ingrediente;
 	}
 	
