@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 17-Maio-2018 às 01:03
+-- Data de Criação: 17-Maio-2018 às 18:54
 -- Versão do servidor: 5.6.13
 -- versão do PHP: 5.4.17
 
@@ -124,31 +124,6 @@ CREATE TABLE IF NOT EXISTS `item` (
 INSERT INTO `item` (`id_item`, `descricao`, `custo`, `disponibilidade`, `tipo`) VALUES
 (2, 'Fanta 600 ml', 6, 'S', 'Bebida');
 
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `item_bebida`
---
-CREATE TABLE IF NOT EXISTS `item_bebida` (
-`id_item` int(11)
-,`descricao` varchar(100)
-,`disponibilidade` char(1)
-,`estoque` int(11)
-,`custo` double
-);
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `item_vinho`
---
-CREATE TABLE IF NOT EXISTS `item_vinho` (
-`id_item` int(11)
-,`descricao` varchar(100)
-,`tipo_uva` varchar(100)
-,`safra` varchar(30)
-,`disponibilidade` char(1)
-,`custo` double
-);
 -- --------------------------------------------------------
 
 --
@@ -295,6 +270,18 @@ CREATE TABLE IF NOT EXISTS `vinho` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vw_bebida`
+--
+CREATE TABLE IF NOT EXISTS `vw_bebida` (
+`id_item` int(11)
+,`descricao` varchar(100)
+,`disponibilidade` char(1)
+,`custo` double
+,`estoque` int(11)
+);
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `vw_espera`
 --
 CREATE TABLE IF NOT EXISTS `vw_espera` (
@@ -304,6 +291,30 @@ CREATE TABLE IF NOT EXISTS `vw_espera` (
 ,`data_espera` date
 ,`telefone` varchar(20)
 ,`nome` varchar(50)
+);
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vw_listar_drink`
+--
+CREATE TABLE IF NOT EXISTS `vw_listar_drink` (
+`descricao` varchar(100)
+,`Lista_Ingredientes` text
+,`custo` double
+,`disponibilidade` varchar(1)
+,`tipo` varchar(50)
+);
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vw_listar_prato`
+--
+CREATE TABLE IF NOT EXISTS `vw_listar_prato` (
+`descricao` varchar(100)
+,`GROUP_CONCAT(nome_ingrediente SEPARATOR ', ')` text
+,`custo` double
+,`disponibilidade` varchar(1)
+,`tipo` varchar(50)
 );
 -- --------------------------------------------------------
 
@@ -321,20 +332,25 @@ CREATE TABLE IF NOT EXISTS `vw_reserva` (
 -- --------------------------------------------------------
 
 --
--- Structure for view `item_bebida`
+-- Stand-in structure for view `vw_vinho`
 --
-DROP TABLE IF EXISTS `item_bebida`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `item_bebida` AS select `item`.`id_item` AS `id_item`,`item`.`descricao` AS `descricao`,`item`.`disponibilidade` AS `disponibilidade`,`bebida`.`estoque` AS `estoque`,`item`.`custo` AS `custo` from (`bebida` join `item` on((`bebida`.`cod_bebida` = `item`.`id_item`)));
-
+CREATE TABLE IF NOT EXISTS `vw_vinho` (
+`id_item` int(11)
+,`descricao` varchar(100)
+,`tipo_uva` varchar(100)
+,`safra` varchar(30)
+,`disponibilidade` char(1)
+,`custo` double
+,`estoque` int(11)
+);
 -- --------------------------------------------------------
 
 --
--- Structure for view `item_vinho`
+-- Structure for view `vw_bebida`
 --
-DROP TABLE IF EXISTS `item_vinho`;
+DROP TABLE IF EXISTS `vw_bebida`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `item_vinho` AS select `item`.`id_item` AS `id_item`,`item`.`descricao` AS `descricao`,`vinho`.`tipo_uva` AS `tipo_uva`,`vinho`.`safra` AS `safra`,`item`.`disponibilidade` AS `disponibilidade`,`item`.`custo` AS `custo` from (`item` join `vinho`) where (`item`.`id_item` = `vinho`.`cod_vinho`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_bebida` AS select `item`.`id_item` AS `id_item`,`item`.`descricao` AS `descricao`,`item`.`disponibilidade` AS `disponibilidade`,`item`.`custo` AS `custo`,`bebida`.`estoque` AS `estoque` from (`item` join `bebida` on((`item`.`id_item` = `bebida`.`cod_bebida`)));
 
 -- --------------------------------------------------------
 
@@ -348,11 +364,38 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `vw_listar_drink`
+--
+DROP TABLE IF EXISTS `vw_listar_drink`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_listar_drink` AS select `item`.`descricao` AS `descricao`,group_concat(`ingrediente`.`nome_ingrediente` separator ', ') AS `Lista_Ingredientes`,`item`.`custo` AS `custo`,`item`.`disponibilidade` AS `disponibilidade`,`item`.`tipo` AS `tipo` from (((`item` join `drink` on((`item`.`id_item` = `drink`.`cod_drink`))) join `drink_ingrediente` on((`drink_ingrediente`.`cod_drink` = `drink`.`cod_drink`))) join `ingrediente` on((`drink_ingrediente`.`cod_ingrediente` = `ingrediente`.`id_ingrediente`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_listar_prato`
+--
+DROP TABLE IF EXISTS `vw_listar_prato`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_listar_prato` AS select `item`.`descricao` AS `descricao`,group_concat(`ingrediente`.`nome_ingrediente` separator ', ') AS `GROUP_CONCAT(nome_ingrediente SEPARATOR ', ')`,`item`.`custo` AS `custo`,`item`.`disponibilidade` AS `disponibilidade`,`item`.`tipo` AS `tipo` from (((`item` join `prato` on((`item`.`id_item` = `prato`.`cod_prato`))) join `prato_ingrediente` on((`prato_ingrediente`.`cod_prato` = `prato`.`cod_prato`))) join `ingrediente` on((`prato_ingrediente`.`cod_ingrediente` = `ingrediente`.`id_ingrediente`)));
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `vw_reserva`
 --
 DROP TABLE IF EXISTS `vw_reserva`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_reserva` AS select `reserva`.`id_reserva` AS `id_reserva`,`reserva`.`nome_cliente` AS `nome_cliente`,`reserva`.`telefone` AS `telefone`,`reserva`.`data_hora` AS `data_hora`,`reserva`.`cod_mesa` AS `cod_mesa`,`atendente`.`nome` AS `nome` from (`reserva` join `atendente` on((`reserva`.`cod_atendente` = `atendente`.`id_atendente`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_vinho`
+--
+DROP TABLE IF EXISTS `vw_vinho`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_vinho` AS select `item`.`id_item` AS `id_item`,`item`.`descricao` AS `descricao`,`vinho`.`tipo_uva` AS `tipo_uva`,`vinho`.`safra` AS `safra`,`item`.`disponibilidade` AS `disponibilidade`,`item`.`custo` AS `custo`,`vinho`.`estoque` AS `estoque` from (`item` join `vinho` on((`item`.`id_item` = `vinho`.`cod_vinho`)));
 
 --
 -- Constraints for dumped tables
