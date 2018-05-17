@@ -1,6 +1,7 @@
 <?php
 
     class Lista_Espera{
+        protected $id_lista_espera;
         protected $nome_cliente;
         protected $ordem;
         protected $data_espera;
@@ -26,6 +27,10 @@
         //sera inserido um objeto da classe Atendente no atributo Atendente
         protected function set_atendente(Atendente $a){
             $this->atendente=$a;
+        }
+
+        protected function set_id_lista_espera($id){
+            $this->id_lista_espera = $id;
         }
 
         public function get_nome_cliente(){
@@ -55,8 +60,8 @@
             return($this->atendente->get_nome());
         }
 
-        public function get_id_espera(){
-            return($this->telefone);
+        public function get_id_lista_espera(){
+            return($this->id_lista_espera);
         }
 
         //tem de ser passado um POST com os dados, além do objeto da Classe Atendente
@@ -65,6 +70,7 @@
             $this->set_ordem($list_espera['ordem']);
             $this->set_data_espera($list_espera['data_espera']);
             $this->set_telefone($list_espera['telefone']);
+            $this->set_id_lista_espera($list_espera['id_lista_espera']);
             $this->set_atendente($a);            
         }
     }

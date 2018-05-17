@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 12-Maio-2018 às 01:27
+-- Data de Criação: 17-Maio-2018 às 01:03
 -- Versão do servidor: 5.6.13
 -- versão do PHP: 5.4.17
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `atendente` (
   `nome` varchar(50) NOT NULL,
   `comissao` double NOT NULL,
   PRIMARY KEY (`id_atendente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Extraindo dados da tabela `atendente`
@@ -42,8 +42,7 @@ CREATE TABLE IF NOT EXISTS `atendente` (
 INSERT INTO `atendente` (`id_atendente`, `nome`, `comissao`) VALUES
 (4, 'Vinicius Nascimento', 30),
 (5, 'Davi Freitas', 30),
-(6, 'Carlos Pereira', 30),
-(7, 'Rogério Silva', 30);
+(6, 'Carlos Pereira', 30);
 
 -- --------------------------------------------------------
 
@@ -165,14 +164,7 @@ CREATE TABLE IF NOT EXISTS `lista_espera` (
   `id_lista_espera` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id_lista_espera`),
   KEY `cod_atendente` (`cod_atendente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- Extraindo dados da tabela `lista_espera`
---
-
-INSERT INTO `lista_espera` (`nome_cliente`, `ordem`, `data_espera`, `telefone`, `cod_atendente`, `id_lista_espera`) VALUES
-('Valter Renner', 2, '2018-05-11', '(16) 99724-9904', 6, 2);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -191,14 +183,14 @@ CREATE TABLE IF NOT EXISTS `mesa` (
 --
 
 INSERT INTO `mesa` (`id_mesa`, `status_mesa`) VALUES
-(1, NULL),
+(1, 'Disponível'),
 (2, 'Disponível'),
-(3, ''),
-(4, ''),
-(5, ''),
-(6, ''),
-(7, ''),
-(8, '');
+(3, 'Disponível'),
+(4, 'Indisponível'),
+(5, 'Disponível'),
+(6, 'Disponível'),
+(7, 'Disponível'),
+(8, 'Disponível');
 
 -- --------------------------------------------------------
 
@@ -284,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `reserva` (
   PRIMARY KEY (`id_reserva`),
   KEY `cod_mesa` (`cod_mesa`),
   KEY `cod_atendente` (`cod_atendente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -316,6 +308,19 @@ CREATE TABLE IF NOT EXISTS `vw_espera` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vw_reserva`
+--
+CREATE TABLE IF NOT EXISTS `vw_reserva` (
+`id_reserva` int(11)
+,`nome_cliente` varchar(50)
+,`telefone` varchar(20)
+,`data_hora` datetime
+,`cod_mesa` int(11)
+,`nome` varchar(50)
+);
+-- --------------------------------------------------------
+
+--
 -- Structure for view `item_bebida`
 --
 DROP TABLE IF EXISTS `item_bebida`;
@@ -339,6 +344,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `vw_espera`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_espera` AS select `lista_espera`.`id_lista_espera` AS `id_lista_espera`,`lista_espera`.`nome_cliente` AS `nome_cliente`,`lista_espera`.`ordem` AS `ordem`,`lista_espera`.`data_espera` AS `data_espera`,`lista_espera`.`telefone` AS `telefone`,`atendente`.`nome` AS `nome` from (`lista_espera` join `atendente` on((`lista_espera`.`cod_atendente` = `atendente`.`id_atendente`))) order by `lista_espera`.`ordem`;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_reserva`
+--
+DROP TABLE IF EXISTS `vw_reserva`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_reserva` AS select `reserva`.`id_reserva` AS `id_reserva`,`reserva`.`nome_cliente` AS `nome_cliente`,`reserva`.`telefone` AS `telefone`,`reserva`.`data_hora` AS `data_hora`,`reserva`.`cod_mesa` AS `cod_mesa`,`atendente`.`nome` AS `nome` from (`reserva` join `atendente` on((`reserva`.`cod_atendente` = `atendente`.`id_atendente`)));
 
 --
 -- Constraints for dumped tables

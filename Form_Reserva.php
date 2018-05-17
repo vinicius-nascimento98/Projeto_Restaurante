@@ -1,7 +1,7 @@
 <?php
 
     include("Class/View/Form/ClassForm.php");
-    include("Class/Control/ClassBD;");
+    include("Class/Control/ClassBD.php");
     include("Conexao.php");
     include("Cabecalho/Cabecalho.php");
 
@@ -27,22 +27,26 @@
     $table = "atendente";
     $atendentes = $b ->  select($table);
 
-    //CONTINUAR - ADAPTAR PASSOS ABAIXO
-
-    //instanciando os objetos options para listar as mesas
-    $cont=0;
+    //criando vetor de options
+    $opt1[0] = array("valor"=>"selecione","texto"=>"-- Selecione --");
     foreach($mesas as $v){
-        $o[$cont] = new Option($v);
-
-        $cont++;
+        $opt1[]= array("texto"=>$v['id_mesa']);
     }
 
-    //instanciando os objetos options para listar os atendentes
-    $cont=0;
-    foreach($nome_atendentes as $v){
-        $o2[$cont] = new Option($v);
+    //instanciando os objetos options
+    foreach($opt1 as $v){
+        $o[]= new Option($v);
+    }
 
-        $cont++;
+    //criando vetor de options
+    $opt[0] = array("valor"=>"selecione","texto"=>"-- Selecione --");
+    foreach($atendentes as $v){
+        $opt[]= array("valor"=>$v['id_atendente'],"texto"=>$v['nome']);
+    }
+
+    //instanciando os objetos options
+    foreach($opt as $v){
+        $o2[]= new Option($v);
     }
 
     //instanciando o objeto select passando os objetos option de mesas
@@ -54,7 +58,7 @@
     $s2 = new Select($select2, $o2);
 
     //criando o form
-    $f = array("nome"=>"cadastro_reserva", "action"=>"cadastro_BD_reserva.php", "method"=>"post");
+    $f = array("nome"=>"cadastro_reserva", "action"=>"Cadastro_Reserva.php", "method"=>"post");
     $form = new Form($f);
 
     //adicionando os objetos input 1 e um textarea 1

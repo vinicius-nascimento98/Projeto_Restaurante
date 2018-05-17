@@ -1,8 +1,7 @@
 <?php
 
     include("Class/View/Form/ClassForm.php");
-	//include("Class/Control/ClassBD;");
-    include("Funcoes.php"); //mudar para conceito orientação objeto (class_BD)
+	include("Class/Control/ClassBD.php");
     include("Conexao.php");
     include("Cabecalho/Cabecalho.php");
 
@@ -24,14 +23,20 @@
     $i4 = array("label"=>"Tel.", "nome"=>"telefone", "tipo"=>"text", "id"=>"campo_telefone","required"=>true);
     $input4 = new Input($i4);
 
-    $nome_atendentes = busca_atendente($conn);
+    $a = new BD($conn);
+    $table = "atendente"; 
+
+    $nome_atendentes = $a->select($table);
+
+    //criando vetor de options
+    $opt[0] = array("valor"=>"selecione","texto"=>"-- Selecione --");
+    foreach($nome_atendentes as $v){
+        $opt[]= array("valor"=>$v['id_atendente'],"texto"=>$v['nome']);
+    }
 
     //instanciando os objetos options
-    $cont=0;
-    foreach($nome_atendentes as $v){
-        $o[$cont] = new Option($v);
-
-        $cont++;
+    foreach($opt as $v){
+        $o[]= new Option($v);
     }
 
     //instanciando o objeto select passando os objetos option acima

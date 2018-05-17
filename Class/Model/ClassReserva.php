@@ -5,6 +5,7 @@
     include("ClassAtendente.php");
 
     class Reserva{
+        protected $id_reserva;
         protected $nome_cliente;
         protected $telefone;
         protected $data_hora;
@@ -31,6 +32,10 @@
         //sera inserido um objeto da classe Atendente no atributo Atendente
         protected function set_atendente(Atendente $a){
             $this->atendente=$a;
+        }
+
+        protected function set_id_reserva($id){
+            $this->id_reserva = $id;
         }
 
         public function get_nome_cliente(){
@@ -67,7 +72,7 @@
         }
 
         public function get_id_reserva(){
-            return($this->telefone);
+            return($this->id_reserva);
         }
 
         //tem de ser passado um POST com os dados, além do objeto da Classe Atendente e Mesa
@@ -75,6 +80,7 @@
             $this->set_nome_cliente($reserva['nome_cliente']);
             $this->set_telefone($reserva['telefone']);
             $this->set_data_hora($reserva['data_hora']);
+            $this->set_id_reserva($reserva['id_reserva']);
             $this->set_mesa($m);
             $this->set_atendente($a);
         } 

@@ -8,13 +8,12 @@
 
         include("Conexao.php");
 
-        print_r($_POST);
-		/*$l = new BD($conn);
+		$r = new BD($conn);
 
-		$l->insert($_POST,"lista_espera");
+		$r->insert($_POST,"reserva");
 
 		echo "<br/>";
-        echo "Reserva cadastrada com sucesso!";*/
+        echo "Reserva cadastrada com sucesso!";
 
     }
     else{

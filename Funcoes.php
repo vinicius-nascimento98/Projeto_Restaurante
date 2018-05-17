@@ -26,7 +26,7 @@
     //função responsável por buscar as mesas cadastradas no banco de dados e guarda-los em um vetor
     function busca_mesa($conn,$listar_mesa){
         
-        $select = "SELECT id_Mesa FROM mesa WHERE status_Mesa = 'liberada'";
+        $select = "SELECT id_Mesa FROM mesa WHERE status_Mesa = 'Disponível'";
 
         $stmt = $conn->prepare($select);
 
