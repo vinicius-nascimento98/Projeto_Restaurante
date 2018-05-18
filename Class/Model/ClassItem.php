@@ -8,9 +8,15 @@ abstract class Item {
 	protected $tipo;
 	
 	public function __construct ($item){
-		$this->set_disponibilidade($item['disponibilidade']);
 		$this->set_descricao($item['descricao']);
-		$this->set_custo($item['custo']);
+		
+		if(isset($d["disponibilidade"])){
+			$this->set_disponibilidade($item['disponibilidade']);
+		}
+		
+		if(isset($c["custo"])){
+			$this->set_custo($item['custo']);
+		}
 		
 		if(isset($i["id_item"])){
 			$this->set_id_item($item["id_item"]);

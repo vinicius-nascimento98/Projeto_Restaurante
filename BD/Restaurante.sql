@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 17-Maio-2018 às 18:54
+-- Data de Criação: 18-Maio-2018 às 17:40
 -- Versão do servidor: 5.6.13
 -- versão do PHP: 5.4.17
 
@@ -282,6 +282,16 @@ CREATE TABLE IF NOT EXISTS `vw_bebida` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vw_bebida_estoque`
+--
+CREATE TABLE IF NOT EXISTS `vw_bebida_estoque` (
+`id_item` int(11)
+,`descricao` varchar(100)
+,`estoque` int(11)
+);
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `vw_espera`
 --
 CREATE TABLE IF NOT EXISTS `vw_espera` (
@@ -346,11 +356,32 @@ CREATE TABLE IF NOT EXISTS `vw_vinho` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vw_vinho_estoque`
+--
+CREATE TABLE IF NOT EXISTS `vw_vinho_estoque` (
+`id_item` int(11)
+,`descricao` varchar(100)
+,`tipo_uva` varchar(100)
+,`safra` varchar(30)
+,`estoque` int(11)
+);
+-- --------------------------------------------------------
+
+--
 -- Structure for view `vw_bebida`
 --
 DROP TABLE IF EXISTS `vw_bebida`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_bebida` AS select `item`.`id_item` AS `id_item`,`item`.`descricao` AS `descricao`,`item`.`disponibilidade` AS `disponibilidade`,`item`.`custo` AS `custo`,`bebida`.`estoque` AS `estoque` from (`item` join `bebida` on((`item`.`id_item` = `bebida`.`cod_bebida`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_bebida_estoque`
+--
+DROP TABLE IF EXISTS `vw_bebida_estoque`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_bebida_estoque` AS select `item`.`id_item` AS `id_item`,`item`.`descricao` AS `descricao`,`bebida`.`estoque` AS `estoque` from (`item` join `bebida`);
 
 -- --------------------------------------------------------
 
@@ -396,6 +427,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `vw_vinho`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_vinho` AS select `item`.`id_item` AS `id_item`,`item`.`descricao` AS `descricao`,`vinho`.`tipo_uva` AS `tipo_uva`,`vinho`.`safra` AS `safra`,`item`.`disponibilidade` AS `disponibilidade`,`item`.`custo` AS `custo`,`vinho`.`estoque` AS `estoque` from (`item` join `vinho` on((`item`.`id_item` = `vinho`.`cod_vinho`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_vinho_estoque`
+--
+DROP TABLE IF EXISTS `vw_vinho_estoque`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_vinho_estoque` AS select `item`.`id_item` AS `id_item`,`item`.`descricao` AS `descricao`,`vinho`.`tipo_uva` AS `tipo_uva`,`vinho`.`safra` AS `safra`,`vinho`.`estoque` AS `estoque` from (`item` join `vinho` on((`item`.`id_item` = `vinho`.`cod_vinho`)));
 
 --
 -- Constraints for dumped tables

@@ -32,5 +32,7 @@ header('Content-Type: text/html; charset=utf-8');
 	<a href="Listar_Atendente.php">Listar Atendentes</a>
 	|
 	<a href="Listar_Mesa.php">Listar Mesas</a>
+	|
+	<a href="Listar_Estoque.php">Listar Estoque</a>
 	<hr />
 	<br />
