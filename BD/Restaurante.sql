@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 18-Maio-2018 às 17:40
+-- Data de Criação: 19-Maio-2018 às 00:08
 -- Versão do servidor: 5.6.13
 -- versão do PHP: 5.4.17
 
@@ -98,6 +98,7 @@ CREATE TABLE IF NOT EXISTS `ingrediente` (
   `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT,
   `nome_ingrediente` varchar(30) NOT NULL,
   `custo` double NOT NULL,
+  `unid` set('l','ml','kg','g','un','cx','gl') NOT NULL,
   `estoque` double NOT NULL,
   PRIMARY KEY (`id_ingrediente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -139,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `lista_espera` (
   `id_lista_espera` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id_lista_espera`),
   KEY `cod_atendente` (`cod_atendente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -149,7 +150,6 @@ CREATE TABLE IF NOT EXISTS `lista_espera` (
 
 CREATE TABLE IF NOT EXISTS `mesa` (
   `id_mesa` int(11) NOT NULL AUTO_INCREMENT,
-  `status_mesa` enum('Disponível','Indisponível') DEFAULT 'Disponível',
   PRIMARY KEY (`id_mesa`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
@@ -157,15 +157,15 @@ CREATE TABLE IF NOT EXISTS `mesa` (
 -- Extraindo dados da tabela `mesa`
 --
 
-INSERT INTO `mesa` (`id_mesa`, `status_mesa`) VALUES
-(1, 'Disponível'),
-(2, 'Disponível'),
-(3, 'Disponível'),
-(4, 'Indisponível'),
-(5, 'Disponível'),
-(6, 'Disponível'),
-(7, 'Disponível'),
-(8, 'Disponível');
+INSERT INTO `mesa` (`id_mesa`) VALUES
+(1),
+(2),
+(3),
+(4),
+(5),
+(6),
+(7),
+(8);
 
 -- --------------------------------------------------------
 
@@ -176,10 +176,13 @@ INSERT INTO `mesa` (`id_mesa`, `status_mesa`) VALUES
 CREATE TABLE IF NOT EXISTS `pagamento` (
   `data_hora` datetime NOT NULL,
   `cod_mesa` int(11) NOT NULL,
+  `cod_reserva` int(11) NOT NULL,
   `forma_pagamento` varchar(15) NOT NULL,
   `operadora` varchar(15) DEFAULT NULL,
   `desconto` double DEFAULT NULL,
-  PRIMARY KEY (`cod_mesa`,`data_hora`)
+  `total` double NOT NULL,
+  PRIMARY KEY (`cod_mesa`,`data_hora`),
+  KEY `cod_reserva` (`cod_reserva`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -191,9 +194,11 @@ CREATE TABLE IF NOT EXISTS `pagamento` (
 CREATE TABLE IF NOT EXISTS `pedido` (
   `data_hora` datetime NOT NULL,
   `cod_mesa` int(11) NOT NULL,
+  `cod_reserva` int(11) NOT NULL,
   `sequencia` int(11) DEFAULT NULL,
   PRIMARY KEY (`cod_mesa`,`data_hora`),
-  KEY `sequencia` (`sequencia`)
+  KEY `sequencia` (`sequencia`),
+  KEY `cod_reserva` (`cod_reserva`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -247,11 +252,13 @@ CREATE TABLE IF NOT EXISTS `reserva` (
   `data_hora` datetime NOT NULL,
   `cod_mesa` int(11) NOT NULL,
   `cod_atendente` int(11) NOT NULL,
+  `qtd_pessoas` int(11) NOT NULL,
   `id_reserva` int(11) NOT NULL AUTO_INCREMENT,
+  `reserva_finalizada` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id_reserva`),
   KEY `cod_mesa` (`cod_mesa`),
   KEY `cod_atendente` (`cod_atendente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -470,14 +477,16 @@ ALTER TABLE `lista_espera`
 -- Limitadores para a tabela `pagamento`
 --
 ALTER TABLE `pagamento`
-  ADD CONSTRAINT `pagamento_ibfk_1` FOREIGN KEY (`cod_mesa`) REFERENCES `pedido` (`cod_mesa`);
+  ADD CONSTRAINT `pagamento_ibfk_1` FOREIGN KEY (`cod_mesa`) REFERENCES `pedido` (`cod_mesa`),
+  ADD CONSTRAINT `pagamento_ibfk_2` FOREIGN KEY (`cod_reserva`) REFERENCES `reserva` (`id_reserva`);
 
 --
 -- Limitadores para a tabela `pedido`
 --
 ALTER TABLE `pedido`
   ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`cod_mesa`) REFERENCES `mesa` (`id_mesa`),
-  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`sequencia`) REFERENCES `item` (`id_item`);
+  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`sequencia`) REFERENCES `item` (`id_item`),
+  ADD CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`cod_reserva`) REFERENCES `reserva` (`id_reserva`);
 
 --
 -- Limitadores para a tabela `pedido_atendente`
