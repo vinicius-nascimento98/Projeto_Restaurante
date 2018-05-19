@@ -28,6 +28,14 @@
 		public function set_texto($texto){
 			$this->texto=$texto;
 		}
+		
+		public function get_value(){
+			return($this->value);
+		}
+		
+		public function get_texto(){
+			return($this->texto);
+		}
 
 		public function __construct($option){
 			$this->set_texto($option['texto']);

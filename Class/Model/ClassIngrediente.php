@@ -5,11 +5,13 @@ class Ingrediente {
 	protected $nome_ingrediente;
 	protected $custo;
 	protected $estoque;
+	protected $unid;
 	
 	public function __construct($ingrediente){
 		$this->set_nome_ingrediente($ingrediente["nome_ingrediente"]);
 		$this->set_custo($ingrediente["custo"]);
 		$this->set_estoque($ingrediente["estoque"]);
+		$this->set_unid($ingrediente["unid"]);
 		if(isset($ingrediente["id_ingrediente"])){
 			$this->set_id_ingrediente($ingrediente["id_ingrediente"]);
 		}
@@ -31,6 +33,10 @@ class Ingrediente {
 		$this->estoque = $estoque;
 	}
 	
+	public function set_unid($unid){
+		$this->unid = $unid;
+	}
+	
 	public function get_id_ingrediente(){
 		return($this->id_ingrediente);
 	}
@@ -45,6 +51,10 @@ class Ingrediente {
 	
 	public function get_estoque(){
 		return($this->estoque);
+	}
+	
+	public function get_unid(){
+		return($this->unid);
 	}
 	
 }
