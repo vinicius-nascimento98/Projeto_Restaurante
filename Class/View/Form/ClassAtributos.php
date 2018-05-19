@@ -7,6 +7,7 @@
 		protected $name;
 		protected $tag;
 		protected $pos_label;
+		protected $value;
 
 
 		public function set_label($l){

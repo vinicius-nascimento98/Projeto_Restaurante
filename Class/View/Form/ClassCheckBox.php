@@ -8,7 +8,13 @@
 			$this->tag="$this->label: ";
 
 			foreach ($this->value as $i => $v) {
-				$this->tag.="<input type='checkbox' name='$this->name' value='$v'> ".$this->labelTexto[$i];
+				$this->tag.="<input type='checkbox' name='$this->name' value='$v' ".$this->labelTexto[$i];
+
+				if(in_array($v,$this->checked)){
+					$this->tag.= "checked='checked' ";
+				}
+
+				$this->tag.= ">";
 			}
 		}
 
