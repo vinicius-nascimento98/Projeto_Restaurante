@@ -91,6 +91,43 @@
         public function __construct(PDO $conexao){
             $this->set_conn($conexao);
         }
-    }
+		
+		public function update($dados){
+            
+			$tabela = substr($dados[0],3,strlen($dados[0]));
+            //montando string de UPDATE
+			//substr descobrindo o nome da tabela, strlen da o tamanho da string
+            $update = " UPDATE ".$tabela." SET ";
+			
+            $cont=0;
+            foreach($dados as $i=>$v){
+                
+				if(substr($i,0,2) == "id"){
+					$id = $v;
+				}
+				else{
+					if($cont == 0){
+						$update.= "$i = :$i";
+						$cont++;
+					}
+					else{
+						$update.=",$i = :$i";
+					}
+				}
+            }
+			//update atendente set nome=:nome, comissao=:comissao, email=:email
+            $update.=" WHERE id_".$tabela."=:id_".$tabela;
 
+            $stmt = $this->conn->prepare($update);
+
+            //criando bind values com os valores do POST
+            foreach($dados as $i=>$v){
+                $stmt->bindValue(":$i",$v);
+            }
+			
+            //executando a string de UPDATE
+            $stmt->execute();
+
+        }
+    }
 ?>
