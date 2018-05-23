@@ -26,7 +26,9 @@
 		}
 
 		public function __construct($atributos){
-			$this->set_label($atributos['label']);
+			if(isset($atributos["label"])){
+				$this->set_label($atributos['label']);
+			}
 			$this->set_name($atributos['nome']);
 			if(isset($atributos['pos_label'])){
 				$this->set_pos_label($atributos['pos_label']);

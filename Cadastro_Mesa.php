@@ -1,5 +1,5 @@
 <?php
-
+	
 	if(!empty($_POST)){
 		include("Cabecalho/Cabecalho.php");
 		include("Class/Control/ClassBD.php");
@@ -13,8 +13,9 @@
 		echo "Mesa cadastrada com sucesso!!";
 		
 	}
+	
 	else{
-		header("location: Form_Mesa.php");
+		//header("location: Form_Mesa.php");
 	}
 	
 ?>

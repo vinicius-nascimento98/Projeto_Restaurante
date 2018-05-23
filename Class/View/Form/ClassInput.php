@@ -23,8 +23,12 @@
 		}
 
 		public function set_tag(){
-			$this->tag = "<label>$this->label: </label><input type='$this->type' name='$this->name' ";
-			
+			if($this->label!= null){
+				$this->tag = "<label>$this->label: </label><input type='$this->type' name='$this->name' ";
+			}
+			else{
+				$this->tag = "<input type='$this->type' name='$this->name' ";
+			}
 			if($this->id!=null){
 				$this->tag .= " id='$this->id' ";
 			}
