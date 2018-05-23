@@ -15,7 +15,7 @@
 	}
 	
 	else{
-		//header("location: Form_Mesa.php");
+		header("location: Form_Mesa.php");
 	}
 	
 ?>
