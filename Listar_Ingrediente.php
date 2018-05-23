@@ -26,6 +26,8 @@
 		$t = new Table($cabecalho,$ingrediente);
 
 		//get_object_vars([objeto]) -> retorna um vetor de atributos do objeto
+		
+			
 	}
 	else{
 		echo"<h1>Não possui DADOS!!</h1>";

@@ -10,7 +10,7 @@
     
 	
 	/* -----------------------------Ingrediente----------------------------------------------- */
-    
+    //echo "<h3>Estoque Ingrediente</h3>" ;
 	$table = "ingrediente";
 
     $b = new BD($conn);
@@ -37,6 +37,7 @@
 	}
 	
 	/* --------------------------------Vinho-------------------------------------------------- */
+	//echo "<h3>Estoque Vinho</h3>" ;
 	$table = "vw_vinho_estoque";
 
     $retorno = $b->select($table);
@@ -60,7 +61,8 @@
 		echo"<h1>Não possui VINHO!!</h1>";
 	}
 	
-	/* -----------------------------------Bebida-------------------------------------------- */	
+	/* -----------------------------------Bebida-------------------------------------------- */
+	//echo "<h3>Estoque Bebida</h3>" ;
 	$table = " vw_bebida_estoque";
 
     $retorno = $b->select($table);

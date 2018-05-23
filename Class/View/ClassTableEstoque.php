@@ -66,7 +66,7 @@
 			}
 			
 			//adicionando as colunas com input number.
-			$this->tagBody.="<td><input type='number'></input></td>";
+			$this->tagBody.="<td><input type='number' ></input></td>";
 
 			//fechando a linha da tabela
 			$this->tagBody.="</tr>";

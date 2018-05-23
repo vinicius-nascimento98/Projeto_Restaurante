@@ -1,12 +1,14 @@
+
 <?php
 
-	include("Interface.php");
+	include("InterfaceTag.php");
 	
 	abstract class Atributos implements Tag{
 		protected $label;
 		protected $name;
 		protected $tag;
 		protected $pos_label;
+		protected $value;
 
 
 		public function set_label($l){
@@ -26,13 +28,12 @@
 		}
 
 		public function __construct($atributos){
-			if(isset($atributos["label"])){
-				$this->set_label($atributos['label']);
-			}
+			$this->set_label($atributos['label']);
 			$this->set_name($atributos['nome']);
 			if(isset($atributos['pos_label'])){
 				$this->set_pos_label($atributos['pos_label']);
 			}
 		}
 	}
+
 ?>
