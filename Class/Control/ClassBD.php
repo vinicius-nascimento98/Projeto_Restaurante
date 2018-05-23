@@ -18,21 +18,21 @@
             $stmt->execute();
 
             $cont = 0;
-            $vetor_retorno = array();
+            $matriz_retorno = array();
 			
             while($retorno = $stmt->fetch()){
 				
                 foreach($retorno as $i => $v){
                     
                     if(!is_numeric($i)){
-                        $vetor_retorno[$cont][$i]=$v;
+                        $matriz_retorno[$cont][$i]=$v;
                     }
                 }
 
                 $cont++;
             }
 
-            return ($vetor_retorno);
+            return ($matriz_retorno);
         }
 
         public function delete($vetor_delete){

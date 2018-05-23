@@ -9,6 +9,7 @@
 
   $d->delete($_GET);
 
+  
   //redirecionando usuário após a remoção no banco de dados
   /*1. str_place interno- troca os _ da string por "espaço"
     2. ucwords interno- troca as primeiras letras de cada palavra para maiuscula
