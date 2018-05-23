@@ -11,6 +11,8 @@
         protected $data_hora;
         protected $mesa;
         protected $atendente;
+        protected $reserva_finalizada;
+        protected $qtd_pessoas;
 
         protected function set_nome_cliente($nome){
             $this->nome_cliente=$nome;
@@ -36,6 +38,14 @@
 
         protected function set_id_reserva($id){
             $this->id_reserva = $id;
+        }
+		
+		protected function set_reserva_finalizada($reserva_finalizada){
+            $this->reserva_finalizada=$reserva_finalizada;
+        }
+		
+		protected function set_qtd_pessoas($qtd_pessoas){
+            $this->qtd_pessoas=$qtd_pessoas;
         }
 
         public function get_nome_cliente(){
@@ -74,6 +84,14 @@
         public function get_id_reserva(){
             return($this->id_reserva);
         }
+		
+		public function get_reserva_finalizada(){
+            return($this->reserva_finalizada);
+        }
+		
+		public function get_qtd_pessoas(){
+            return($this->qtd_pessoas);
+        }
 
         //tem de ser passado um POST com os dados, além do objeto da Classe Atendente e Mesa
         public function __construct($reserva, Mesa $m, Atendente $a){
@@ -81,6 +99,8 @@
             $this->set_telefone($reserva['telefone']);
             $this->set_data_hora($reserva['data_hora']);
             $this->set_id_reserva($reserva['id_reserva']);
+            $this->set_reserva_finalizada($reserva['reserva_finalizada']);
+            $this->set_qtd_pessoas($reserva['qtd_pessoas']);
             $this->set_mesa($m);
             $this->set_atendente($a);
         } 

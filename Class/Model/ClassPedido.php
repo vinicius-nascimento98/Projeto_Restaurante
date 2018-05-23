@@ -8,6 +8,7 @@
         protected $data_hora;
         protected $mesa;
         protected $sequencia=array();
+        protected $cod_reserva;
 
         public function __construct($pedido, Mesa $m, Item $i){
 
@@ -20,6 +21,7 @@
 		public function set_sequencia(Item $i){
             $this->sequencia=$i;
         }
+		
 		
 		//Terminar set's
     }
