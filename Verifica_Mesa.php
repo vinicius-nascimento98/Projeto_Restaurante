@@ -4,9 +4,13 @@
     header("Content-Type: application/json; charset=UTF-8");
 
     include("Conexao.php");
-    include("Funcoes.php"); //mudar para conceito orientação objeto
+    include("Class/Control/ClassBD.php");
 
-    $outp = busca_mesa($conn,false);
+    $m = new BD($conn);
+    
+    $table = '';
+
+    $m-> 
 
     echo json_encode($outp);
 ?>
