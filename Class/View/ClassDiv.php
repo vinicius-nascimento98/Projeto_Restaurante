@@ -25,6 +25,10 @@
             echo $this->tag;
         }
 
+        public function get_tag(){
+			return($this->tag);
+		}
+
         public function set_tag(){
 
             //primeira parte responsável por setar os atributos da DIV

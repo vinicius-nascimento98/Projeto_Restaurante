@@ -20,7 +20,6 @@
 			$this->set_name($f["nome"]);
 			$this->set_action($f["action"]);
 			$this->set_method($f["method"]);
-			$this->submit = "<input type='submit' value='Enviar' />";
 		}
 		
 		protected function set_name($n){
@@ -64,22 +63,28 @@
 			$pos=sizeof($this->entrada);
 			$this->entrada[$pos]=$c;
 		}
+
+		public function add_div(Div $d){
+
+			$pos=sizeof($this->entrada);
+			$this->entrada[$pos]=$d;
+		}
+
+		public function add_submit(Input $submit){
+
+			$pos=sizeof($this->entrada);
+			$this->entrada[$pos]=$submit;
+		}
 		
 		public function exibe_form(){
+			
 			echo "<form name='$this->name' action='$this->action' method='$this->method'>";
-			echo "<fieldset>";
 			if($this->entrada != null){
 				foreach($this->entrada as $e){
-					echo "<p>";	
 					$e->imprime_tag();
-					echo "</p>";
 				}
 			}
-			echo "<p>";
-			echo $this->submit;
-			echo "</p>";
 
-			echo "</fieldset>";
 			echo "</form>";
 		}
 		

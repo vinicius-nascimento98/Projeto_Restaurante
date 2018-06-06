@@ -12,21 +12,18 @@ da viewport de acordo com o dispositivo-->
     //criando o primeiro input
     $input = array("tipo"=>"text","nome"=>"nome");
     $i = new Input($input);
-    $vetor_obj[] = $i; //adicionando ao vetor de objetos
-
-    //criando o segundo input
-    $input2 = array("tipo"=>"number","nome"=>"idade");
-    $i2 = new Input($input2);
-    $vetor_obj[] = $i2; //adicionando ao vetor de objetos
+    $vetor_obj1[0] = $i; //adicionando ao vetor de objetos
 
     //criando um vetor de atributos que sera utilizado pela DIV
-    $atributos = array("class"=>"form-group col-xs-12");
+    $atributos = array("class"=>"input-group");
+    $d_input1 = new Div($vetor_obj1,$atributos);
+    $vetor_obj_div[0] = $d_input1;
 
-    /*criando o objeto DIV e passando como parametros os
-    inputs e os atributos da DIV criados anteriormente*/
-    $d = new Div($vetor_obj,$atributos);
+    //colocando a DIV dentro de outra div
+    $atributos = array("class"=>"form-group");
+    $d1 = new Div($vetor_obj_div,$atributos);
+
     
-    $d->imprime_tag();
 ?>
 
 <!--incluindo o js do jquery e do bootstrap-->

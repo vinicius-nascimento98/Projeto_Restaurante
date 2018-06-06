@@ -19,6 +19,10 @@
 			$this->name=$nome;
 		}
 
+		public function get_tag(){
+			return($this->tag);
+		}
+
 		public function imprime_tag(){
 			echo $this->tag;
 		}
