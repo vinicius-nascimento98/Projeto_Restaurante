@@ -5,6 +5,7 @@
 		protected $type;
 		protected $required;
 		protected $step;
+		protected $onclick;
 		
 		public function set_type($tipo){
 			$this->type=$tipo;
@@ -20,6 +21,10 @@
 
 		public function set_step($step){
 			$this->step = $step;
+		}
+		
+		public function set_onclick($onclick){
+			$this->onclick = $onclick;
 		}
 
 		public function set_tag(){
@@ -37,6 +42,12 @@
 			}
 			if($this->step!=null){
 				$this->tag .= " step='".$this->step."' ";
+			}
+			if($this->onclick!=null){
+				$this->tag .= " onclick='".$this->onclick."' ";
+			}
+			if($this->value!=null){
+				$this->tag .= " value='".$this->value."' ";
 			}
 
 			$this->tag .= " />";
@@ -61,6 +72,10 @@
 
 			if(isset($i["required"])){
 				$this->set_required($i["required"]);
+			}
+			
+			if(isset($i["onclick"])){
+				$this->set_onclick($i["onclick"]);
 			}
 
 			$this->set_tag();

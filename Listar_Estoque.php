@@ -6,8 +6,18 @@
     include("Class/Model/ClassBebida.php");
     include("Class/Model/ClassVinho.php");
     include("Class/View/ClassTableEstoque.php");
+    include("Class/View/Form/ClassForm.php");
     include("Conexao.php");
     
+	
+	$inp1 = array('nome'=>'btnComprar','tipo'=>'button', 'onclick'=>'controleEstoque(1)', 'value'=>'Comprar');
+	$inp2 = array('nome'=>'btnDescartar','tipo'=>'button', 'onclick'=>'controleEstoque(-1)', 'value'=>'Descartar');
+	
+	$input1 = new Input($inp1); 
+	$input2 = new Input($inp2); 
+	
+	$input1->imprime_tag();
+	$input2->imprime_tag();
 	
 	/* -----------------------------Ingrediente----------------------------------------------- */
     //echo "<h3>Estoque Ingrediente</h3>" ;
@@ -86,3 +96,5 @@
 		echo"<h1>Não possui BEBIDAS!!</h1>";
 	}
 ?>
+<script src="Javascripts/jquery-2.2.4.min.js"></script>
+<script src="Javascripts/funcoes.js"></script>

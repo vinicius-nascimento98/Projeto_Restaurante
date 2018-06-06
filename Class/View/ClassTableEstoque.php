@@ -60,13 +60,13 @@
 					$id= $objBody->$method();
 				}
 				else{
-					$this->tagBody.="<td>".$objBody->$method()."</td>";
+					$this->tagBody.="<td class='$lin'>".$objBody->$method()."</td>";
 				}
 				
 			}
 			
 			//adicionando as colunas com input number.
-			$this->tagBody.="<td><input type='number' ></input></td>";
+			$this->tagBody.="<td class='valorAlteraEstoque'><input type='number' id='valor' step='0.01' min='0' /></td>";
 
 			//fechando a linha da tabela
 			$this->tagBody.="</tr>";
