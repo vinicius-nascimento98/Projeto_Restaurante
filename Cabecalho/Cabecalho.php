@@ -34,5 +34,7 @@ header('Content-Type: text/html; charset=utf-8');
 	<a href="Remover_Mesa.php">Remover Mesa</a>
 	|
 	<a href="Listar_Estoque.php">Listar Estoque</a>
+	|
+	<a href="Form_Pedido.php">Iniciar Pedido</a>
 	<hr />
 	<br />
