@@ -47,8 +47,6 @@
             //setando o conteudo da DIV
             foreach($this->conteudo as $v){
 
-                /*TEREMOS QUE ADICIONAR NAS CLASSES FORM (INPUT,SELECT,OPTION ETC) O MÉTODO 'get_tag'
-                PARA QUE ELE SEJA UTILIZADO ABAIXO*/
                 $this->tag.= "".$v->get_tag()." ";
             }
 

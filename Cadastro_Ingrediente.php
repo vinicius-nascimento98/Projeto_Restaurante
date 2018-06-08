@@ -11,7 +11,7 @@
 		
 		echo "<br/>";
 		echo "Ingrediente cadastrado com sucesso!";
-
+		
 	}
 	else{
 		header("location: Form_Ingrediente.php");

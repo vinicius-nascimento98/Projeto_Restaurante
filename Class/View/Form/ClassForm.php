@@ -21,7 +21,7 @@
 			$this->set_action($f["action"]);
 			$this->set_method($f["method"]);
 
-			$this->submit = "<input type='submit' name='submeter' />";
+			$this->submit = "<input type='submit' />";
 		}
 		
 		protected function set_name($n){

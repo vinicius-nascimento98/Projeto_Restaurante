@@ -1,6 +1,7 @@
 <?php
 include('Cabecalho/Cabecalho.php'); //mudar para cabecalho geral
 include("Class/View/Form/ClassForm.php");
+include("Class/View/Classse");
 include("Javascripts/onchange_item.js");
 
  echo "<h1>Cadastro Item</h1>";
@@ -24,8 +25,8 @@ $vetValueLabel2 = array('Drink'=>"Drink", 'Prato'=>"Prato", 'Vinho'=>"Vinho", 'B
 $r1 = new Radio($r1, $vetValueLabel);
 $r2 = new Radio($r2, $vetValueLabel2);
 
-// Utilizar para tipo de ITem	
-//$inputBebida = array("label"=>"Estoque", "nome"=>"estoque", "tipo"=>"number", "value"=>"bebida", "onchange"=>"habilita_div(this)");
+// Utilizar para tipo de ITem
+$inputBebida = array("label"=>"Estoque", "nome"=>"estoque", "tipo"=>"number", "value"=>"bebida", "onchange"=>"habilita_div(this)");
 
 //form
 $f = array("nome"=>"Form_Item", "action"=>"Cadastro_Item.php", "method"=>"post");
@@ -40,3 +41,4 @@ $form->add_radio($r2);
 $form->exibe_form();
 ?>
 <script src = "Javascripts/jquery-2.2.4.min.js"></script>
+<script src = "Javascripts/onchange_item.js"></script>
