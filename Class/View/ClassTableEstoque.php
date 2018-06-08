@@ -47,7 +47,7 @@
 		}
 
 		public function add_body($objBody){
-
+			$tabela = strtolower(get_class($objBody));
 			//abrindo uma linha na tabela
 			$this->tagBody.="<tr>";
 
@@ -57,7 +57,10 @@
 				$method = "get_".$lin;
 
 				if(substr($lin,0,2) == "id"){
-					$id= $objBody->$method();
+					$id = $objBody->$method();
+				}
+				elseif($lin == 'tipo'){
+					$tabela = $objBody->method();
 				}
 				else{
 					$this->tagBody.="<td class='$lin'>".$objBody->$method()."</td>";
@@ -66,7 +69,7 @@
 			}
 			
 			//adicionando as colunas com input number.
-			$this->tagBody.="<td class='valorAlteraEstoque'><input type='number' id='valor' step='0.01' min='0' /></td>";
+			$this->tagBody.="<td class='valorAlteraEstoque'><div class='id_produto' ><input type='hidden' id='id_produto' value='$id' /></div><div class='tabela' ><input type='hidden' id='tabela' value='$tabela' /></div><input type='number' value='0' step='0.01' min='0' /></td>";
 
 			//fechando a linha da tabela
 			$this->tagBody.="</tr>";

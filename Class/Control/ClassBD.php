@@ -93,41 +93,56 @@
         }
 		
 		public function update($dados){
-            
-			$tabela = substr($dados[0],3,strlen($dados[0]));
+            $tabela = $dados['tabela'];
+			$id	= $dados['chave_tabela'];
+			$i = 0;
+			
             //montando string de UPDATE
 			//substr descobrindo o nome da tabela, strlen da o tamanho da string
-            $update = " UPDATE ".$tabela." SET ";
+            
+			$update = " UPDATE ".$tabela." SET ";
 			
             $cont=0;
-            foreach($dados as $i=>$v){
-                
-				if(substr($i,0,2) == "id"){
-					$id = $v;
-				}
-				else{
+            while($teste = current($dados)){
+				
+				if($i > 1){				
+				
 					if($cont == 0){
-						$update.= "$i = :$i";
+						$update.= key($dados) .'= :'. key($dados);
 						$cont++;
+						
 					}
 					else{
-						$update.=",$i = :$i";
+						$update.= ','. key($dados) .'= :'. key($dados);
 					}
 				}
-            }
+				$i++;
+				next($dados);
+			}
 			//update atendente set nome=:nome, comissao=:comissao, email=:email
             $update.=" WHERE id_".$tabela."=:id_".$tabela;
-
-            $stmt = $this->conn->prepare($update);
-
-            //criando bind values com os valores do POST
-            foreach($dados as $i=>$v){
-                $stmt->bindValue(":$i",$v);
-            }
 			
+            $stmt = $this->conn->prepare($update);
+			
+			//criando bind values com os valores do POST
+			$i=0;
+			reset($dados);
+			while($teste = current($dados)){
+				
+				if($i > 1){				
+					echo ':'.key($dados);
+					$stmt->bindValue(':'.key($dados),$teste);
+					
+					
+				}
+				$i++;
+				next($dados);
+			}
+			$stmt->bindValue(':id_'. $tabela, $id);
+            
             //executando a string de UPDATE
             $stmt->execute();
-
+		
         }
     }
 ?>

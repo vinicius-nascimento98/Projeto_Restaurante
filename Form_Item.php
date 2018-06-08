@@ -18,14 +18,14 @@ $r1 = array("label"=>"Disponibilidade", "nome"=>"disponibilidade", "tipo"=>"radi
 $vetValueLabel = array('di'=>"Disponivel", 'in'=>"Indisponivel");
 
 //adicionar onchange.
-$r2 = array("label"=>"Tipo", "nome"=>"tipo", "tipo"=>"radio");
+$r2 = array("label"=>"Tipo", "nome"=>"tipo", "	"=>"radio");
 $vetValueLabel2 = array('Drink'=>"Drink", 'Prato'=>"Prato", 'Vinho'=>"Vinho", 'Bebida'=>"Bebida");
 
 $r1 = new Radio($r1, $vetValueLabel);
 $r2 = new Radio($r2, $vetValueLabel2);
 
-
-// Utilizar para tipo de ITem $inputBebida = array("label"=>"Estoque", "nome"=>"estoque", "tipo"=>"number", "value"=>"bebida", "onchange"=>"habilita_div(this)");
+// Utilizar para tipo de ITem	
+//$inputBebida = array("label"=>"Estoque", "nome"=>"estoque", "tipo"=>"number", "value"=>"bebida", "onchange"=>"habilita_div(this)");
 
 //form
 $f = array("nome"=>"Form_Item", "action"=>"Cadastro_Item.php", "method"=>"post");
@@ -39,4 +39,4 @@ $form->add_radio($r2);
 
 $form->exibe_form();
 ?>
-<script src = "Javascripts/jquery-3.3.1.min.js"></script>
+<script src = "Javascripts/jquery-2.2.4.min.js"></script>
