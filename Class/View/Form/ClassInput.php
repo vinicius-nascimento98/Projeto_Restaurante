@@ -43,6 +43,9 @@
 			if($this->step!=null){
 				$this->tag .= " step='".$this->step."' ";
 			}
+			if($this->onchange!=null){
+				$this->tag .= " onchange='".$this->onchange."' ";
+			}
 			if($this->onclick!=null){
 				$this->tag .= " onclick='".$this->onclick."' ";
 			}
