@@ -9,6 +9,7 @@
 		protected $tag;
 		protected $pos_label;
 		protected $value;
+		protected $onchange;
 
 
 		public function set_label($label){
@@ -34,13 +35,22 @@
 		public function set_value($valor){
 			$this->value=$valor;
 		}
+		
+		public function set_onchange($onchange){
+			$this->onchange=$onchange;
+		}
 
 		public function __construct($atributos){
 			if(isset($atributos['label'])){
 				$this->set_label($atributos['label']);
 			}
+			
 			if(isset($atributos['value'])){
 				$this->set_value($atributos['value']);
+			}
+			
+			if(isset($atributos['onchange'])){
+				$this->set_onchange($atributos['onchange']);
 			}
 			
 			$this->set_name($atributos['nome']);

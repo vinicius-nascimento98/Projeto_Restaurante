@@ -2,15 +2,15 @@
 	
 	class Radio extends Atributos{
 	protected $labelTexto = array();
-	protected $onchange;
 	protected $checked;
+	
 
 	public function set_tag(){
 		$this->tag="$this->label: ";
 
 		foreach ($this->value as $i => $v) {
 			
-			$this->tag.="<input type='radio' name='$this->name' value='$v' ";
+			$this->tag.="<input type='radio' name='$this->name' value='$v'";
 
 			if($this->checked == $v){
 				$this->tag.="checked='checked' ";

@@ -1,11 +1,16 @@
 function habilita_div(selecao){
 
-	$('selecao').value
-	document.getElementById("bebida").style.display="none";
-	document.getElementById("vinho").style.display="none";
-	document.getElementById("prato").style.display="none";
-	document.getElementById("drink").style.display="none";
+	$('selecao').val();
+	$("#bebida").css("display","none");
+	$("#vinho").css("display","none");
+	$("#prato").css("display","none");
+	$("#drink").css("display","none");
 	
-	document.getElementById(selecao.value).style.display="block";
+	$(selecao.val).css("display","block");
+	
+	console.log($(selecao).val());
+	/*if(selecao == "bebida"){
+		document.getElementById("bebida").style.display = "block";	
+	}*/
 	
 }
