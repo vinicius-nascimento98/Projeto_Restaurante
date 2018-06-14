@@ -19,7 +19,7 @@ header('Content-Type: text/html; charset=utf-8');
 	|
 	<a href="Form_Item.php">Cadastrar Item</a>
 	|
-	<a href="Verifica_Mesa.html">Cadastrar Reserva</a>
+	<a href="Form_Reserva.php">Cadastrar Reserva</a>
 	|
 	<a href="Form_Mesa.php">Cadastrar Mesa</a>
 	|

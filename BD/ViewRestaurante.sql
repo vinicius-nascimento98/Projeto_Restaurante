@@ -33,17 +33,11 @@ CREATE VIEW `vw_max_mesa` AS select max(`mesa`.`id_mesa`) AS `id_mesa` from `mes
 
 
 CREATE VIEW  vw_mesaDisponivel as 
-Select * from mesa where id_mesa not in(
+Select id_mesa from mesa where id_mesa not in(
 	Select id_reserva 
 	from reserva
 	where RESERVA_FINALIZADA = 0 
 );
 
 CREATE VIEW vw_mesaReservada as 
-Select * from mesa where id_mesa in(
-	Select id_reserva 
-	from reserva
-	where RESERVA_FINALIZADA = 0  
-);
-
-
+	select cod_mesa, data_hora from reserva where reserva_finalizada = 0

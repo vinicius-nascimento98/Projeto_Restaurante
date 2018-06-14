@@ -9,12 +9,18 @@
 
         /*método responsável por montar o select para consulta, utilizando a
          tabela passado por parametro e retornando uma matriz de resultados,
-         adquiridos pela consulta no BD.*/
+         adquiridos pela consulta no BD.*/        
         public function select($tabela){
-             
-            $select = "SELECT * FROM ". $tabela;
+
+            if(is_array($tabela)){
+                $select = "SELECT * FROM ". $tabela['nome']." WHERE ".$tabela['condicao'];
+            }
+            else{
+                $select = "SELECT * FROM ". $tabela;
+            }
 
             $stmt = $this->conn->prepare($select);
+            
             $stmt->execute();
 
             $cont = 0;
