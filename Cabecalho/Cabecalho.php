@@ -35,6 +35,9 @@ header('Content-Type: text/html; charset=utf-8');
 	|
 	<a href="Listar_Estoque.php">Listar Estoque</a>
 	|
-	<a href="Form_Pedido.php">Iniciar Pedido</a>
+	<a href="Form_Iniciar_Mesa.php">Iniciar Mesa</a>
+	|
+	<a href="Form_Pedido.php">Adicionar Pedidos a Mesa</a>
+	
 	<hr />
 	<br />
