@@ -32,7 +32,7 @@ $r2 = new Radio($r2, $vetValueLabel2);
 $atributos_bebida = array("class"=>"bebida", "id"=>"bebida");
 
 //input(vetor) quando habilitar bebida. 
-$vetBebida = array("label"=>"Estoque", "nome"=>"estoque", "tipo"=>"number");
+$vetBebida = array("label"=>"Estoque", "nome"=>"estoque_bebida", "tipo"=>"number");
 //Input item bebida.
 $inputBebida = new Input($vetBebida);
 $vetor_obj_div_bebida[0] = $inputBebida;
@@ -44,7 +44,7 @@ $div_inputBebida = new Div($vetor_obj_div_bebida,$atributos_bebida);
 $atributos_vinho = array("class"=>"vinho", "id"=>"vinho");
 
 //input(vetor) quando habilitar vinho.
-$vetVinho1 = array("label"=>"Estoque", "nome"=>"estoque", "tipo"=>"number");
+$vetVinho1 = array("label"=>"Estoque", "nome"=>"estoque_vinho", "tipo"=>"number");
 $vetVinho2 = array("label"=>"Tipo Uva", "nome"=>"tipo_uva", "tipo"=>"text");
 $vetVinho3 = array("label"=>"Safra", "nome"=>"safra", "tipo"=>"number");
 

@@ -52,7 +52,7 @@
 				
 				$v['tipo_uva'] = $_POST['tipo_uva'];
 				$v['safra'] = $_POST['safra'];
-				$v['estoque'] = $_POST['estoque'];
+				$v['estoque'] = $_POST['estoque_vinho'];
 				$v['cod_vinho'] = $id;
 				$vinho->insert($v, "vinho");
 			break;
@@ -61,7 +61,7 @@
 				$bebida = new BD($conn);
 				
 				$b['cod_bebida'] = $id;
-				$b['estoque'] = $_POST['estoque'];
+				$b['estoque'] = $_POST['estoque_bebida'];
 				$bebida->insert($b, "bebida");
 			break;
 	

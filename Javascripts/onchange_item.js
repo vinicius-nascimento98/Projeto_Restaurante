@@ -12,6 +12,4 @@ function habilita_div(selecao){
 	else{
 		$("#"+$(selecao).val()).css("display","block");
 	}
-	//console.log($(selecao).val());
-	
 }
