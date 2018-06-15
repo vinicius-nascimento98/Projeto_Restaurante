@@ -5,6 +5,7 @@
         protected $conteudo=array();
         protected $id;
         protected $class;
+		protected $none;
 
         /*
             $tag-><div id='' class=''>conteudo</div>
@@ -24,6 +25,10 @@
         public function imprime_tag(){
             echo $this->tag;
         }
+		
+		public function set_none(){
+            echo $this->none=true;
+        }
 
         public function get_tag(){
 			return($this->tag);
@@ -40,6 +45,10 @@
 
             if($this->class != null){
                 $this->tag.="class='".$this->class."' ";
+            }
+			
+            if($this->none != null){
+                $this->tag.="style='display:none' ";
             }
 
             $this->tag.="> ";
@@ -66,6 +75,10 @@
                 $this->set_class($atributos['class']);
             }
 
+			if(isset($atributos['none'])){
+                $this->set_none();
+            }
+			
             foreach ($vetor_obj_conteudo as $v) {
 				array_push($this->conteudo, $v);
 			}

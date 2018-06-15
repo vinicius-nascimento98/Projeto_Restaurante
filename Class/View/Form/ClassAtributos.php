@@ -4,6 +4,8 @@
 	include("InterfaceTag.php");
 	
 	abstract class Atributos implements Tag{
+		protected $id;
+		protected $class;
 		protected $label;
 		protected $name;
 		protected $tag;
@@ -14,6 +16,10 @@
 
 		public function set_label($label){
 			$this->label=$label;
+		}
+		
+		public function set_id($id){
+			$this->id=$id;
 		}
 		
 		public function set_name($nome){
@@ -51,6 +57,10 @@
 			
 			if(isset($atributos['onchange'])){
 				$this->set_onchange($atributos['onchange']);
+			}
+
+			if(isset($atributos["id"])){
+				$this->set_id($atributos["id"]);
 			}
 			
 			$this->set_name($atributos['nome']);

@@ -28,9 +28,18 @@
 	public function __construct($radio,$vetorRadio){
 		
 		$this->value = array();
+		$this->checked = array();
 		
-		if(isset($vetorRadio['checked'])){
-			$this->checked = $vetorRadio['checked'];
+		if(isset($radio['checked'])){
+			if(!is_array($radio["checked"])){
+				$this->checked = $radio['checked'];
+			}
+			else{
+				foreach($radio['checked'] as $i=>$v){
+					$this->checked[$i] = $v;
+				}
+			}
+			
 		}
 		
 		parent::__construct($radio);

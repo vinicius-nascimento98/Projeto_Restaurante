@@ -1,16 +1,17 @@
 function habilita_div(selecao){
 
-	$('selecao').val();
 	$("#bebida").css("display","none");
 	$("#vinho").css("display","none");
-	$("#prato").css("display","none");
-	$("#drink").css("display","none");
+	$("#ingrediente").css("display","none");
+	$("#qtd").css("display","none");
 	
-	$(selecao.val).css("display","block");
-	
-	console.log($(selecao).val());
-	/*if(selecao == "bebida"){
-		document.getElementById("bebida").style.display = "block";	
-	}*/
+	if($(selecao).val()=="drink" || $(selecao).val()=="prato"){
+		$("#ingrediente").css("display","block");
+		$("#qtd").css("display","block");
+	}
+	else{
+		$("#"+$(selecao).val()).css("display","block");
+	}
+	//console.log($(selecao).val());
 	
 }
