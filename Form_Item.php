@@ -11,7 +11,7 @@ include("Class/Model/ClassIngrediente.php");
 //input
 $inp1 = array("label"=>"Descrição", "nome"=>"descricao", "tipo"=>"text");
 
-$inp2 = array("label"=>"Preço", "nome"=>"custo", "tipo"=>"number",'pos_label'=>' 	R$');
+$inp2 = array("label"=>"Preço", "nome"=>"custo", "tipo"=>"number", "step"=>"0.01" ,'pos_label'=>' 	R$');
 
 $input1 = new Input($inp1);
 $input2 = new Input($inp2);
