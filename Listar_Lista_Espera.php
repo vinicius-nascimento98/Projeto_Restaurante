@@ -9,7 +9,7 @@
     
     $l=new BD($conn);
 
-    $table = "vw_espera";
+    $table = "vw_listaespera";
     $retornoEspera = $l->select($table);
     
     //se tiver retorno do banco ele entra o if

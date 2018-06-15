@@ -12,7 +12,7 @@ item.id_item = vinho.cod_vinho;
 CREATE view vw_listaEspera as 
 SELECT id_lista_espera,nome_cliente,ordem,data_espera,telefone,nome
 FROM lista_espera inner join atendente on
-lista_espera.cod_atendente = atendente.id_atendente;
+lista_espera.cod_atendente = atendente.id_atendente ORDER BY data_espera;
 
 
 CREATE view vw_listar_drink as
@@ -40,4 +40,22 @@ Select id_mesa from mesa where id_mesa not in(
 );
 
 CREATE VIEW vw_mesaReservada as 
-	select cod_mesa, data_hora from reserva where reserva_finalizada = 0
+	select cod_mesa, data_hora from reserva where reserva_finalizada = 0;
+	
+CREATE VIEW vw_reserva AS
+    SELECT 
+		id_reserva,
+        nome_cliente,
+        telefone,
+        data_hora,
+        cod_mesa,
+        atendente.nome,
+        qtd_pessoas,
+        reserva_finalizada
+    FROM
+        reserva
+            INNER JOIN
+        atendente ON reserva.cod_atendente = atendente.id_atendente ORDER BY data_hora;
+
+CREATE VIEW vw_ordem AS SELECT ordem,data_espera
+FROM  `lista_espera`;

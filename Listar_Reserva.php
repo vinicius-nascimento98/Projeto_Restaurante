@@ -22,7 +22,7 @@
         $table = "mesa";
         $retornoMesa = $r->select($table);
         
-        foreach($retornoReserva as $v){
+        foreach($retornoReserva as $i=>$v){
             
             //criando os objetos dos atendentes relacionados com a reserva
             foreach ($retornoAtendente as $val) {
@@ -41,13 +41,19 @@
             
             }
 
+            if($v['reserva_finalizada']){
+                $retornoReserva[$i]['reserva_finalizada'] = "Sim";
+            }
+            else{
+                $retornoReserva[$i]['reserva_finalizada'] = "Não";
+            }
+
         }
 
         //for responsável por percorrer as reservas no banco de dados
         for ($i=0; $i < sizeof($retornoReserva); $i++) { 
             
-            //instanciando objeto reserva, passando os objetos de mesa e atendente respectivos a reserva
-            $reserva[]=new Reserva($retornoReserva[$i],$m[$i],$a[$i]);
+           $reserva[] = new Reserva($retornoReserva[$i],$m[$i],$a[$i]);
         }
 
         //criando vetor de cabecalho

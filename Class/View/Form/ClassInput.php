@@ -6,6 +6,7 @@
 		protected $required;
 		protected $step;
 		protected $onclick;
+		protected $disabled;
 		
 		public function set_type($tipo){
 			$this->type=$tipo;
@@ -13,6 +14,10 @@
 
 		public function set_id($id){
 			$this->id=$id;
+		}
+
+		public function set_disabled($disabled){
+			$this->disabled = $disabled;
 		}
 
 		public function set_required($obrigatorio){
@@ -33,6 +38,9 @@
 			}
 			else{
 				$this->tag = "<input type='$this->type' name='$this->name' ";
+			}
+			if($this->disabled){
+				$this->tag .= " disabled = 'disabled' ";
 			}
 			if($this->id!=null){
 				$this->tag .= " id='$this->id' ";
@@ -79,6 +87,10 @@
 			
 			if(isset($i["onclick"])){
 				$this->set_onclick($i["onclick"]);
+			}
+
+			if(isset($i["disabled"])){
+				$this->set_disabled($i["disabled"]);
 			}
 
 			$this->set_tag();

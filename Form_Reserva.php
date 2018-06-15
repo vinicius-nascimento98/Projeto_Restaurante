@@ -28,31 +28,45 @@
         //verificando no banco de dados se existem mesas reservadas para a data inserida
         $retornoMesasReservadas = $b->select($table);
 
-        $table = array('nome'=>'mesa','condicao'=>'id_mesa NOT IN ( ');
+        /*caso o valor retornado for vazio, significa que não ha reservas naquela data,
+        sendo assim seta-se a variavel table para um futuro SELECT ALL*/
+        if(empty($retornoMesasReservadas)){
+            $table = "mesa";    
+        }
+        /*caso seja retornado valores, significa que a reservas naquela data, sendo assim
+        é serado a variavel com as condições para um futuro SELECT NOT IN */
+        else{
+            $table = array('nome'=>'mesa','condicao'=>'id_mesa NOT IN ( ');
 
-        //montando condição responsável por trazer as mesas disponíveis para reserva naquela data
-        foreach($retornoMesasReservadas as $i=>$v){
+            //montando condição responsável por trazer as mesas disponíveis para reserva naquela data
+            foreach($retornoMesasReservadas as $i=>$v){
 
-            if($i==0){
-                $table['condicao'].= $v['cod_mesa'];
+                if($i==0){
+                    $table['condicao'].= $v['cod_mesa'];
+                }
+                else{
+                    $table['condicao'].= ','.$v['cod_mesa'];
+                }
             }
-            else{
-                $table['condicao'].= ','.$v['cod_mesa'];
-            }
+
+            $table['condicao'].= ' )';
         }
 
-        $table['condicao'].= ' )';
-
+        //dando SELECT no banco de acordo com a variavel table setada
         $retornoMesasLivres = $b->select($table);
 
         //se o retorno mesas for NULL o usuário é redirecionado ao cadastro de lista de espera, pois não ha mesas livres
         if($retornoMesasLivres == null){
-                header('Location: Form_Lista_Espera.php');
+                header("Location: Form_Lista_Espera.php?data_hora=$data_reserva");
         }
         //caso contrário é habilitado o cadastro de uma reserva
         else{
 
             echo "<h1>Cadastro Reserva</h1>";
+
+            //criando objeto input oculto para passar situação da reserva
+            $i_hidden = array("nome"=>"reserva_finalizada", "tipo"=>"hidden", "id"=>"reserva_finalizada","value"=>"0");
+            $input_hidden = new Input($i_hidden);
 
             //criando objeto input 1
             $i1 = array("label"=>"Cliente", "nome"=>"nome_cliente", "tipo"=>"text", "id"=>"campo_nome","required"=>true);
@@ -63,8 +77,12 @@
             $input2 = new Input($i2);
 
             //criando objeto input 3
-            $i3 = array("label"=>"Data", "nome"=>"data_hora", "tipo"=>"date", "id"=>"campo_data","required"=>true);
+            $i3 = array("label"=>"Data", "nome"=>"data_hora", "tipo"=>"date", "id"=>"campo_data","required"=>true,"value"=>"$data_reserva");
             $input3 = new Input($i3);
+
+             //criando objeto input 4
+            $i4 = array("label"=>"Quantidade de pessoas", "nome"=>"qtd_pessoas", "tipo"=>"number", "id"=>"qtd_pessoa","required"=>true,"value"=>'1');
+            $input4 = new Input($i4);
 
             $table = "atendente";
             $atendentes = $b ->  select($table);
@@ -104,9 +122,11 @@
             $form = new Form($f);
 
             //adicionando os objetos input 1 e um textarea 1
+            $form->add_input($input_hidden);
             $form->add_input($input1);
             $form->add_input($input2);
             $form->add_input($input3);
+            $form->add_input($input4);
             $form->add_select($s);
             $form->add_select($s2);
 
