@@ -25,39 +25,44 @@
 		switch($_POST["tipo"]){
 			
 			case 'prato':
-				$ingrediente['quantidade'] = $_POST['quantidade'];
-				
+				$prato_ingrediente = new BD($conn);
 				
 				foreach($_POST["ingrediente"] as $i=>$v){
 					$prato["cod_prato"] = $id;
 					$prato["cod_ingrediente"] = $v;
 					$prato["quantidade"] = $_POST["qtdIngrediente"][$v];
-					$ingrediente->insert($ingrediente, "ingrediente");
+					$prato_ingrediente->insert($prato, "prato_ingrediente");
 				}
 				
 			break;
 			
 			case 'drink':
+				$drink_ingrediente = new BD($conn);
 				foreach($_POST["ingrediente"] as $i=>$v){
 					$drink["cod_drink"] = $id;
 					$drink["cod_ingrediente"] = $v;
 					$drink["quantidade"] = $_POST["qtdIngrediente"][$v];
-					$ingrediente->insert($ingrediente, "ingrediente");
+					$drink_ingrediente->insert($drink, "drink_ingrediente");
 				}
 					
 			break;
 			
 			case 'vinho':
-				$vinho['tipo_uva'] = $_POST['tipo_uva'];
-				$vinho['safra'] = $_POST['safra'];
-				$vinho['estoque'] = $_POST['estoque'];
-				$vinho['cod_vinho'] = $id;
-				$item->insert($vinho, "vinho");
+				$vinho = new BD($conn);
+				
+				$v['tipo_uva'] = $_POST['tipo_uva'];
+				$v['safra'] = $_POST['safra'];
+				$v['estoque'] = $_POST['estoque'];
+				$v['cod_vinho'] = $id;
+				$vinho->insert($v, "vinho");
 			break;
 			
 			case 'bebida':
-				$bebida['estoque'] = $_POST['estoque'];
-				$bebida->insert($bebida, "bebida");
+				$bebida = new BD($conn);
+				
+				$b['cod_bebida'] = $id;
+				$b['estoque'] = $_POST['estoque'];
+				$bebida->insert($b, "bebida");
 			break;
 	
 		}
