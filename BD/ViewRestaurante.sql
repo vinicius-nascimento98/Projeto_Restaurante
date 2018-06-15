@@ -3,6 +3,15 @@ SELECT id_item,disponibilidade,descricao,custo,estoque,tipo
 FROM item inner join bebida on
 item.id_item = bebida.cod_bebida;
 
+CREATE view vw_bebida_estoque as 
+SELECT id_item,descricao,estoque
+FROM item inner join bebida on
+item.id_item = bebida.cod_bebida;
+
+CREATE view vw_vinho_estoque as 
+SELECT id_item,descricao,estoque
+FROM item inner join vinho on
+item.id_item = vinho.cod_vinho;
 
 CREATE view vw_vinho as 
 SELECT id_item,disponibilidade,descricao,custo,estoque,tipo 
