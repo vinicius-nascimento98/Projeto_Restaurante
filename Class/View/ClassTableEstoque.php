@@ -54,7 +54,6 @@
 			//laço responsável por montar as colunas da tabela
 			foreach ($this->vetorHead as $lin) {
 
-				echo $lin;
 				$method = "get_".$lin;
 
 				if(substr($lin,0,2) == "id"){
