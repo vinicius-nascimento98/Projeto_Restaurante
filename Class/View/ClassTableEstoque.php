@@ -127,7 +127,7 @@
 
 			$this->imprime_table();
 		}
-
+		
 	}
 	
 	//strtoupper->deixa a string maiuscula
