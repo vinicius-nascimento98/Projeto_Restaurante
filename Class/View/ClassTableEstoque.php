@@ -75,6 +75,8 @@
 			}
 			
 			//adicionando as colunas com input number.
+			//adicionando as colunas com value $tabela.
+			//adicionando as colunas com value $prefixo.
 			$this->tagBody.="<td class='valorAlteraEstoque'><div class='id_produto' ><input type='hidden' id='id_produto' value='$id' /></div><div class='tabela' ><input type='hidden' id='tabela' value='$tabela' /></div><input type='number' value='0' step='0.01' min='0' /><input type='hidden' class='prefixo' value='$prefixo' /></td>";
 
 			//fechando a linha da tabela

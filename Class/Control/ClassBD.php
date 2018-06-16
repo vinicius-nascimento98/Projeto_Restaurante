@@ -113,6 +113,7 @@
             
 			$update = " UPDATE ".$tabela." SET ";
 			
+			//sempre inicia em 2, pois foi adicionado prefixo para definir se é id ou cod.
             $cont=0;
             while($teste = current($dados)){
 				
@@ -132,10 +133,11 @@
 			}
 			//update atendente set nome=:nome, comissao=:comissao, email=:email
             $update.=" WHERE ".$prefixo."_".$tabela."=:".$prefixo."_".$tabela;
-			print_r($update);
+	
             $stmt = $this->conn->prepare($update);
 			
 			//criando bind values com os valores do POST
+			//sempre inicia em 2, pois foi adicionado prefixo para definir se é id ou cod.
 			$i=0;
 			reset($dados);
 			while($teste = current($dados)){
