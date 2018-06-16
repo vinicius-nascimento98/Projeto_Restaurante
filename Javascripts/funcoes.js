@@ -31,7 +31,7 @@ function controleEstoque(operacao){
 			$.post(url + "/Altera.php",
 			{tabela: tabela, chave_tabela: id_produto, prefixo_chave: prefixo,estoque: novoEstoque })
 			.done(function (data){
-				console.log(data);
+				
 			}).fail(function(data){
 				alert("ERRO!!");
 			});
