@@ -14,7 +14,7 @@
 			}
 			$this->set_safra($vinho["safra"]);
 			$this->set_tipo_uva($vinho["tipo_uva"]);
-			$this->set_estoque($bebida["estoque"]);
+			$this->set_estoque($vinho["estoque"]);
 		}
 		
 		public function set_cod_vinho($cod_vinho){
@@ -37,6 +37,10 @@
 			return $this->cod_vinho;
 		}
 		
+		public function get_id_ingrediente(){
+			return $this->cod_vinho;
+		}
+		
 		public function get_safra(){
 			return $this->safra;
 		}
@@ -50,6 +54,4 @@
 		}
 		
 	}
-		
-
 ?>

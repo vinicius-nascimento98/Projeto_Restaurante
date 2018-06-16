@@ -22,7 +22,7 @@
 		}
 		
 		public function get_cod_bebida(){
-			return $this->id_atendente;
+			return $this->cod_bebida;
 		}
 		
 		public function get_estoque(){

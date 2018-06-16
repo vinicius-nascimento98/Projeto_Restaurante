@@ -4,12 +4,12 @@ FROM item inner join bebida on
 item.id_item = bebida.cod_bebida;
 
 CREATE view vw_bebida_estoque as 
-SELECT id_item,descricao,estoque
+SELECT id_item as cod_bebida,descricao,estoque
 FROM item inner join bebida on
 item.id_item = bebida.cod_bebida;
 
 CREATE view vw_vinho_estoque as 
-SELECT id_item,descricao,estoque
+SELECT id_item as cod_vinho,descricao,estoque,safra,tipo_uva
 FROM item inner join vinho on
 item.id_item = vinho.cod_vinho;
 

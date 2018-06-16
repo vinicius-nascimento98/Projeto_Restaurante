@@ -20,7 +20,7 @@
 	$input2->imprime_tag();
 	
 	/* -----------------------------Ingrediente----------------------------------------------- */
-    //echo "<h3>Estoque Ingrediente</h3>" ;
+    echo "<h3>Estoque Ingrediente</h3>" ;
 	$table = "ingrediente";
 
     $b = new BD($conn);
@@ -47,22 +47,26 @@
 	}
 	
 	/* --------------------------------Vinho-------------------------------------------------- */
-	//echo "<h3>Estoque Vinho</h3>" ;
+	echo "<h3>Estoque Vinho</h3>" ;
 	$table = "vw_vinho_estoque";
+
+	$b = new BD($conn);
 
     $retorno = $b->select($table);
     
+	unset($cabecalho);
+	
 	if($retorno != null){
 		//criando vetor de objetos
 		foreach($retorno as $v){
 			$vinho[] = new Vinho($v);
 		}
-
+		
 		//criando vetor de cabecalho
 		foreach($retorno[0] as $i=>$v){
 			$cabecalho[] = $i;
 		}
-
+		
 		$t = new TableEstoque($cabecalho,$vinho);
 
 		//get_object_vars([objeto]) -> retorna um vetor de atributos do objeto
@@ -72,11 +76,15 @@
 	}
 	
 	/* -----------------------------------Bebida-------------------------------------------- */
-	//echo "<h3>Estoque Bebida</h3>" ;
+	echo "<h3>Estoque Bebida</h3>" ;
 	$table = " vw_bebida_estoque";
 
+	$b = new BD($conn);
+
     $retorno = $b->select($table);
-    
+	
+    unset($cabecalho);
+	
 	if($retorno != null){
 		//criando vetor de objetos
 		foreach($retorno as $v){
