@@ -16,6 +16,8 @@ function controleEstoque(operacao){
 		
 		var id_produto = $(elemento[pos]).find('.id_produto input').val();
 		
+		var prefixo =  $(elemento[pos]).find('.prefixo input').val();
+		
 		var tabela =  $(elemento[pos]).find('.tabela input').val();	
 		
 		if(novoEstoque < 0){
@@ -27,7 +29,7 @@ function controleEstoque(operacao){
 			
 			$(elemento[pos]).find('.estoque').text(novoEstoque);
 			$.post(url + "/Altera.php",
-			{tabela: tabela, chave_tabela: id_produto, estoque: novoEstoque})
+			{tabela: tabela, chave_tabela: id_produto, estoque: novoEstoque, prefixo_chave: prefixo})
 			.done(function (data){
 				console.log(data);
 			}).fail(function(data){

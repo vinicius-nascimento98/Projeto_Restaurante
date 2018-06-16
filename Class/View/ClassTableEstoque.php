@@ -54,10 +54,14 @@
 			//laço responsável por montar as colunas da tabela
 			foreach ($this->vetorHead as $lin) {
 
+				echo $lin;
 				$method = "get_".$lin;
 
 				if(substr($lin,0,2) == "id"){
 					$id = $objBody->$method();
+				}
+				elseif(substr($lin,0,3) == "cod"){
+					$id=$objBody->$method();
 				}
 				elseif($lin == 'tipo'){
 					$tabela = $objBody->method();

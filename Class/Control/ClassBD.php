@@ -10,13 +10,13 @@
         /*método responsável por montar o select para consulta, utilizando a
          tabela passado por parametro e retornando uma matriz de resultados,
          adquiridos pela consulta no BD.*/        
-        public function select($tabela){
+        public function select($dados){
 
-            if(is_array($tabela)){
-                $select = "SELECT * FROM ". $tabela['nome']." WHERE ".$tabela['condicao'];
+            if(is_array($dados)){
+                $select = "SELECT * FROM ". $dados['nome']." WHERE ".$dados['condicao'];
             }
             else{
-                $select = "SELECT * FROM ". $tabela;
+                $select = "SELECT * FROM ". $dados;
             }
 
             $stmt = $this->conn->prepare($select);
@@ -101,6 +101,10 @@
 		public function update($dados){
             $tabela = $dados['tabela'];
 			$id	= $dados['chave_tabela'];
+			
+			$prefixo = $dados["prefixo_chave"];
+			
+			
 			$i = 0;
 			
             //montando string de UPDATE
@@ -126,7 +130,7 @@
 				next($dados);
 			}
 			//update atendente set nome=:nome, comissao=:comissao, email=:email
-            $update.=" WHERE id_".$tabela."=:id_".$tabela;
+            $update.=" WHERE ".$prefixo.$tabela."=:".prefixo.$tabela;
 			
             $stmt = $this->conn->prepare($update);
 			
