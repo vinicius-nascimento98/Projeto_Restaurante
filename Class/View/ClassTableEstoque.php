@@ -59,9 +59,11 @@
 
 				if(substr($lin,0,2) == "id"){
 					$id = $objBody->$method();
+					$prefixo = "id";
 				}
 				elseif(substr($lin,0,3) == "cod"){
 					$id=$objBody->$method();
+					$prefixo = "cod";
 				}
 				elseif($lin == 'tipo'){
 					$tabela = $objBody->method();
@@ -73,7 +75,7 @@
 			}
 			
 			//adicionando as colunas com input number.
-			$this->tagBody.="<td class='valorAlteraEstoque'><div class='id_produto' ><input type='hidden' id='id_produto' value='$id' /></div><div class='tabela' ><input type='hidden' id='tabela' value='$tabela' /></div><input type='number' value='0' step='0.01' min='0' /></td>";
+			$this->tagBody.="<td class='valorAlteraEstoque'><div class='id_produto' ><input type='hidden' id='id_produto' value='$id' /></div><div class='tabela' ><input type='hidden' id='tabela' value='$tabela' /></div><input type='number' value='0' step='0.01' min='0' /><input type='hidden' class='prefixo' value='$prefixo' /></td>";
 
 			//fechando a linha da tabela
 			$this->tagBody.="</tr>";

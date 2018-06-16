@@ -99,6 +99,7 @@
         }
 		
 		public function update($dados){
+			var_dump($dados);
             $tabela = $dados['tabela'];
 			$id	= $dados['chave_tabela'];
 			
@@ -115,7 +116,7 @@
             $cont=0;
             while($teste = current($dados)){
 				
-				if($i > 1){				
+				if($i > 2){				
 				
 					if($cont == 0){
 						$update.= key($dados) .'= :'. key($dados);
@@ -130,8 +131,8 @@
 				next($dados);
 			}
 			//update atendente set nome=:nome, comissao=:comissao, email=:email
-            $update.=" WHERE ".$prefixo.$tabela."=:".prefixo.$tabela;
-			
+            $update.=" WHERE ".$prefixo."_".$tabela."=:".$prefixo."_".$tabela;
+			print_r($update);
             $stmt = $this->conn->prepare($update);
 			
 			//criando bind values com os valores do POST
@@ -139,8 +140,8 @@
 			reset($dados);
 			while($teste = current($dados)){
 				
-				if($i > 1){				
-					echo ':'.key($dados);
+				if($i > 2){				
+					
 					$stmt->bindValue(':'.key($dados),$teste);
 					
 					
@@ -148,7 +149,7 @@
 				$i++;
 				next($dados);
 			}
-			$stmt->bindValue(':id_'. $tabela, $id);
+			$stmt->bindValue(":{$prefixo}_". $tabela, $id);
             
             //executando a string de UPDATE
             $stmt->execute();
