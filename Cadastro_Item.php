@@ -1,10 +1,5 @@
 <?php
 
-
-//print_r($_POST);
-
-//die();
-
 	if(!empty($_POST)){
 		include("Cabecalho/Cabecalho.php");
 		include("Class/Control/ClassBD.php");

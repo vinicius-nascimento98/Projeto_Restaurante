@@ -43,3 +43,13 @@ function controleEstoque(operacao){
 		alert(msgErro);
 	}
 }
+
+function alteraIngrediente(){
+	//var url = "http://localhost/Projeto_Restaurante";
+	//var elemento = $("tbody tr");
+	
+	//pegar valor do input
+	//var  = ('#').val();
+	
+	//alert("entrou");
+	
