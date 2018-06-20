@@ -99,7 +99,7 @@
         }
 		
 		public function update($dados){
-			var_dump($dados);
+			
             $tabela = $dados['tabela'];
 			$id	= $dados['chave_tabela'];
 			

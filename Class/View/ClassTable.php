@@ -47,7 +47,10 @@
 		}
 
 		public function add_body($objBody){
-
+			
+			//adicionado para testes no altera geral.
+			$tabela = strtolower(get_class($objBody));
+			
 			//abrindo uma linha na tabela
 			$this->tagBody.="<tr>";
 
@@ -60,13 +63,14 @@
 					$id= $objBody->$method();
 				}
 				else{
-					$this->tagBody.="<td>".$objBody->$method()."</td>";
+					$this->tagBody.="<td class='$lin'><input id='$id' value='".$objBody->$method()."'></td>";
 				}
 				
 			}
 
 			//adicionando as colunas de remoção e Alteração
-			$this->tagBody.="<td><a href = 'Altera.php?id=".$id."&tabela=".strtolower(get_class($objBody))."'>Alterar</a> | <a href = 'Remover.php?id=".$id."&tabela=".strtolower(get_class($objBody))."'>Remover</a></td>";
+			//teste para altera geral.
+			$this->tagBody.="<td class='alteraGeral'><div class='id_produto' ><input type='hidden' id='id_produto' value='$id' /></div><div class='tabela' ><input type='hidden' id='tabela' value='$tabela' /><a href = 'Remover.php?id=".$id."&tabela=".strtolower(get_class($objBody))."'>Remover</a></td>";
 
 			//fechando a linha da tabela
 			$this->tagBody.="</tr>";
