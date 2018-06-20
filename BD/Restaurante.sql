@@ -257,6 +257,7 @@ CREATE TABLE IF NOT EXISTS `reserva` (
   `qtd_pessoas` int(11) NOT NULL,
   `id_reserva` int(11) NOT NULL AUTO_INCREMENT,
   `reserva_finalizada` tinyint(1) DEFAULT NULL,
+  `mesa_iniciada` tinyint(1) DEFAULT null,
   PRIMARY KEY (`id_reserva`),
   KEY `cod_mesa` (`cod_mesa`),
   KEY `cod_atendente` (`cod_atendente`)
