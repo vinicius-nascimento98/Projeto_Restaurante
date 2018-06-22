@@ -6,13 +6,6 @@
 	include("Class/View/Form/ClassForm.php");
     include("Conexao.php");
 	
-	/* --------------------------- Inputs --------------------- */
-	$inp1 = array('nome'=>'btnAlterar','tipo'=>'button', 'onclick'=>'alteraIngrediente()', 'value'=>'Alterar');
-	
-	$input1 = new Input($inp1); 
-	
-	$input1->imprime_tag();
-	
 	/*---------------------------- Select --------------------- */
 	echo "<h3>Ingredientes</h3>";
     $table = "ingrediente";
@@ -43,3 +36,4 @@
 	}
 ?>
 <script src="Javascripts/funcoes.js"></script>
+<script src="Javascripts/jquery-2.2.4.min.js"></script>

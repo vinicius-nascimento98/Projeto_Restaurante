@@ -55,22 +55,28 @@
 			$this->tagBody.="<tr>";
 
 			//laço responsável por montar as colunas da tabela
+			$cont=0;
 			foreach ($this->vetorHead as $lin) {
 
 				$method = "get_".$lin;
 
 				if(substr($lin,0,2) == "id"){
-					$id= $objBody->$method();
+					$id = $objBody->$method();
+					$prefixo = "id";
+				}
+				elseif(substr($lin,0,3) == "cod"){
+					$id=$objBody->$method();
+					$prefixo = "cod";
 				}
 				else{
-					$this->tagBody.="<td class='$lin'><input id='$id' value='".$objBody->$method()."'></td>";
+					$this->tagBody.="<td class='$lin' onclick =\"editar('$lin','$id','$tabela','$prefixo',this)\">".$objBody->$method()."</td>";
 				}
-				
+				$cont++;
 			}
 
 			//adicionando as colunas de remoção e Alteração
 			//teste para altera geral.
-			$this->tagBody.="<td class='alteraGeral'><div class='id_produto' ><input type='hidden' id='id_produto' value='$id' /></div><div class='tabela' ><input type='hidden' id='tabela' value='$tabela' /><a href = 'Remover.php?id=".$id."&tabela=".strtolower(get_class($objBody))."'>Remover</a></td>";
+			$this->tagBody.="<td><a href = 'Alterar.php?id=".$id."&tabela=".strtolower(get_class($objBody))."'>Alterar</a> | <a href = 'Remover.php?id=".$id."&tabela=".strtolower(get_class($objBody))."'>Remover</a></td>";
 
 			//fechando a linha da tabela
 			$this->tagBody.="</tr>";

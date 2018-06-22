@@ -1,5 +1,5 @@
 function controleEstoque(operacao){
-	var dados = [];
+	//var dados = [];
 	var elemento = $("tbody tr");
 	var contErro = 0;
 	var msgErro = "Os seguintes produtos possuem descarte maior que estoque atual: ";
@@ -44,12 +44,25 @@ function controleEstoque(operacao){
 	}
 }
 
-function alteraIngrediente(){
-	//var url = "http://localhost/Projeto_Restaurante";
-	//var elemento = $("tbody tr");
+function editar(nome_coluna, id, tabela, prefixo, td){
+	var elemento = $(td);
 	
-	//pegar valor do input
-	//var  = ('#').val();
+	var valor = $(elemento).text();
+	$(elemento).off('click');
 	
-	//alert("entrou");
+	$(elemento).empty();
 	
+	//console.log($(altera).text());
+	$(elemento).append("<input class='edicao' type='text' onblur='salvarEdicao()' name='"+nome_coluna+"' value='"+valor+"'/>")
+				.append("<input class='edicao' type='hidden' name='"+prefixo+'_'+tabela+"' value='"+id+"'/>")
+				.append("<input class='edicao' type='hidden' name='tabela' value='"+tabela+"'/>");
+}
+
+function salvarEdicao(){
+	var nome = $($(elemento)).find('.edicao').text();
+	console.log(nome);
+	$.post(url + "/Altera.php",
+			//arrumar.
+			{tabela: tabela, chave_tabela:id , prefixo_chave: prefixo })
+	
+}
