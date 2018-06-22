@@ -84,6 +84,10 @@
             $i4 = array("label"=>"Quantidade de pessoas", "nome"=>"qtd_pessoas", "tipo"=>"number", "id"=>"qtd_pessoa","required"=>true,"value"=>'1');
             $input4 = new Input($i4);
 
+            //criando objeto input 3 que sera hidden contendo a inicialização da mesa para cadastrar no banco de dados
+            $i5 = array("nome"=>"mesa_iniciada", "tipo"=>"hidden", "id"=>"mesa_iniciada","value"=>"1");
+            $input5 = new Input($i5);
+
             $table = "atendente";
             $atendentes = $b ->  select($table);
 
@@ -127,6 +131,7 @@
             $form->add_input($input2);
             $form->add_input($input3);
             $form->add_input($input4);
+            $form->add_input($input5);
             $form->add_select($s);
             $form->add_select($s2);
 
