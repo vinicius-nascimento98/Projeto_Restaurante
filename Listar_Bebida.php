@@ -6,7 +6,7 @@
     include("Class/View/ClassTable.php");
     include("Conexao.php");
     
-    $table = "item_bebida";
+    $table = "vw_bebida_estoque";
 
     $b = new BD($conn);
 
@@ -31,3 +31,5 @@
 		echo"<h1>Não possui DADOS!!</h1>";
 	}
 ?>
+<script src="Javascripts/funcoes.js"></script>
+<script src="Javascripts/jquery-2.2.4.min.js"></script>

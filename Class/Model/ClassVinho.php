@@ -1,5 +1,5 @@
 <?php
-
+	
 	class Vinho extends Item{
 		protected $cod_vinho;
 		protected $safra;
@@ -36,11 +36,6 @@
 		public function get_cod_vinho(){
 			return $this->cod_vinho;
 		}
-		
-		public function get_id_ingrediente(){
-			return $this->cod_vinho;
-		}
-		
 		public function get_safra(){
 			return $this->safra;
 		}

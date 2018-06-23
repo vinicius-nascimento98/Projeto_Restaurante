@@ -31,9 +31,13 @@ header('Content-Type: text/html; charset=utf-8');
 	|
 	<a href="Listar_Atendente.php">Listar Atendentes</a>
 	|
-	<a href="Remover_Mesa.php">Remover Mesa</a>
-	|
 	<a href="Listar_Estoque.php">Listar Estoque</a>
+	|
+	<a href="Listar_Vinho.php">Listar Vinho</a>
+	|
+	<a href="Listar_Bebida.php">Listar Bebida</a>
+	|
+	<a href="Remover_Mesa.php">Remover Mesa</a>
 	|
 	<a href="Form_Iniciar_Mesa.php">Iniciar Mesa</a>
 	|

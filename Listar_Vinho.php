@@ -2,11 +2,12 @@
 
 	include("Cabecalho/Cabecalho.php");
     include("Class/Control/ClassBD.php");
-    include("Class/Model/ClassBebida.php");
+    include("Class/Model/ClassVinho.php");
     include("Class/View/ClassTable.php");
+	include("Class/View/Form/ClassForm.php");
     include("Conexao.php");
     
-    $table = "item_vinho";
+    $table = "vw_vinho";
 	
 	$b = new BD($conn);
 	
@@ -32,3 +33,5 @@
 	}
 	
 ?>
+<script src="Javascripts/funcoes.js"></script>
+<script src="Javascripts/jquery-2.2.4.min.js"></script>

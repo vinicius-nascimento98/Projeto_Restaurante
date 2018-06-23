@@ -1,6 +1,6 @@
 <?php
 
-abstract class Item {
+	abstract class Item {
 	protected $id_item;
 	protected $descricao;
 	protected $custo;
