@@ -37,6 +37,8 @@
 	class Tbody{
 		protected $tagBody;
 		protected $vetorHead=array();
+		protected $linha=0;
+		
 
 		public function imprime_body(){
 			echo $this->tagBody;
@@ -47,7 +49,7 @@
 		}
 
 		public function add_body($objBody){
-			
+
 			//adicionado para testes no altera geral.
 			$tabela = strtolower(get_class($objBody));
 			
@@ -56,6 +58,7 @@
 
 			//laço responsável por montar as colunas da tabela
 			$cont=0;
+			
 			foreach ($this->vetorHead as $lin) {
 
 				$method = "get_".$lin;
@@ -69,14 +72,15 @@
 					$prefixo = "cod";
 				}
 				else{
-					$this->tagBody.="<td class='$lin' onclick =\"editar('$lin','$id','$tabela','$prefixo',this)\">".$objBody->$method()."</td>";
+					$this->tagBody.="<td class='$lin' onclick =\"editar('$lin','$id','$tabela','$prefixo',this,$this->linha)\">".$objBody->$method()."</td>";
 				}
 				$cont++;
 			}
 
+			$this->linha++;
 			//adicionando as colunas de remoção e Alteração
 			//teste para altera geral.
-			$this->tagBody.="<td><a href = 'Alterar.php?id=".$id."&tabela=".strtolower(get_class($objBody))."'>Alterar</a> | <a href = 'Remover.php?id=".$id."&tabela=".strtolower(get_class($objBody))."'>Remover</a></td>";
+			$this->tagBody.="<td><a href = 'Remover.php?id=".$id."&tabela=".strtolower(get_class($objBody))."'>Remover</a></td>";
 
 			//fechando a linha da tabela
 			$this->tagBody.="</tr>";
@@ -97,6 +101,7 @@
 	class Table{
 		protected $thead;
 		protected $tbody;
+
 
 		public function set_thead($dadoshead){
 			$this->thead=$dadoshead;
@@ -120,6 +125,7 @@
 			$h=new Thead($cabecalho);
 			$b=new Tbody($cabecalho);
 
+			
 			foreach($vetorObj as $v){
 				$b->add_body($v);
 			}
@@ -134,5 +140,4 @@
 	
 	//strtoupper->deixa a string maiuscula
 	//strtolower() deixa a string minuscula
-
 ?>

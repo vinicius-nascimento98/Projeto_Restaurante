@@ -102,9 +102,7 @@
 			
             $tabela = $dados['tabela'];
 			$id	= $dados['chave_tabela'];
-			
 			$prefixo = $dados["prefixo_chave"];
-			
 			
 			$i = 0;
 			
@@ -145,8 +143,7 @@
 				if($i > 2){				
 					
 					$stmt->bindValue(':'.key($dados),$teste);
-					
-					
+
 				}
 				$i++;
 				next($dados);
