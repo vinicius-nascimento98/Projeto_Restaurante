@@ -47,13 +47,12 @@ function editar(nome_coluna, id, tabela, prefixo, td, linha){
 	
 	
 	var elemento = $(td);
-	console.log(elemento);
 	
 	var valor = $(elemento).text();
 	$(elemento).prop('onclick', null).off('click');
 	
 	vetUnidade = ["kg", "l", "ml", "g", "un", "cx", "gl"];
-	console.log(td);
+
 	if(vetUnidade.indexOf(valor) != -1){
 		entrada = "<select name='unid' onchange=\"salvarEdicao('"+nome_coluna+"', '"+id+"','"+tabela+"','"+prefixo+"' ,"+linha+" , this.value)\"><option value='l'>L</option><option value='ml'>Ml</option><option value='kg'>Kg</option><option value='g'>G</option><option value='un'>Un</option><option value='cx'>Cx</option><option value='gl'>Gl</option></select>";
 	}
@@ -65,8 +64,7 @@ function editar(nome_coluna, id, tabela, prefixo, td, linha){
 	
 	
 	$(elemento).empty();
-	
-	//console.log($(altera).text());
+
 	$(elemento).append(entrada)
 				.append("<input class='edicao' type='hidden' name='"+prefixo+'_'+tabela+"' value='"+id+"'/>")
 				.append("<input class='edicao' type='hidden' name='tabela' value='"+tabela+"'/>");
@@ -77,7 +75,6 @@ function salvarEdicao(nome_coluna, id, tabela, prefixo, linha, valor){
 	var elemento = $("tbody tr");
 	var td = $(elemento[linha]).find('.'+nome_coluna);
 	
-	console.log(td);
 	$(td).empty();
 	var objeto = {"tabela": tabela, "chave_tabela":id , "prefixo_chave": prefixo};
 	objeto[nome_coluna] = valor;
@@ -86,13 +83,6 @@ function salvarEdicao(nome_coluna, id, tabela, prefixo, linha, valor){
 			}).fail(function(data){
 				alert("ERRO!!");
 			});
-	/*		
-		//Desabilitando input
-		$(elemento).empty();
 	
-	//console.log($(altera).text());*/	
 	$(td).append(valor);
-	//$(td).prop('onclick', true).on('click');
-		
 }
-
