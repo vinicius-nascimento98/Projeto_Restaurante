@@ -13,7 +13,13 @@
 		$r->insert($_POST,"reserva");
 
 		echo "<br/>";
-        echo "Reserva cadastrada com sucesso!";
+        
+        if(!isset($_GET['mesa_iniciada'])){
+            echo "Reserva cadastrada e Mesa Inicada com sucesso!";
+        }
+        else{
+            echo "Reserva cadastrada com sucesso!";
+        }
 
     }
     else{

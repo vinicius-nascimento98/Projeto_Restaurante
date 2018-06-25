@@ -38,15 +38,13 @@
             $cont = 0;
             foreach($retornoMesasReservadas as $i=>$v){
 
-                if($v['mesa_iniciada'] != 0){
-                    if($cont==0){
-                        $table['condicao'].= $v['cod_mesa'];
-                        $cont++;
-                    }
-                    else{
-                        $table['condicao'].= ','.$v['cod_mesa'];
-                    }
-                }
+				if($cont==0){
+					$table['condicao'].= $v['cod_mesa'];
+					$cont++;
+				}
+				else{
+					$table['condicao'].= ','.$v['cod_mesa'];
+				}
             }
 
             $table['condicao'].= ' )';//terminar verificação
@@ -145,17 +143,23 @@
 	é serado a variavel com as condições para um futuro SELECT NOT IN */
 	else{
 
+		//concatenando jquery para poder ser passado o id do radio selecionado
+		$location = "location.href= 'Iniciar_Mesa.php?id_reserva='+$(this).val();";
+
 		//montando os paramentros do radio
-		$r = array("label"=>"Mesas Reservadas","nome"=>"cod_mesa", "tipo"=>"radio");
+		$r = array("label"=>"Mesas Reservadas","nome"=>"cod_mesa", "tipo"=>"radio","onchange"=>$location);
 		
 		//montando o vetor de radios
 		foreach($retornoMesasReservadas as $v){
-			$vet_radio[$v['cod_mesa']] = $v['cod_mesa'];
+			
+			if($v['mesa_iniciada'] != '1'){
+				$vet_radio[$v['id_reserva']] = $v['cod_mesa'];
+			}
 		}
 
 		$radio = new Radio($r, $vet_radio);
 
-		$f2 = array("nome"=>"iniciar_mesa", "action"=>"Iniciar_Mesa.php", "method"=>"post");
+		$f2 = array("nome"=>"iniciar_mesa", "action"=>"Iniciar_Mesa.php?mesa_inicada=1", "method"=>"post");
 		$form2 = new Form($f2);
 
 		//adicionando os objetos input 1 e um textarea 1
@@ -167,3 +171,4 @@
 	ELE DEVERA REDIRECIONAR PARA FORM_PEDIDO.PHP*/
 
 ?>
+<script src="Javascripts/jquery-2.2.4.min.js"></script>

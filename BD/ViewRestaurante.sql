@@ -49,7 +49,7 @@ Select id_mesa from mesa where id_mesa not in(
 );
 
 CREATE VIEW vw_mesaReservada as 
-	select cod_mesa, data_hora,mesa_iniciada from reserva where reserva_finalizada = 0;
+	select id_reserva,cod_mesa, data_hora,mesa_iniciada from reserva where reserva_finalizada = 0;
 	
 CREATE VIEW vw_reserva AS
     SELECT 
@@ -68,3 +68,8 @@ CREATE VIEW vw_reserva AS
 
 CREATE VIEW vw_ordem AS SELECT ordem,data_espera
 FROM  `lista_espera`;
+
+CREATE VIEW vw_mesasIniciadas AS SELECT id_reserva, cod_mesa, data_hora, reserva_finalizada
+FROM reserva
+WHERE reserva_finalizada =0
+AND mesa_iniciada =1;

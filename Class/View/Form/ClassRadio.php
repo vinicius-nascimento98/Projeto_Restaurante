@@ -18,7 +18,7 @@
 
 			//Adicionar onchange no Formulario que contenha radio ou checkbox caso use jQuery.
 			if($this->onchange!=null){
-				$this->tag .=" onchange='$this->onchange' ";
+				$this->tag .=' onchange="'.$this->onchange.'" ';
 			}
 			
 			$this->tag.="> ".$this->labelTexto[$i];
