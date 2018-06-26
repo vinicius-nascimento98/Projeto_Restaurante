@@ -6,7 +6,6 @@
 		protected $tipo_uva;
 		protected $estoque;
 		
-		
 		public function __construct($vinho){
 			parent::__construct($vinho);
 			if(isset($vinho["cod_vinho"])){

@@ -6,7 +6,7 @@
     include("Class/View/ClassTable.php");
     include("Conexao.php");
     
-    $table = "vw_bebida_estoque";
+    $table = "vw_bebida";
 
     $b = new BD($conn);
 

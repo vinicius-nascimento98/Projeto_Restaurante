@@ -2,6 +2,7 @@
 
 	include("Cabecalho/Cabecalho.php");
     include("Class/Control/ClassBD.php");
+	include("Class/Model/ClassItem.php");
     include("Class/Model/ClassVinho.php");
     include("Class/View/ClassTable.php");
 	include("Class/View/Form/ClassForm.php");
@@ -16,7 +17,7 @@
 	if($retorno_BD != null){
 		//criando vetor de objetos
 		foreach($retorno_BD as $v){
-			$vinho = new Vinho($v);
+			$vinho[] = new Vinho($v);
 		}
 		
 		//criando vetor de cabecalho
@@ -25,7 +26,7 @@
 		}
 		
 		$t = new Table($cabecalho,$vinho);
-		
+			
 	}
 	
 	else{

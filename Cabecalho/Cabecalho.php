@@ -23,7 +23,7 @@ header('Content-Type: text/html; charset=utf-8');
 	</head>
 	
 	<body>
-		<nav class="navbar navbar-outro navbar-fixed-top">
+		<nav class="navbar navbar-dark bg-primary navbar-static-top">
 			<div class="container">
 				<div class="navbar-header">
 					<button type="button" id="button-responsivo" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu">
@@ -32,7 +32,7 @@ header('Content-Type: text/html; charset=utf-8');
 						<span class="icon-bar" id="bar"></span>
 					</button>
 					<a href="Form_Atendente.php" class="navbar-brand logotipo">
-						<img src="imagens/ifsp.jpeg" alt="IFSP">
+						<img class="img-responsive pull-left" src="imagens/ifsp.jpeg" alt="IFSP">
 					</a>
 				</div>
 				<div class="collapse navbar-collapse" id="menu">

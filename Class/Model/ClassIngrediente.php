@@ -9,7 +9,9 @@ class Ingrediente {
 	
 	public function __construct($ingrediente){
 		$this->set_nome_ingrediente($ingrediente["nome_ingrediente"]);
-		$this->set_custo($ingrediente["custo"]);
+		if(isset($ingrediente["custo"])){
+			$this->set_custo($ingrediente["custo"]);
+		}
 		$this->set_estoque($ingrediente["estoque"]);
 		$this->set_unid($ingrediente["unid"]);
 		if(isset($ingrediente["id_ingrediente"])){

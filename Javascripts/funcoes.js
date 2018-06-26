@@ -49,6 +49,7 @@ function editar(nome_coluna, id, tabela, prefixo, td, linha){
 	var elemento = $(td);
 	
 	var valor = $(elemento).text();
+	
 	$(elemento).prop('onclick', null).off('click');
 	
 	vetUnidade = ["kg", "l", "ml", "g", "un", "cx", "gl"];
@@ -85,4 +86,5 @@ function salvarEdicao(nome_coluna, id, tabela, prefixo, linha, valor){
 			});
 	
 	$(td).append(valor);
+	$(td).onclick(editar);
 }

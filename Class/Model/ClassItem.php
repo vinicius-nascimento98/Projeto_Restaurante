@@ -10,15 +10,15 @@
 	public function __construct ($item){
 		$this->set_descricao($item['descricao']);
 		
-		if(isset($d["disponibilidade"])){
+		if(isset($item["disponibilidade"])){
 			$this->set_disponibilidade($item['disponibilidade']);
 		}
 		
-		if(isset($c["custo"])){
+		if(isset($item["custo"])){
 			$this->set_custo($item['custo']);
 		}
 		
-		if(isset($i["id_item"])){
+		if(isset($item["id_item"])){
 			$this->set_id_item($item["id_item"]);
 		}
 

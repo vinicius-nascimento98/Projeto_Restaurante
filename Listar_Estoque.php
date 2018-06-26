@@ -11,7 +11,7 @@
 	
 	/* -----------------------------Ingrediente----------------------------------------------- */
     echo "<h3>Estoque Ingrediente</h3>" ;
-	$table = "ingrediente";
+	$table = "vw_ingrediente_estoque";
 
     $b = new BD($conn);
 
