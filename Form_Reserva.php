@@ -38,26 +38,30 @@
         else{
             $table = array('nome'=>'mesa','condicao'=>'id_mesa NOT IN ( ');
 
+            //variável auxiliar para verificar virgula
+            $cont=0;
+
             //montando condição responsável por trazer as mesas disponíveis para reserva naquela data
             foreach($retornoMesasReservadas as $i=>$v){
 
-                if($i==0){
+                if($cont==0){
                     $table['condicao'].= $v['cod_mesa'];
+                    $cont++;
                 }
                 else{
                     $table['condicao'].= ','.$v['cod_mesa'];
                 }
             }
 
-            $table['condicao'].= ' )';
+            $table['condicao'].= ")";
         }
 
         //dando SELECT no banco de acordo com a variavel table setada
         $retornoMesasLivres = $b->select($table);
-
+        
         //se o retorno mesas for NULL o usuário é redirecionado ao cadastro de lista de espera, pois não ha mesas livres
         if($retornoMesasLivres == null){
-                header("Location: Form_Lista_Espera.php?data_hora=$data_reserva");
+                //header("Location: Form_Lista_Espera.php?data_hora=$data_reserva");
         }
         //caso contrário é habilitado o cadastro de uma reserva
         else{

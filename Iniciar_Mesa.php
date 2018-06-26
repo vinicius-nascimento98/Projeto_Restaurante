@@ -4,16 +4,21 @@
     include("Cabecalho/Cabecalho.php");
 
     //verificando se foi passado um POST
-    if(!empty($_POST)){
+    if(!empty($_GET)){
 
         include("Conexao.php");
 
-		$i = new BD($conn);
-        print_r($_POST);
-		//$r->update($_POST,"reserva");
+        $id_reserva = $_GET['id_reserva'];
 
-		echo "<br/>";
-        echo "Mesa iniciada com sucesso! Para adicionar pedidos a mesa <a href='Form_Pedido.php'>clique aqui</a>";
+		$i = new BD($conn);
+        $update['tabela']="reserva";
+		$update['chave_tabela']=$id_reserva;
+		$update["prefixo_chave"]="id";
+        $update['mesa_iniciada']="1";
+        
+		$i->update($update);
+
+		header("Location: Form_Pedido.php?id_reserva=$id_reserva");
 
     }
     else{
