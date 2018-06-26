@@ -1,8 +1,8 @@
 <?php
 //conexao.
-$servBD = 'mysql:host=localhost:3307;dbname=restaurante';
+$servBD = 'mysql:host=localhost;dbname=restaurante';
 $usuario = 'root';
-$senha = 'usbw';
+$senha = '';
 
 $conn = new PDO($servBD, $usuario, $senha);
 

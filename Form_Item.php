@@ -71,8 +71,8 @@ $table = "ingrediente";
     $b = new BD($conn);
 
     $retorno = $b->select($table);
-		
-	
+	$vetor_obj_div_quantidade = array();	
+	$vetInputIngrediente = array();
 	if($retorno != null){
 		//criando vetor de objetos
 		$vetInputIngrediente = array();

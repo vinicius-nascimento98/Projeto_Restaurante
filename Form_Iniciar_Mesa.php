@@ -142,7 +142,8 @@
 	/*caso seja retornado valores, significa que a reservas naquela data, sendo assim
 	é serado a variavel com as condições para um futuro SELECT NOT IN */
 	else{
-
+		
+		$vet_radio = array();
 		//concatenando jquery para poder ser passado o id do radio selecionado
 		$location = "location.href= 'Iniciar_Mesa.php?id_reserva='+$(this).val();";
 

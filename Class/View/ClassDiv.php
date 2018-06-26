@@ -1,7 +1,7 @@
 <?php
 
     //incluindo tags style e script do bootstrap
-    include('../bootstrap.html');
+    include('./bootstrap.html');
 
     class Div implements Tag{
         protected $tag;
